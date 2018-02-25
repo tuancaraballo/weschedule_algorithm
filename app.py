@@ -65,8 +65,15 @@ def helper(tasks, people, shift):
 def login():
     if request.method == 'POST':
         name = ''
+        demand = ''
         try:
             name = request.form['name']
+            demand = json.loads(request.form['demand'])
+            print('Type of demand ', type(demand))
+            print(demand)
+            for obj in demand:
+                print('~~~~~~',obj)
+
             logging.info('Sucess feetching name %s', name)
             return 'Success ' + name
         except Exception as e:
