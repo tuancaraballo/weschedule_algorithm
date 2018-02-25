@@ -66,7 +66,7 @@ def login():
     if request.method == 'POST':
         name = ''
         try:
-            name = json.loads(request.form['name'])
+            name = request.form['name']
             logging.info('Sucess feetching name %s', name)
             return 'Success ' + name
         except Exception as e:
