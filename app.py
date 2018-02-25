@@ -1,10 +1,12 @@
 from flask import Flask
 from flask import request
+import logging
 import json
 
 from test import *
 
 app = Flask(__name__)
+logging.basicConfig(level=logging.DEBUG)
 
 
 @app.route('/')
@@ -71,7 +73,13 @@ def login():
             shift = tuple(json.loads(request.form['shift']))
         except e:
             raise e
+        logging.debug('People --  %s', str(people))
+        logging.debug('Tasks -- %s', str(tasks))
+        logging.debug('Shift -- %s', str(shift))
+
         x = helper(tasks, people, shift)
+
+        logging.debug('x -- %s', str(x));
         result = {}
         for person in x.keys():
             person_tasks = []
@@ -79,14 +87,17 @@ def login():
                 person_tasks.append(demand.demand_name)
             result[person] = person_tasks
         print('RESULT', result)
+        logging.warning('Result -- %s', str(result))
 
         try:
             result = json.dumps(result)
         except:
             print('Error dumping')
+            logging.debug('Error dumping')
 
         return result
     else:
+        logging.warning('Nothing to return')
         return 'nothing to return'
 
 
