@@ -35,7 +35,6 @@ modulegraph==0.10.4
 nbconvert==5.3.1
 nbformat==4.4.0
 notebook==5.1.0
-numpy==1.8.0rc1
 pandocfilters==1.4.2
 pathlib2==2.3.0
 pexpect==4.2.1
