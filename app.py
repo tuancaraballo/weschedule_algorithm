@@ -1,5 +1,8 @@
 from flask import Flask
 from flask import request
+import json
+
+from test import *
 
 app = Flask(__name__)
 
@@ -18,12 +21,74 @@ def show_post(post_id):
     # show the post with the given id, the id is an integer
     return 'Post %d' % post_id
 
-@app.route('/login', methods=['GET', 'POST'])
+
+def helper(tasks, people, shift):
+
+    list_demands = []
+    for task in tasks:
+        list_demands.append(daily_demand(task))
+    demand_schedule = demand_daily_resource(list_demands)
+
+    people_shifts_dic = {}
+    for person in people:
+        people_shifts_dic[person] = shift
+
+    MA_master_schedule = daily_master_schedule(people_shifts_dic)
+    solver = assign(demand_schedule, MA_master_schedule, "divide_equally")
+    x = solver.solve()
+
+    return x
+
+    # demand_names_list = ["clean rooms", "replace fax paper", "replace printer paper", "send billing paperwork", "clean emails"]
+    # list_demands = []
+    #
+    # for task in demand_names_list:
+    #     list_demands.append(daily_demand(task))
+    #
+    # demand_schedule = demand_daily_resource(list_demands)
+    # people = ["Maria Chavez", "Sally Puentes", "Gustavo Chavez"]
+    # shift = ("900","1700")
+    #
+    # people_shifts_dic = {}
+    # for person in people:
+    #     people_shifts_dic[person] = shift
+    #
+    # MA_master_schedule = daily_master_schedule(people_shifts_dic)
+    # solver = assign(demand_schedule, MA_master_schedule, "divide_equally")
+    # x = solver.solve()
+    #
+    # return x
+
+@app.route('/test', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        return 'Hello !!' + request.form['name']
+        tasks = ''
+        people = ''
+        shift = ''
+        try:
+            tasks = json.loads(request.form['demand'])
+            people = json.loads(request.form['people'])
+            shift = tuple(json.loads(request.form['shift']))
+        except e:
+            raise e
+        x = helper(tasks, people, shift)
+        result = {}
+        for person in x.keys():
+            person_tasks = []
+            for demand in x[person]:
+                person_tasks.append(demand.demand_name)
+            result[person] = person_tasks
+        print('RESULT', result)
+
+        try:
+            result = json.dumps(result)
+        except:
+            print('Error dumping')
+
+        return result
     else:
         return 'nothing to return'
+
 
 if __name__ == "__main__":
     app.run()
