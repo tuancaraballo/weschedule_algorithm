@@ -69,7 +69,7 @@ def login():
         try:
             name = request.form['name']
             demand = json.loads(request.form['demand'])
-            print('Type of demand ', type(demand))
+            logging.warning('Type of demand %s', str(type(demand)))
             print(demand)
             for obj in demand:
                 print('~~~~~~',obj)
