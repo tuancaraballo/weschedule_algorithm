@@ -74,7 +74,7 @@ def login():
                 logging.warning('Key: %s', str(key))
                 key_list.append(key)
             for key in key_list:
-                logging.warning('Value: %s', request.form[key]))
+                logging.warning('Value: %s', request.form[key])
             # logging.warning('Request [0]: --- %s', str(request.form[0]))
             # logging.warning('Request form length: --- %s', str(len(request.form)))
             # name = request.form['name']
