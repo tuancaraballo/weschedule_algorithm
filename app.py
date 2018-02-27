@@ -66,7 +66,7 @@ def assignTasks():
             for demand in x[person]:
                 person_tasks.append(demand.demand_name)
             result[person] = person_tasks
-        logging.warning('Result -- %s', str(result))
+        logging.debug('Result -- %s', str(result))
         # Send response back
         return jsonify(result)
     else:
