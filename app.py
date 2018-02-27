@@ -68,6 +68,7 @@ def login():
         demand = ''
         try:
             logging.warning('Request : --- %s', str(request.form))
+            logging.warning('Demand : --- %s', str(request.form['demand']))
             key_list = []
             for key, value in request.form.items():
                 # logging.warning('Key: %s, Value: %s', str(key), str(value))
