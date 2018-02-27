@@ -103,20 +103,12 @@ def login():
         except Exception as e:
             logging.exception('Error fetching value from request: -- %s',str(e))
             raise
-        return "Success" + str(tasks) + str(people) + str(shift) 
-        # try:
-        #     tasks = json.loads(request.form['demand'])
-        #     people = json.loads(request.form['people'])
-        #     shift = tuple(json.loads(request.form['shift']))
-        # except e:
-        #     raise e
-        # logging.debug('People --  %s', str(people))
-        # logging.debug('Tasks -- %s', str(tasks))
-        # logging.debug('Shift -- %s', str(shift))
+        # return "Success" + str(tasks) + str(people) + str(shift)
+
+        x = helper(tasks, people, shift)
         #
-        # x = helper(tasks, people, shift)
-        #
-        # logging.debug('x -- %s', str(x));
+        logging.debug('x -- %s', str(x));
+        return "Success " + str(x)
         # result = {}
         # for person in x.keys():
         #     person_tasks = []
