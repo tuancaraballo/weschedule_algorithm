@@ -25,13 +25,11 @@ def show_post(post_id):
     return 'Post %d' % post_id
 
 
-def helper(tasks, people, shift):
-
+def tasksAlgorithm(tasks, people, shift):
     list_demands = []
     for task in tasks:
         list_demands.append(daily_demand(task))
     demand_schedule = demand_daily_resource(list_demands)
-
     people_shifts_dic = {}
     for person in people:
         people_shifts_dic[person] = shift
@@ -39,61 +37,16 @@ def helper(tasks, people, shift):
     MA_master_schedule = daily_master_schedule(people_shifts_dic)
     solver = assign(demand_schedule, MA_master_schedule, "divide_equally")
     x = solver.solve()
-
     return x
 
-    # demand_names_list = ["clean rooms", "replace fax paper", "replace printer paper", "send billing paperwork", "clean emails"]
-    # list_demands = []
-    #
-    # for task in demand_names_list:
-    #     list_demands.append(daily_demand(task))
-    #
-    # demand_schedule = demand_daily_resource(list_demands)
-    # people = ["Maria Chavez", "Sally Puentes", "Gustavo Chavez"]
-    # shift = ("900","1700")
-    #
-    # people_shifts_dic = {}
-    # for person in people:
-    #     people_shifts_dic[person] = shift
-    #
-    # MA_master_schedule = daily_master_schedule(people_shifts_dic)
-    # solver = assign(demand_schedule, MA_master_schedule, "divide_equally")
-    # x = solver.solve()
-    #
-    # return x
 
-@app.route('/test', methods=['GET', 'POST'])
-def login():
+@app.route('/tasks', methods=['GET', 'POST'])
+def assignTasks():
     if request.method == 'POST':
-        # name = ''
-        # demand = ''
-        # try:
-        #     logging.warning('Request : --- %s', str(request.form))
-        #     logging.warning('Demand : --- %s', str(request.form['demand']))
-        #     key_list = []
-            # for key, value in request.form.items():
-            #     # logging.warning('Key: %s, Value: %s', str(key), str(value))
-            #     logging.warning('Key: %s', str(key))
-            #     key_list.append(key)
-            # for key in key_list:
-            #     logging.warning('Value: %s', request.form[key])
-            # logging.warning('Request [0]: --- %s', str(request.form[0]))
-            # logging.warning('Request form length: --- %s', str(len(request.form)))
-            # name = request.form['name']
-            # demand = json.loads(request.form['demand'])
-            # logging.warning('Type of demand %s', str(type(demand)))
-            # print(demand)
-            # for obj in demand:
-            #     logging.warning('~~~~~~ %s',str(obj))
-            #
-            # logging.info('Sucess feetching name %s', name)
-        #     return 'Success ' + str(key_list)
-        # except Exception as e:
-        #     logging.warning('Error fetching name from request %s', str(e))
-        #     raise
         tasks = ''
         people = ''
         shift = ''
+        # Fetches taks, people and shift from rquest
         try:
             tasks = json.loads(request.form['demand'])
             people = json.loads(request.form['people'])
@@ -104,31 +57,18 @@ def login():
         except Exception as e:
             logging.exception('Error fetching value from request: -- %s',str(e))
             raise
-        # return "Success" + str(tasks) + str(people) + str(shift)
-
-        x = helper(tasks, people, shift)
-        #
-        logging.debug('x -- %s', str(x));
-
+        # Run helper function that calls our algorithm
+        x = tasksAlgorithm(tasks, people, shift)
         result = {}
+        # Reformat result into a dictionary {Person : [task1, task2]}
         for person in x.keys():
             person_tasks = []
             for demand in x[person]:
                 person_tasks.append(demand.demand_name)
             result[person] = person_tasks
-        # print('RESULT', result)
         logging.warning('Result -- %s', str(result))
+        # Send response back
         return jsonify(result)
-        # return json.dumps(resut)
-        # return "Success " + str(result)
-        #
-        # try:
-        #     result = json.dumps(result)
-        # except:
-        #     print('Error dumping')
-        #     logging.debug('Error dumping')
-        #
-        # return result
     else:
         logging.warning('Nothing to return')
         return 'nothing to return'
