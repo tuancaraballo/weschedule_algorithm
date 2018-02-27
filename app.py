@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import request
+from flask import jsonify
 import logging
 import json
 
@@ -117,7 +118,9 @@ def login():
             result[person] = person_tasks
         # print('RESULT', result)
         logging.warning('Result -- %s', str(result))
-        return "Success " + str(result)
+        return jsonify(result)
+        # return json.dumps(resut)
+        # return "Success " + str(result)
         #
         # try:
         #     result = json.dumps(result)
