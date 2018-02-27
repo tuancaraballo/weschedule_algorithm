@@ -68,6 +68,8 @@ def login():
         demand = ''
         try:
             logging.warning('Request : --- %s', str(request.form))
+            logging.warning('Request [0]: --- %s', str(request.form[0]))
+            logging.warning('Request form length: --- %s', str(len(request.form)))
             name = request.form['name']
             demand = json.loads(request.form['demand'])
             logging.warning('Type of demand %s', str(type(demand)))
