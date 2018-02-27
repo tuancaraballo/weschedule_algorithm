@@ -68,14 +68,16 @@ def login():
         demand = ''
         try:
             logging.warning('Request : --- %s', str(request.form))
-            logging.warning('Request [0]: --- %s', str(request.form[0]))
-            logging.warning('Request form length: --- %s', str(len(request.form)))
-            name = request.form['name']
+            for key, value in request.form.items():
+                logging.warning('Key: %s, Value: %s', str(key), str(value))
+            # logging.warning('Request [0]: --- %s', str(request.form[0]))
+            # logging.warning('Request form length: --- %s', str(len(request.form)))
+            # name = request.form['name']
             demand = json.loads(request.form['demand'])
-            logging.warning('Type of demand %s', str(type(demand)))
+            # logging.warning('Type of demand %s', str(type(demand)))
             print(demand)
             for obj in demand:
-                print('~~~~~~',obj)
+                logging.warning('~~~~~~ %s',str(obj))
 
             logging.info('Sucess feetching name %s', name)
             return 'Success ' + name
