@@ -60,7 +60,7 @@ def assignTasks():
         # Run helper function that calls our algorithm
         x = tasksAlgorithm(tasks, people, shift)
         result = {}
-        # Reformat result into a dictionary {Person : [task1, task2]}
+        # Reformat result into a dictionary  {Person : [task1, task2]}
         for person in x.keys():
             person_tasks = []
             for demand in x[person]:
