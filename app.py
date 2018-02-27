@@ -64,18 +64,18 @@ def helper(tasks, people, shift):
 @app.route('/test', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        name = ''
-        demand = ''
-        try:
-            logging.warning('Request : --- %s', str(request.form))
-            logging.warning('Demand : --- %s', str(request.form['demand']))
-            key_list = []
-            for key, value in request.form.items():
-                # logging.warning('Key: %s, Value: %s', str(key), str(value))
-                logging.warning('Key: %s', str(key))
-                key_list.append(key)
-            for key in key_list:
-                logging.warning('Value: %s', request.form[key])
+        # name = ''
+        # demand = ''
+        # try:
+        #     logging.warning('Request : --- %s', str(request.form))
+        #     logging.warning('Demand : --- %s', str(request.form['demand']))
+        #     key_list = []
+            # for key, value in request.form.items():
+            #     # logging.warning('Key: %s, Value: %s', str(key), str(value))
+            #     logging.warning('Key: %s', str(key))
+            #     key_list.append(key)
+            # for key in key_list:
+            #     logging.warning('Value: %s', request.form[key])
             # logging.warning('Request [0]: --- %s', str(request.form[0]))
             # logging.warning('Request form length: --- %s', str(len(request.form)))
             # name = request.form['name']
@@ -86,13 +86,24 @@ def login():
             #     logging.warning('~~~~~~ %s',str(obj))
             #
             # logging.info('Sucess feetching name %s', name)
-            return 'Success ' + str(key_list)
+        #     return 'Success ' + str(key_list)
+        # except Exception as e:
+        #     logging.warning('Error fetching name from request %s', str(e))
+        #     raise
+        tasks = ''
+        people = ''
+        shift = ''
+        try:
+            tasks = json.loads(request.form['demand'])
+            people = json.loads(request.form['people'])
+            shift = tuple(json.loads(request.form['shift']))
+            logging.debug('People --  %s', str(people))
+            logging.debug('Tasks -- %s', str(tasks))
+            logging.debug('Shift -- %s', str(shift))
         except Exception as e:
-            logging.warning('Error fetching name from request %s', str(e))
+            logging.exception('Error fetching value from request: -- %s',str(e))
             raise
-        # tasks = ''
-        # people = ''
-        # shift = ''
+        return "Success" + str(tasks) + str(people) + str(shift) 
         # try:
         #     tasks = json.loads(request.form['demand'])
         #     people = json.loads(request.form['people'])
