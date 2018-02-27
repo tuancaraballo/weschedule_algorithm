@@ -108,15 +108,16 @@ def login():
         x = helper(tasks, people, shift)
         #
         logging.debug('x -- %s', str(x));
-        return "Success " + str(x)
-        # result = {}
-        # for person in x.keys():
-        #     person_tasks = []
-        #     for demand in x[person]:
-        #         person_tasks.append(demand.demand_name)
-        #     result[person] = person_tasks
+
+        result = {}
+        for person in x.keys():
+            person_tasks = []
+            for demand in x[person]:
+                person_tasks.append(demand.demand_name)
+            result[person] = person_tasks
         # print('RESULT', result)
-        # logging.warning('Result -- %s', str(result))
+        logging.warning('Result -- %s', str(result))
+        return "Success " + str(result)
         #
         # try:
         #     result = json.dumps(result)
