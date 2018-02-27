@@ -68,19 +68,24 @@ def login():
         demand = ''
         try:
             logging.warning('Request : --- %s', str(request.form))
+            key_list = []
             for key, value in request.form.items():
-                logging.warning('Key: %s, Value: %s', str(key), str(value))
+                # logging.warning('Key: %s, Value: %s', str(key), str(value))
+                logging.warning('Key: %s', str(key))
+                key_list.append(key)
+            for key in key_list:
+                logging.warning('Value: %s', request.form[key]))
             # logging.warning('Request [0]: --- %s', str(request.form[0]))
             # logging.warning('Request form length: --- %s', str(len(request.form)))
             # name = request.form['name']
-            demand = json.loads(request.form['demand'])
+            # demand = json.loads(request.form['demand'])
             # logging.warning('Type of demand %s', str(type(demand)))
-            print(demand)
-            for obj in demand:
-                logging.warning('~~~~~~ %s',str(obj))
-
-            logging.info('Sucess feetching name %s', name)
-            return 'Success ' + name
+            # print(demand)
+            # for obj in demand:
+            #     logging.warning('~~~~~~ %s',str(obj))
+            #
+            # logging.info('Sucess feetching name %s', name)
+            return 'Success ' + str(key_list)
         except Exception as e:
             logging.warning('Error fetching name from request %s', str(e))
             raise
