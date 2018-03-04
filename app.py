@@ -1,6 +1,8 @@
 from flask import Flask
 from flask import request
 from flask import jsonify
+from ast import literal_eval
+from task_assignments import find_assignments
 import logging
 import json
 
@@ -73,6 +75,33 @@ def assignTasks():
         logging.warning('Nothing to return')
         return 'nothing to return'
 
+@app.route('/ma_task', methods=['GET', 'POST'])
+def ma_task_handle():
+    if request.method == 'POST':
+        ma_info = ""
+        task_info = ""
+        try:
+            ma_info = request.form["ma_info"]
+            ma_info = ma_info.encode('ascii','ignore')
+            ma_info = ma_info.decode("utf-8")
+            ma_info = literal_eval(ma_info)
 
+            #ma_info = literal_eval(ma_info)
+
+            task_info = request.form["task_info"]
+            task_info = task_info.encode('ascii', 'ignore')
+            task_info = task_info.decode("utf-8")
+            task_info = literal_eval(task_info)
+
+            #task_info = literal_eval(task_info)
+
+            result = find_assignments(ma_info, task_info)
+            return jsonify(result)
+        except Exception as e:
+            logging.exception('Error fetching value from request: -- %s', str(e))
+            raise
+        return "post"
+    else:
+        return "got GET"
 if __name__ == "__main__":
     app.run()
