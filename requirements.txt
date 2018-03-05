@@ -18,7 +18,6 @@ html5lib==1.0b10
 ipykernel==4.6.1
 ipython==5.5.0
 ipython-genutils==0.2.0
-numpy==1.8.0rc1
 post==0.0.26
 query-string==0.0.28
 request==0.0.26
