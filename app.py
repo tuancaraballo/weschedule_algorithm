@@ -19,6 +19,7 @@ def index():
 
 @app.route('/hello')
 def hello():
+    
     return 'Hello, World'
 
 @app.route('/post/<int:post_id>')
