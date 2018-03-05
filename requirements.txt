@@ -12,7 +12,6 @@ entrypoints==0.2.3
 enum34==1.1.6
 ez-setup==0.9
 Flask==0.12.2
-functools32==3.2.3.post2
 get==0.0.39
 gunicorn==19.7.1
 html5lib==1.0b10
