@@ -87,9 +87,9 @@ def ma_task_handle():
             # logging.debug('Request ma_info -- %s', str(rquest.form['ma_info']))
             # logging.debug('Request task_info -- %s', str(rquest.form['task_info']))
 
-            ma_info = json.loads(request.form['ma_info'])
+            ma_info = request.form['ma_info']
             logging.debug('Ma info --- %s', str(ma_info))
-            task_info = json.loads(request.form['task_info'])
+            task_info = request.form['task_info']
             logging.debug('Task info --- %s', str(task_info))
 
             # ma_info = request.form["ma_info"]
