@@ -82,25 +82,31 @@ def ma_task_handle():
         ma_info = ""
         task_info = ""
         try:
-            logging.debug('Request form -- %s', str(rquest.form))
-            logging.debug('Request ma_info -- %s', str(rquest.form['ma_info']))
-            logging.debug('Request task_info -- %s', str(rquest.form['task_info']))
-            ma_info = request.form["ma_info"]
-            ma_info = ma_info.encode('ascii','ignore')
-            ma_info = ma_info.decode("utf-8")
-            ma_info = literal_eval(ma_info)
+            # logging.debug('Request form -- %s', str(rquest.form))
+            # logging.debug('Request ma_info -- %s', str(rquest.form['ma_info']))
+            # logging.debug('Request task_info -- %s', str(rquest.form['task_info']))
+
+            ma_info = json.loads(request.form['ma_info'])
+            logging.debug('Ma info --- %s', str(ma_info))
+            task_info = json.loads(request.form['task_info'])
+            logging.debug('Task info --- %s', str(task_info))
+
+            # ma_info = request.form["ma_info"]
+            # ma_info = ma_info.encode('ascii','ignore')
+            # ma_info = ma_info.decode("utf-8")
+            # ma_info = literal_eval(ma_info)
 
             #ma_info = literal_eval(ma_info)
 
-            task_info = request.form["task_info"]
-            task_info = task_info.encode('ascii', 'ignore')
-            task_info = task_info.decode("utf-8")
-            task_info = literal_eval(task_info)
+            # task_info = request.form["task_info"]
+            # task_info = task_info.encode('ascii', 'ignore')
+            # task_info = task_info.decode("utf-8")
+            # task_info = literal_eval(task_info)
 
             #task_info = literal_eval(task_info)
 
-            result = find_assignments(ma_info, task_info)
-            return jsonify(result)
+            # result = find_assignments(ma_info, task_info)
+            return jsonify(str(ma_info) + '-------' + str(task_info))
         except Exception as e:
             logging.exception('Error fetching value from request: -- %s', str(e))
             raise
