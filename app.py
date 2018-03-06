@@ -81,6 +81,7 @@ def ma_task_handle():
     if request.method == 'POST':
         ma_info = ""
         task_info = ""
+        logging.debug('Got to the request ~~~~ %s', str(request.form))
         try:
             # logging.debug('Request form -- %s', str(rquest.form))
             # logging.debug('Request ma_info -- %s', str(rquest.form['ma_info']))
@@ -106,9 +107,10 @@ def ma_task_handle():
             #task_info = literal_eval(task_info)
 
             # result = find_assignments(ma_info, task_info)
-            return jsonify(str(ma_info) + '-------' + str(task_info))
+            return jsonify(str(request.form))
         except Exception as e:
             logging.exception('Error fetching value from request: -- %s', str(e))
+            return jsonify(str(e))
             raise
         return "post"
     else:
