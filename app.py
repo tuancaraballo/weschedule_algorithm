@@ -82,6 +82,9 @@ def ma_task_handle():
         ma_info = ""
         task_info = ""
         try:
+            logging.debug('Request form -- %s', str(rquest.form))
+            logging.debug('Request ma_info -- %s', str(rquest.form['ma_info']))
+            logging.debug('Request task_info -- %s', str(rquest.form['task_info']))
             ma_info = request.form["ma_info"]
             ma_info = ma_info.encode('ascii','ignore')
             ma_info = ma_info.decode("utf-8")
