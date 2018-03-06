@@ -82,24 +82,33 @@ def ma_task_handle():
         ma_info = ""
         task_info = ""
         try:
-            ma_info = request.form["ma_info"]
-            ma_info = ma_info.encode('ascii','ignore')
-            ma_info = ma_info.decode("utf-8")
-            ma_info = literal_eval(ma_info)
+            data = request.get_json()
+            ma_info = data.get('ma_info', {})
+            task_info = data.get('task_info', {})
+
+            logging.debug('Ma info --- %s', str(ma_info))
+            logging.debug('Task info --- %s', str(task_info))
+
+            # ma_info = request.form["ma_info"]
+            # ma_info = ma_info.encode('ascii','ignore')
+            # ma_info = ma_info.decode("utf-8")
+            # ma_info = literal_eval(ma_info)
 
             #ma_info = literal_eval(ma_info)
 
-            task_info = request.form["task_info"]
-            task_info = task_info.encode('ascii', 'ignore')
-            task_info = task_info.decode("utf-8")
-            task_info = literal_eval(task_info)
+            # task_info = request.form["task_info"]
+            # task_info = task_info.encode('ascii', 'ignore')
+            # task_info = task_info.decode("utf-8")
+            # task_info = literal_eval(task_info)
 
             #task_info = literal_eval(task_info)
 
             result = find_assignments(ma_info, task_info)
+            logging.debug('Result --- %s', str(result))
             return jsonify(result)
         except Exception as e:
             logging.exception('Error fetching value from request: -- %s', str(e))
+            return jsonify(str(e))
             raise
         return "post"
     else:
