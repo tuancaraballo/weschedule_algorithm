@@ -89,6 +89,9 @@ def ma_task_handle():
             # logging.debug('Request ma_info -- %s', str(rquest.form['ma_info']))
             # logging.debug('Request task_info -- %s', str(rquest.form['task_info']))
 
+            for info in request.form:
+                logging.debug('info object --- %s', str(info))
+
             ma_info = request.form.getlist('ma_info')
             logging.debug('Ma info --- %s', str(ma_info))
 
