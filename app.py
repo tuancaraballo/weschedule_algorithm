@@ -82,6 +82,8 @@ def ma_task_handle():
         ma_info = ""
         task_info = ""
         logging.debug('Got to the request ~~~~ %s', str(request.form))
+        logging.debug('Got to the request data ++++ %s', str(request.data))
+
         try:
             # logging.debug('Request form -- %s', str(rquest.form))
             # logging.debug('Request ma_info -- %s', str(rquest.form['ma_info']))
@@ -90,8 +92,8 @@ def ma_task_handle():
             ma_info = request.form.getlist('ma_info')
             logging.debug('Ma info --- %s', str(ma_info))
             # ma_info = json.loads(request.form['ma_info'])
-            ma_result = json.loads(request.form['ma_info'])
-            logging.debug('Ma result --- %s', str(ma_result))
+            # ma_result = json.loads(request.form['ma_info'])
+            # logging.debug('Ma result --- %s', str(ma_result))
             # for res in ma_info:
             #     print('Item from ma info' + str(res))
             #     ma_result.append(res)
