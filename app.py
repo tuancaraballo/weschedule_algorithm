@@ -89,8 +89,9 @@ def ma_task_handle():
             # logging.debug('Request ma_info -- %s', str(rquest.form['ma_info']))
             # logging.debug('Request task_info -- %s', str(rquest.form['task_info']))
 
-            keys = request.form.keys()
-            logging.debug('Keys --- %s', str(keys))
+            data = request.get_json()
+            logging.debug('Data -- %s', str(data))
+
 
             # for info in request.form:
             #     logging.debug('info object --- %s', str(info))
