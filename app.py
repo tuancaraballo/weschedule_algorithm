@@ -91,9 +91,10 @@ def ma_task_handle():
 
             ma_info = request.form.getlist('ma_info')
             logging.debug('Ma info --- %s', str(ma_info))
+
             # ma_info = json.loads(request.form['ma_info'])
-            # ma_result = json.loads(request.form['ma_info'])
-            # logging.debug('Ma result --- %s', str(ma_result))
+            ma_result = request.form['ma_info']
+            logging.debug('Ma result --- %s', str(ma_result))
             # for res in ma_info:
             #     print('Item from ma info' + str(res))
             #     ma_result.append(res)
