@@ -81,27 +81,12 @@ def ma_task_handle():
     if request.method == 'POST':
         ma_info = ""
         task_info = ""
-        logging.debug('Got to the request ~~~~ %s', str(request.form))
-        logging.debug('Got to the request data ++++ %s', str(request.data))
-
         try:
             data = request.get_json()
-            logging.debug('Data -- %s', str(data))
-
-
             ma_info = data.get('ma_info', {})
-            logging.debug('Ma info --- %s', str(ma_info))
-
-            # ma_info = json.loads(request.form['ma_info'])
-            # ma_result = request.form['ma_info']
-            # logging.debug('Ma result --- %s', str(ma_result))
-            # for res in ma_info:
-            #     print('Item from ma info' + str(res))
-            #     ma_result.append(res)
-
-            # logging.debug('Ma result --- %s', str(ma_result))
-            # logging.debug('Ma info json --- %s', str(json.loads(request.form['ma_info'])))
             task_info = data.get('task_info', {})
+
+            logging.debug('Ma info --- %s', str(ma_info))
             logging.debug('Task info --- %s', str(task_info))
 
             # ma_info = request.form["ma_info"]
@@ -118,8 +103,9 @@ def ma_task_handle():
 
             #task_info = literal_eval(task_info)
 
-            # result = find_assignments(ma_info, task_info)
-            return jsonify(str(request.form))
+            result = find_assignments(ma_info, task_info)
+            logging.debug('Result --- %s', str(result))
+            return jsonify(result)
         except Exception as e:
             logging.exception('Error fetching value from request: -- %s', str(e))
             return jsonify(str(e))
