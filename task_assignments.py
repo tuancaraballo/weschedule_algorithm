@@ -27,10 +27,10 @@ def find_assignments(ma_info, task_info):
     for idx, task in enumerate(task_info):
         for day in task["due_dates"]:
             expanded_tasks = expanded_tasks + [(task["key"], task["skills_req"], task["effort"], day)]
-    print(len(expanded_tasks))
+    # print(len(expanded_tasks))
 
     matrix_vars = zeros((len(ma_info), len(expanded_tasks)), dtype=object)
-    print("matrix_vars is of shape {}".format(matrix_vars.shape))
+    # print("matrix_vars is of shape {}".format(matrix_vars.shape))
 
     solver = pywraplp.Solver('SolveIntegerProblem',
                              pywraplp.Solver.CBC_MIXED_INTEGER_PROGRAMMING)
@@ -46,7 +46,7 @@ def find_assignments(ma_info, task_info):
     #print(expanded_tasks)
 
     for row, single_ma_info in enumerate(ma_info):
-        print(single_ma_info)
+        # print(single_ma_info)
         for col, single_task_info in enumerate(expanded_tasks):
             # check if ma is working on day due
             # check if ma has skills
@@ -60,8 +60,8 @@ def find_assignments(ma_info, task_info):
 
     # make all the cosntraints
 
-    print("shape of matrix is {}".format(matrix_vars.shape))
-    print("len of expaneded is {}".format(len(expanded_tasks)))
+    # print("shape of matrix is {}".format(matrix_vars.shape))
+    # print("len of expaneded is {}".format(len(expanded_tasks)))
 
     z = solver.IntVar(0.0, solver.infinity(), "z")
     ma_constraints = []
@@ -105,7 +105,7 @@ def find_assignments(ma_info, task_info):
                 else:
                     result[ma_name] = result[ma_name] + [task]
     #create dictionary that maps ma_name to typle with (assignment name, date_due)
-    print(result)
+    # print(result)
     return result
 
     #return answer
