@@ -81,6 +81,7 @@ def ma_task_handle():
     if request.method == 'POST':
         ma_info = ""
         task_info = ""
+        result = ""
         try:
             data = request.get_json()
             ma_info = data.get('ma_info', {})
@@ -103,9 +104,9 @@ def ma_task_handle():
 
             #task_info = literal_eval(task_info)
 
-            result = find_assignments(ma_info, task_info)
+            #result = find_assignments(ma_info, task_info)
             logging.debug('Result --- %s', str(result))
-            return jsonify(result)
+            return "result" #jsonify(result)
         except Exception as e:
             logging.exception('Error fetching value from request: -- %s', str(e))
             return jsonify(str(e))
