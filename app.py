@@ -84,8 +84,8 @@ def ma_task_handle():
         result = ""
         try:
             data = request.get_json()
-            logging.debug('DATA HERE!!!!!!!', data)
-            logging.debug('Data --- %s', str(data))
+            # logging.debug('DATA HERE!!!!!!!', data)
+            logging.debug('Data HEREE--- %s', str(data))
             ma_info = data.get('ma_info', {})
             task_info = data.get('task_info', {})
 
