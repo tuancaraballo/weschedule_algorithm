@@ -15,17 +15,18 @@ task_info:
 # TODO: should error sanity checking be done here or at ui? (ui most likely, but we havent decided)
 #
 
+
 def find_assignments(ma_info, task_info):
 
     # make matrix to store all the variables, will be num_ma x num_task_days
     num_cols = 0
     for row in range(len(task_info)):
-        num_cols = num_cols + len(task_info[3])
+        num_cols = num_cols + len(task_info[row]["due_dates"])
 
     expanded_tasks = []
     for idx, task in enumerate(task_info):
-        for day in task[3]:
-            expanded_tasks = expanded_tasks + [(task[0], task[1], task[2], day)]
+        for day in task["due_dates"]:
+            expanded_tasks = expanded_tasks + [(task["key"], task["skills_req"], task["effort"], day)]
     print(len(expanded_tasks))
 
     matrix_vars = zeros((len(ma_info), len(expanded_tasks)), dtype=object)
@@ -40,18 +41,18 @@ def find_assignments(ma_info, task_info):
 
     expanded_tasks = []
     for idx, task in enumerate(task_info):
-        for day in task[3]:
-            expanded_tasks = expanded_tasks + [(task[0], task[1], task[2], day)]
-    print(len(expanded_tasks))
+        for day in task["due_dates"]:
+            expanded_tasks = expanded_tasks + [(task["key"], task["skills_req"], task["effort"], day)]
+    #print(expanded_tasks)
 
     for row, single_ma_info in enumerate(ma_info):
         print(single_ma_info)
         for col, single_task_info in enumerate(expanded_tasks):
             # check if ma is working on day due
             # check if ma has skills
-
-            if single_task_info[3] in single_ma_info[2] and single_task_info[1] == 'none' or single_task_info[1] in single_ma_info[1]:
-                var_name = single_ma_info[0] + " " + single_task_info[0] + " " + str(single_task_info[3])
+            print(single_task_info)
+            if single_task_info[3] in single_ma_info["availability"] and single_task_info[1] == 'none' or single_task_info[1] in single_ma_info["skills"]:
+                var_name = single_ma_info["key"] + " " + single_task_info[0] + " " + str(single_task_info[3])
                 print(var_name)
                 matrix_vars[row, col] = solver.IntVar(0.0, 1.0, var_name)
             else:
