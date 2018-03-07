@@ -90,13 +90,14 @@ def ma_task_handle():
             logging.debug('Ma info --- %s', str(ma_info))
             logging.debug('Task info --- %s', str(task_info))
 
-            #TODO: uncomment these three lines, when changes have been made
-            # result = find_assignments(ma_info, task_info)
-            # logging.debug('Result --- %s', str(result))
-            # return jsonify(result);
+            # TODO: uncomment these three lines, when changes have been made
+            result = find_assignments(ma_info, task_info)
+            logging.debug('Result --- %s', str(result))
+            return jsonify(result);
+
             # TODO: get rid of this return, use the one above after result returns
 
-            return "success from algorithm server"
+            # return "success from algorithm server"
 
         except Exception as e:
             logging.exception('Error fetching value from request: -- %s', str(e))
