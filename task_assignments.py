@@ -59,7 +59,7 @@ def find_assignments(ma_info, task_info):
                 matrix_vars[row, col] = "none"
 
     # make all the cosntraints
-
+#
     # print("shape of matrix is {}".format(matrix_vars.shape))
     # print("len of expaneded is {}".format(len(expanded_tasks)))
 
@@ -97,9 +97,11 @@ def find_assignments(ma_info, task_info):
             if type(matrix_vars[row, col]) != type("none") and matrix_vars[row, col].solution_value() == 1:
                 var_name = matrix_vars[row, col].name().split()
                 ma_name = var_name[0]
+                day = int(var_name[-1])
+                task_name = " ".join(var_name[1: -1])
                 task = {}
-                task['task_key'] = " ".join(var_name[1: -1])
-                task['due_date'] = int(var_name[-1])
+                task['task_key'] = task_name
+                task['due_date'] = day
                 if ma_name not in result.keys():
                     result[ma_name] = [task]
                 else:
