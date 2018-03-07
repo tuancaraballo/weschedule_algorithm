@@ -84,14 +84,35 @@ def ma_task_handle():
         result = ""
         try:
             data = request.get_json()
-            logging.debug('DATA HERE!!!!!!!', data)
-            logging.debug('Data --- %s', str(data))
             ma_info = data.get('ma_info', {})
             task_info = data.get('task_info', {})
 
             logging.debug('Ma info --- %s', str(ma_info))
             logging.debug('Task info --- %s', str(task_info))
 
+            #TODO: uncomment these three lines, when changes have been made
+            # result = find_assignments(ma_info, task_info)
+            # logging.debug('Result --- %s', str(result))
+            # return jsonify(result);
+            # TODO: get rid of this return, use the one above after result returns
+
+            return "success from algorithm server"
+
+        except Exception as e:
+            logging.exception('Error fetching value from request: -- %s', str(e))
+            return jsonify(str(e))
+            raise
+        return "post"
+    else:
+        return "got GET"
+
+if __name__ == "__main__":
+    app.run()
+
+
+# ------- CODE THAT WE MAY USE LATER --------
+
+# >>>>> Encoding for postman request of ma_info or task_info
             # ma_info = request.form["ma_info"]
             # ma_info = ma_info.encode('ascii','ignore')
             # ma_info = ma_info.decode("utf-8")
@@ -105,23 +126,3 @@ def ma_task_handle():
             # task_info = literal_eval(task_info)
 
             #task_info = literal_eval(task_info)
-
-# <<<<<<< HEAD
-#             #result = find_assignments(ma_info, task_info)
-#             logging.debug('Result --- %s', str(result))
-#             return "result" #jsonify(result)
-# =======
-            # result = find_assignments(ma_info, task_info)
-            # logging.debug('Result --- %s', str(result))
-            return "success from algorithm server"
-            # return jsonify({message: "Success from algorithm server"});
-        except Exception as e:
-            logging.exception('Error fetching value from request: -- %s', str(e))
-            return jsonify(str(e))
-            raise
-        return "post"
-    else:
-        return "got GET"
-
-if __name__ == "__main__":
-    app.run()
