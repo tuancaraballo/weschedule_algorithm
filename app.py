@@ -111,7 +111,8 @@ def ma_task_handle():
 # =======
             # result = find_assignments(ma_info, task_info)
             # logging.debug('Result --- %s', str(result))
-            return jsonify({message: "Success from algorithm server"});
+            return "success from algorithm server"
+            # return jsonify({message: "Success from algorithm server"});
         except Exception as e:
             logging.exception('Error fetching value from request: -- %s', str(e))
             return jsonify(str(e))
