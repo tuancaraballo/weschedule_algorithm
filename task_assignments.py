@@ -15,7 +15,6 @@ task_info:
 # TODO: should error sanity checking be done here or at ui? (ui most likely, but we havent decided)
 #
 
-
 def find_assignments(ma_info, task_info):
 
     # make matrix to store all the variables, will be num_ma x num_task_days
@@ -89,7 +88,7 @@ def find_assignments(ma_info, task_info):
     objective.SetMinimization()
     result_status = solver.Solve()
 
-    # print out
+    # reconstruct
 
     result = {}
     for row in range(matrix_vars.shape[0]):
@@ -102,9 +101,7 @@ def find_assignments(ma_info, task_info):
                 if ma_name not in result.keys():
                     result[ma_name] = [(task_name, day)]
                 else:
-                    result[ma_name] = result[ma_name] + [(task_name, day)]
+                    result[ma_name] =   + [(task_name, day)]
     #create dictionary that maps ma_name to typle with (assignment name, date_due)
     print(result)
-    return result
-
-    #return answer
+    return result    #return answer
