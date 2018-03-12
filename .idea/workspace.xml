@@ -27,8 +27,8 @@
       <file leaf-file-name="task_assignments.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/task_assignments.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="67" column="61" lean-forward="true" selection-start-line="67" selection-start-column="61" selection-end-line="67" selection-end-column="61" />
+            <state relative-caret-position="554">
+              <caret line="109" column="11" lean-forward="false" selection-start-line="109" selection-start-column="6" selection-end-line="109" selection-end-column="11" />
               <folding>
                 <element signature="e#0#42#0" expanded="true" />
               </folding>
@@ -54,6 +54,11 @@
         <option value="Python Script" />
       </list>
     </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>print</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -346,8 +351,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/task_assignments.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="67" column="61" lean-forward="true" selection-start-line="67" selection-start-column="61" selection-end-line="67" selection-end-column="61" />
+        <state relative-caret-position="554">
+          <caret line="109" column="11" lean-forward="false" selection-start-line="109" selection-start-column="6" selection-end-line="109" selection-end-column="11" />
           <folding>
             <element signature="e#0#42#0" expanded="true" />
           </folding>
