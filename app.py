@@ -106,6 +106,43 @@ def ma_task_handle():
         return "post"
     else:
         return "got GET"
+@app.route('/rooming_inbasket', methods=['GET', 'POST'])
+def rooming_inbasket_handle():
+    if request.method == 'POST':
+        ma_info = ""
+        doctor_info = ""
+        rooming_result = ""
+        inbasket_result = ""
+        preferences = ""
+        try:
+
+            ma_info = request.form.getlist('ma_info')
+            doctor_info = request.form.getlist('doctor_info')
+            preferences = request.form.getlist('preferences')
+
+            logging.debug('Ma info --- %s', str(ma_info))
+            logging.debug('Task info --- %s', str(doctor_info))
+
+            #algorithm will need ma_info, doctor_info and preferences
+            #will return two schedules, the rooming and the inbasket schedule
+            rooming_result, inbasket_result = find_assignments(ma_info, doctor_info, preferences)
+
+            logging.debug('Result --- %s', str(rooming_result))
+            logging.debug('Result --- %s', str(inbasket_result))
+
+            result = {"rooming_result": rooming_result, "inbasket_result": inbasket_result}
+
+            logging.debug('Result --- %s', str(result))
+            return jsonify(result);
+            # return "success from algorithm server"
+
+        except Exception as e:
+            logging.exception('Error fetching value from request: -- %s', str(e))
+            return jsonify(str(e))
+            raise
+        return "post"
+    else:
+        return "got GET"
 
 if __name__ == "__main__":
     app.run()
