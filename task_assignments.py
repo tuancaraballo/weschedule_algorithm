@@ -13,7 +13,6 @@ task_info:
 # TODO: fix dates currently using just an int
 # TODO: handle specific times ie what if task needs to be done at 9am on 15th day? Must be done by employee who is working there
 # TODO: should error sanity checking be done here or at ui? (ui most likely, but we havent decided)
-#
 
 def find_assignments(ma_info, task_info):
 
