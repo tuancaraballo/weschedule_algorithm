@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 
 
 # We need three classes to solve the rooming problem
@@ -34,27 +34,66 @@ class Schedule():
 
 
 class Rules:
-''' Class that will store the rules such as MappingRule and ConstraintRule
-'''
+
     def __init__(self, rules):
         self.rules = rules
+        self.mapping_rule = self.__get_mapping_rule(rules)
 
+    def __get_mapping_rule(self, rules):
+        for rule in rules:
+            if rule["key"] == "mapping":
+                return MappingRule(rule["map"])
 class MappingRule:
 
     def __init__(self, mapping):
+        self.demand_to_resources = self.__get_demand_to_resources(mapping)
+        self.demand_by_priority = self.__get_demand_by_priority(mapping)
 
-        self.DemandToResources = self.__get_demand_to_resources(mapping)
-
-
-    def get_demand_by_priorities:
-        pass
+    def get_demand_by_priorities(self):
+        return self.demand_by_priority
 
     def get_resources_for_demand_by_priority(self, demand):
-        pass
+        return self.demand_to_resources[demand]
 
-    def __get_demand_to_resources(self, mapping):
-        pass
+    @staticmethod
+    def __get_demand_to_resources(mapping):
+        """
+        converts the mapping dictionary to a dictionary that maps demand => list of resouces organized in descending order. 
+        :param mapping:  a list of dictionaries with field key, and priority
+        :return:  Dictionary that maps demand to resources by order of priority
+        """
+        demand_to_resources = {}
 
+
+        for demand_dic in mapping:
+            list_resources = []
+
+            for resource_priority in range(1, demand_dic["num"] + 1):
+                list_resources.append(demand_dic[int(resource_priority)])
+
+            demand_to_resources[demand_dic["key"]] = list_resources
+        return demand_to_resources
+
+    @staticmethod
+    def __get_demand_by_priority(mapping):
+        '''
+        Method to get a list of demand in order by priority to be able to iterate
+        :param mapping: a list of dictionaries with field key, and priority
+        :return: a list of demand_keys in descending priority.
+        '''
+        tuples_priority_demand = []
+
+        for demand in mapping:
+            tuples_priority_demand.append((demand["priority"], demand["key"]))
+
+        tuples_priority_demand.sort()
+        demand_by_priority = []
+
+        for priority, demand in tuples_priority_demand:
+
+            demand_by_priority.append(demand)
+
+        return demand_by_priority
 
 class Solver:
     def __init__(self):
@@ -92,20 +131,17 @@ class Solver:
         # return self.solution
         # package
 
-    def returnSolutino(self):
+    def returnSolution(self):
         return self.solution
 
     def __prepSolution(self):
         self.solution = {}
 
         for demand, scheduleDic in self.demandSchedule.mappingKeyToSchedule.items():
-            print(demand)
             demand_dic = {demand: {}}
             for date, assignment_dic in scheduleDic.items():
-                print("\t" + date)
                 assignments = {}
                 for assignment, daySchedule in assignment_dic.items():
-                    print("\t\t" + assignment)
                     if assignment != "need":
                         if assignment not in assignments.keys():
 
@@ -156,7 +192,7 @@ class Solver:
                 self.__assignOverlap(key["key"], key[idx])
 
     def __assignOverlap(self, demandKey, resourceKey):
-=
+
         for date in self.demandSchedule.getKeySchedule(demandKey).keys():
 
             if date in self.resourceSchedule.getKeySchedule(resourceKey):
@@ -216,4 +252,6 @@ def solveDemandResourceSchedule(demand_info, resource_info, given_rules):
     solver.addRules(rule_obj)
 
     solver.solve()
-    return solver.returnSolution
+    return solver.returnSolution()
+
+
