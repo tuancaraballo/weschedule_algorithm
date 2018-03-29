@@ -164,32 +164,11 @@ class Solver:
         return switcher[key]
 
     def __applyMapping(self, rule):
-        mapping = rule["map"]
 
+        for demand in self.rules.mapping_rule.get_demand_by_priorities():
 
-        priorities = {}
-
-        #get order of mapping, in what order of demands should we apply the mapping?
-
-        for dic in mapping:
-
-            placeholder = {}
-            placeholder["key"] = dic["key"]
-            placeholder["num"] = dic["num"]
-            for idx in range(1, dic["num"] + 1):
-                placeholder[idx] = dic[idx]
-
-            priorities[dic["priority"]] = placeholder
-
-        descending_priorities = list(priorities.keys())
-        descending_priorities.sort()
-
-        for priority in descending_priorities:
-            key = priorities[priority]
-
-            for idx in range(1, priorities[priority]["num"] + 1):
-
-                self.__assignOverlap(key["key"], key[idx])
+            for resource in self.rules.mapping_rule.get_resources_for_demand_by_priority(demand):
+                self.__assignOverlap(demand, resource)
 
     def __assignOverlap(self, demandKey, resourceKey):
 
