@@ -15,7 +15,11 @@ class Schedule:
                 key_schedule = {}
 
                 for day in dic["schedule"]:
-                    key_schedule[day["date"]] = {self.assignments[0]: day["time"]}
+                    converted_datetime = []
+                    for start, end  in day["time"]:
+                        converted_datetime.append((datetime.strptime(start, '%H:%M'),datetime.strptime(end, '%H:%M')))
+
+                    key_schedule[day["date"]] = {self.assignments[0]: converted_datetime}
                 result[dic["key"]] = key_schedule
 
             except KeyError:
@@ -35,17 +39,34 @@ class Schedule:
 
         return self.mappingKeyToSchedule[key].keys()
 
-    def find_overlap_single_day(self, internal_key, external_key, date, external_schedule):
+    def get_key_schedule_date(self, key, date):
+
+        return self.mappingKeyToSchedule[key][date]
+
+    def find_overlap_single_day(self, int_avail_schedule, ext_avail_schedule):
         '''
 
         :param internal_key:
         :param external_key:
         :param date:
         :param external_schedule:
-        :return: a list of overlapping segments for the two schedules 
+        :return: a list of overlapping segments for the two schedules
         '''
+        overlap = []
+        int_avail_schedule["available"].sort(reverse=True)
+        ext_avail_schedule["available"].sort(reverse=True)
 
+        for int_seg in int_avail_schedule["available"]:
+            for ext_seg in ext_avail_schedule["available"]:
 
+                if int_seg[1] > ext_seg[0] and ext_seg[1] > int_seg[0]:
+                    overlap.append((max([int_seg[0], ext_seg[0]]), min([int_seg[1], ext_seg[1]])))
+        print("overlap is ")
+        print(overlap)
+        return overlap
+
+    def remove_overlap_label(self):
+        pass
     #TODO: finish implemting assign overlap
     def assignOverlap(self, internal_key, external_key, external_schedule):
         '''
@@ -53,7 +74,7 @@ class Schedule:
         :param internal_key: key for either resource or demand
         :param external_key: key for either reosource or demand for other schedule
         :param external_schedule: Schedule for other object
-        :return: does not return, just changes both Schedules in place
+        :return: Does not return, just changes both Schedules in place.
         '''
 
         internal_key_schedule = self.getKeySchedule(internal_key)
@@ -63,15 +84,15 @@ class Schedule:
         overlap = {}
         for date in internal_key_schedule.keys():
             if date in external_key_schedule.keys():
-                print("date is {}".format(date))
-                overlap[date] = self.find_overlap_single_day(internal_key, external_key, date, external_schedule)
+                overlap[date] = self.find_overlap_single_day(self.get_key_schedule_date(internal_key, date),
+                                                             external_schedule.get_key_schedule_date(external_key, date))
 
-        #then relavel the overlapping schedules
+        #then reveal the overlapping schedules
         for date in internal_key_schedule.keys():
             if date in external_key_schedule.keys():
-
-                self.remove_overlap_label(date, overlap,external_key)
-                external_schedule.remove_overlap_label(date, overlap, internal_key)
+                pass
+                #self.remove_overlap_label(date, overlap, external_key)
+                #external_schedule.remove_overlap_label(date, overlap, internal_key)
 
 class Rules:
 
@@ -184,7 +205,7 @@ class Solver:
             for date, assignment_dic in scheduleDic.items():
                 assignments = {}
                 for assignment, daySchedule in assignment_dic.items():
-                    if assignment != "need":
+                    if assignment != "available":
                         if assignment not in assignments.keys():
 
                             assignments[assignment] = daySchedule
@@ -229,7 +250,7 @@ class Solver:
 
 
 
-                for demand_segment in self.demandSchedule.getKeySchedule(demandKey)[date]['need']:
+                for demand_segment in self.demandSchedule.getKeySchedule(demandKey)[date]['available']:
 
                     for resource_segment in self.resourceSchedule.getKeySchedule(resourceKey)[date]['available']:
 
@@ -275,7 +296,7 @@ def solveDemandResourceSchedule(demand_info, resource_info, given_rules):
 
     #TODO: create a initializer that creates solver by passing in demand, resource and rules
 
-    demand = Schedule(demand_info, ["need"])
+    demand = Schedule(demand_info, ["available"])
     resource = Schedule(resource_info, ["available"])
     rule_obj = Rules(given_rules)
     print(type(rule_obj))
