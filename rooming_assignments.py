@@ -43,7 +43,7 @@ class Schedule:
 
         return self.mappingKeyToSchedule[key][date]
 
-    def find_overlap_single_day(self, int_avail_schedule, ext_avail_schedule):
+    def find_overlap_single_day(self, int_avail_schedule, ext_avail_schedule, internal_key, external_key):
         '''
 
         :param internal_key:
@@ -52,21 +52,188 @@ class Schedule:
         :param external_schedule:
         :return: a list of overlapping segments for the two schedules
         '''
+
+
+        def start_end_overlap(int_seg, ext_seg):
+            return max([int_seg[0], ext_seg[0]]), min([int_seg[1], ext_seg[1]])
+
+        def replace_segment(old_seg, overlap_seg):
+            if old_seg[0] == overlap_seg[0] and old_seg[1] == overlap_seg[1]:
+                return None
+
         overlap = []
         int_avail_schedule["available"].sort(reverse=True)
         ext_avail_schedule["available"].sort(reverse=True)
 
+        t1 = int_avail_schedule["available"]
+        t2 = ext_avail_schedule["available"]
+
+        new_int_avail = []
+        new_ext_avail = []
+
+        t1_result = []
+        t2_result = []
+        overlap_result = []
+
+        while (len(t1) > 0 and len(t2) > 0):
+
+            t1_trailing, t2_trailing, overlap_add = self._find_overlap(t1, t2)
+
+            t1_result += t1_trailing
+            t2_result += t2_trailing
+            overlap_result += overlap_add
+
+            if len(t1) == 0 and len(t2) != 0:
+                t2_result += t2
+
+            if len(t2) == 0 and len(t1) != 0:
+                t1_result += t1
+        int_avail_schedule["available"] = t1
+        ext_avail_schedule["available"] = t2
+        ext_avail_schedule[internal_key] = overlap_result
+        int_avail_schedule[external_key] = overlap_result
+
+
+    def _find_overlap(self,t1, t2):
+        segment1 = t1[0]
+        segment2 = t2[0]
+
+        if segment1[1] < segment2[0]:
+            # no overlap,so remover trailing from list1 and add to to available
+            t1.pop(0)
+            return [segment1], [], []
+        if segment2[1] < segment1[0]:
+            # no overlap and segment2 is trailing
+            t2.pop(0)
+            return [], [segment2], []
+
+        overlap = (max(segment1[0], segment2[0]), min(segment1[1], segment2[1]))
+
+        # now we have to figure out how to update available time, both for
+        # case 1: they are exactly same segment
+        if segment1[0] == overlap[0] and segment1[1] == overlap[1] and segment1[0] == overlap[0] and segment2[1] == \
+                overlap[1]:
+            t1.pop(0)
+            t2.pop(0)
+
+            return [], [], [overlap]
+
+        # case2: they start same time, but 1 is ends later  than other
+
+        if segment1[0] == overlap[0] and segment2[0] == overlap[0] and segment1[1] != overlap[1] or segment2[1] != \
+                overlap[1]:
+
+            if segment1[1] > segment2[1]:
+
+                t2.pop(0)
+                t1.pop(0)
+
+                t1.insert(0, (overlap[1], segment1[1]))
+
+                return [], [], [overlap]
+            else:
+                t2.pop(0)
+                t1.pop(0)
+
+                t2.insert(0, (overlap[1], segment2[1]))
+
+                return [], [], [overlap]
+
+        # case3: they end same time, but 1 is starts sooner than other
+        if segment1[1] == overlap[1] and segment2[1] == overlap[1] and segment1[0] != overlap[0] or segment2[0] != \
+                overlap[1]:
+
+            if segment1[0] < segment2[0]:
+
+                t1.pop(0)
+                t2.pop(0)
+
+                return [(segment1[0], overlap[0])], [], [overlap]
+
+            else:
+                t1.pop(0)
+                t2.pop(0)
+
+                return [], [(segment2[0], overlap[0])], [overlap]
+        # case4: one is starts sooner and ends later, completely overlapping one
+
+        if segment1[0] > segment2[0] and segment1[1] < segment2[1]:
+            t1.pop()
+            t2.pop()
+
+            t2.insert(0, (overlap[1], segment2[1]))
+
+            return [], [(segment2[0], overlap[0])], [overlap]
+
+        if segment2[0] > segment1[0] and segment2[1] < segment1[1]:
+            t1.pop()
+            t2.pop()
+
+            t1.insert(0, (overlap[1], segment1[1]))
+
+            return [(segment1[0], overlap[0])], [], [overlap]
+
+        # case 5: segments do not either start together or end together, but overlap. like a random middle segemnt
+
+        if segment1[1] > segment2[1]:
+            t1.pop()
+            t2.pop()
+
+            t1.insert(0, (overlap[1], segment1[1]))
+
+            return [], [(segment2[0], overlap[0])], [overlap]
+
+        if segment2[1] > segment1[1]:
+            t1.pop()
+            t2.pop()
+
+            t2.insert(0, (overlap[1], segment2[1]))
+
+            return [(segment1[0], overlap[0])], [], [overlap]
+
+        assert ("Should have not gotten here")
+
         for int_seg in int_avail_schedule["available"]:
             for ext_seg in ext_avail_schedule["available"]:
+                if self.segments_overlap(int_seg, ext_seg):
 
-                if int_seg[1] > ext_seg[0] and ext_seg[1] > int_seg[0]:
-                    overlap.append((max([int_seg[0], ext_seg[0]]), min([int_seg[1], ext_seg[1]])))
-        print("overlap is ")
-        print(overlap)
+                    single_overlap = start_end_overlap(int_seg, ext_seg)
+                    x = replace_segment(int_seg, single_overlap)
+                    print(x)
+
+                    new_int_avail.append(replace_segment(int_seg, single_overlap))
+                    new_ext_avail.append(replace_segment(ext_seg, single_overlap))
+                    overlap.append(single_overlap)
+
+                else:
+                    new_int_avail.append(int_seg)
+                    new_ext_avail.append(ext_seg)
+
+        int_avail_schedule["available"] = [time_seg for time_seg in new_int_avail if time_seg is not None]
+        int_avail_schedule[external_key] = overlap
+        ext_avail_schedule["available"] = [time_seg for time_seg in new_ext_avail if time_seg is not None]
+        ext_avail_schedule[internal_key] = overlap
+
+
+        print("new internal schedule ")
+        print(self.mappingKeyToSchedule)
         return overlap
+    def segments_overlap(self, int_seg, ext_seg):
+        return int_seg[1] > ext_seg[0] and ext_seg[1] > int_seg[0]
 
-    def remove_overlap_label(self):
-        pass
+    def remove_overlap_single_day_and_label(self, overlap_segments, date, overlap_label, internal_key):
+        # Get the schedule from the date
+            # For the segment that there is overlap, divide segment into non-overlap and overlap segment
+            # available = non-overlap
+            # label = overlap
+
+        date_key_schedule_avail = self.get_key_schedule_date(internal_key, date)["available"]
+
+        for avail_segment in date_key_schedule_avail:
+            for single_overlap_segment in overlap_segments:
+                if self.segments_overlap(avail_segment, single_overlap_segment):
+                    self.get_key_schedule_date(internal_key, date)[overlap_label] = single_overlap_segment
+
     #TODO: finish implemting assign overlap
     def assignOverlap(self, internal_key, external_key, external_schedule):
         '''
@@ -85,14 +252,15 @@ class Schedule:
         for date in internal_key_schedule.keys():
             if date in external_key_schedule.keys():
                 overlap[date] = self.find_overlap_single_day(self.get_key_schedule_date(internal_key, date),
-                                                             external_schedule.get_key_schedule_date(external_key, date))
+                                                             external_schedule.get_key_schedule_date(external_key, date), internal_key, external_key)
+
 
         #then reveal the overlapping schedules
         for date in internal_key_schedule.keys():
             if date in external_key_schedule.keys():
-                pass
-                #self.remove_overlap_label(date, overlap, external_key)
-                #external_schedule.remove_overlap_label(date, overlap, internal_key)
+
+                self.remove_overlap_single_day_and_label(overlap[date],date, external_key, internal_key)
+                external_schedule.remove_overlap_single_day_and_label(overlap[date], date, internal_key, external_key)
 
 class Rules:
 
@@ -182,6 +350,7 @@ class Solver:
     def solve(self):
         # check that everything has been added
         if self.resourceSchedule is None or self.demandSchedule is None or self.rules is None:
+
             raise ValueError("Either the Schedule or the Rules have not been set")
 
         # apply rules
