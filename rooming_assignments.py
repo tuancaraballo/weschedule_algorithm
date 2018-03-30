@@ -2,7 +2,7 @@ from datetime import datetime
 
 
 # We need three classes to solve the rooming problem
-class Schedule():
+class Schedule:
     def __init__(self, info, assignments):
         self.assignments = assignments
         self.mappingKeyToSchedule = self.__getMappingKeyToSchedule(info)
@@ -29,9 +29,49 @@ class Schedule():
             return self.mappingKeyToSchedule[key]
 
         except KeyError:
-            print("we schould not find key")
+            print("We did not find key")
             raise
+    def get_dates_key(self, key):
 
+        return self.mappingKeyToSchedule[key].keys()
+
+    def find_overlap_single_day(self, internal_key, external_key, date, external_schedule):
+        '''
+
+        :param internal_key:
+        :param external_key:
+        :param date:
+        :param external_schedule:
+        :return: a list of overlapping segments for the two schedules 
+        '''
+
+
+    #TODO: finish implemting assign overlap
+    def assignOverlap(self, internal_key, external_key, external_schedule):
+        '''
+
+        :param internal_key: key for either resource or demand
+        :param external_key: key for either reosource or demand for other schedule
+        :param external_schedule: Schedule for other object
+        :return: does not return, just changes both Schedules in place
+        '''
+
+        internal_key_schedule = self.getKeySchedule(internal_key)
+        external_key_schedule = external_schedule.getKeySchedule(external_key)
+
+        #find overlap between two scheduels of two keys
+        overlap = {}
+        for date in internal_key_schedule.keys():
+            if date in external_key_schedule.keys():
+                print("date is {}".format(date))
+                overlap[date] = self.find_overlap_single_day(internal_key, external_key, date, external_schedule)
+
+        #then relavel the overlapping schedules
+        for date in internal_key_schedule.keys():
+            if date in external_key_schedule.keys():
+
+                self.remove_overlap_label(date, overlap,external_key)
+                external_schedule.remove_overlap_label(date, overlap, internal_key)
 
 class Rules:
 
@@ -43,6 +83,8 @@ class Rules:
         for rule in rules:
             if rule["key"] == "mapping":
                 return MappingRule(rule["map"])
+
+
 class MappingRule:
 
     def __init__(self, mapping):
@@ -118,7 +160,7 @@ class Solver:
 
     def solve(self):
         # check that everything has been added
-        if (self.resourceSchedule is None or self.demandSchedule is None or self.rules is None):
+        if self.resourceSchedule is None or self.demandSchedule is None or self.rules is None:
             raise ValueError("Either the Schedule or the Rules have not been set")
 
         # apply rules
@@ -166,15 +208,27 @@ class Solver:
     def __applyMapping(self, rule):
 
         for demand in self.rules.mapping_rule.get_demand_by_priorities():
-
             for resource in self.rules.mapping_rule.get_resources_for_demand_by_priority(demand):
-                self.__assignOverlap(demand, resource)
+                #call method in Schedule object that takes a scehdule
+                self.demandSchedule.assignOverlap(demand, resource, self.resourceSchedule)
+
+    def __assignOverlapNew(self, demand_key, resource_key):
+
+        for date in self.demandSchedule.getKeySchedule(demand_key).keys():
+
+            if date in self.resourceSchedule.getKeySchedule(resource_key):
+                pass
+                #self.demandSchedule.assignOverlap(demand_key,resource_key, date)
+
 
     def __assignOverlap(self, demandKey, resourceKey):
 
         for date in self.demandSchedule.getKeySchedule(demandKey).keys():
 
             if date in self.resourceSchedule.getKeySchedule(resourceKey):
+
+
+
                 for demand_segment in self.demandSchedule.getKeySchedule(demandKey)[date]['need']:
 
                     for resource_segment in self.resourceSchedule.getKeySchedule(resourceKey)[date]['available']:
@@ -224,7 +278,7 @@ def solveDemandResourceSchedule(demand_info, resource_info, given_rules):
     demand = Schedule(demand_info, ["need"])
     resource = Schedule(resource_info, ["available"])
     rule_obj = Rules(given_rules)
-
+    print(type(rule_obj))
     solver = Solver()
     solver.addDemandSchedule(demand)
     solver.addResourceSchedule(resource)
