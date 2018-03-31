@@ -278,8 +278,8 @@ class MappingRule:
 
     def __init__(self, mapping):
         #need to reformat mapping of demands to resources to enable getters
-        self.demand_to_resources_by_resource_priority = self._get_demand_to_resources_by_resource_priority(mapping)
-        self.demands_ordered_by_priority = self._get_demand__ordered_by_priority(mapping)
+        self.demand_to_resources_by_resource_priority = self._set_demand_to_resources_by_resource_priority(mapping)
+        self.demands_ordered_by_priority = self._set_demand__ordered_by_priority(mapping)
 
     def get_demands_ordered_by_priority(self):
         return self.demands_ordered_by_priority
@@ -288,7 +288,7 @@ class MappingRule:
         return self.demand_to_resources_by_resource_priority[demand]
 
     @staticmethod
-    def _get_demand_to_resources_by_resource_priority(mapping):
+    def _set_demand_to_resources_by_resource_priority(mapping):
         """
         converts the mapping dictionary to a dictionary that maps demand => list of resouces organized in descending order. 
         :param mapping:  a list of dictionaries with field key, and priority
@@ -306,25 +306,32 @@ class MappingRule:
         return demand_to_resources_by_resource_priority
 
     @staticmethod
-    def _get_demand__ordered_by_priority(mapping):
+    def _set_demand__ordered_by_priority(mapping):
         '''
-        Method to get a list of demand in order by priority to be able to iterate
+        Method to get a list of demands in order by priority to be able to iterate
         :param mapping: a list of dictionaries with field key, and priority
-        :return: a list of demand_keys in descending priority.
+        :return: a list of demand_keys in descending priority.['Dr. Nelligan', 'Dr. Montecute']
         '''
-        tuples_priority_demand = []
+        def find_demands_and_priority(mapping):
+            demands = []
+            for individual_demand in mapping:
+                demands.append((individual_demand["priority"], individual_demand["key"]))
+            demands.sort()
+            return demands
 
-        for demand in mapping:
-            tuples_priority_demand.append((demand["priority"], demand["key"]))
+        def remove_priority(demands_ordered_by_priority):
+            demands = []
 
-        tuples_priority_demand.sort()
-        demand_by_priority = []
+            for priority, demand in demands_ordered_by_priority:
+                demands.append(demand)
+            return demands
 
-        for priority, demand in tuples_priority_demand:
+        #make a list of tuples [(priority, demand_key)] and order them
+        demands_ordered_by_priority = find_demands_and_priority(mapping)
+        #remove priority so that is only a list of demands [demand1,demand2] ordered by descending priority
+        demands_ordered_by_priority = remove_priority(demands_ordered_by_priority)
 
-            demand_by_priority.append(demand)
-
-        return demand_by_priority
+        return demands_ordered_by_priority
 
 class Solver:
     def __init__(self):
@@ -343,10 +350,6 @@ class Solver:
         self.instructions = Instructions(instructions)
 
     def solve(self):
-        # check that everything has been added
-
-        # apply rules
-
 
         #for instruction in self.instructions:
             #self.applyInstruction(instruction)
@@ -397,64 +400,6 @@ class Solver:
             for resource in self.instructions.mapping_rule.get_resources_for_demand_ordered_by_priority(demand):
                 #call method in Schedule object that takes a scehdule
                 self.demandSchedule.assignOverlap(demand, resource, self.resource_schedule)
-
-    def __assignOverlapNew(self, demand_key, resource_key):
-
-        for date in self.demandSchedule.get_key_schedule(demand_key).keys():
-
-            if date in self.resource_schedule.get_key_schedule(resource_key):
-                pass
-                #self.demandSchedule.assignOverlap(demand_key,resource_key, date)
-
-
-    def __assignOverlap(self, demandKey, resourceKey):
-
-        for date in self.demandSchedule.get_key_schedule(demandKey).keys():
-
-            if date in self.resource_schedule.get_key_schedule(resourceKey):
-
-
-
-                for demand_segment in self.demandSchedule.get_key_schedule(demandKey)[date]['available']:
-
-                    for resource_segment in self.resource_schedule.get_key_schedule(resourceKey)[date]['available']:
-
-                        if datetime.strptime(demand_segment[1], '%H:%M') > datetime.strptime(resource_segment[0],
-                                                                                             '%H:%M') \
-                                and datetime.strptime(demand_segment[0], '%H:%M') < datetime.strptime(
-                                    resource_segment[1], '%H:%M'):
-
-                            # print("Found overlapping segments {} " + str(resource_segment))
-                            # remove segment
-                            start_overlap = demand_segment[0] if datetime.strptime(demand_segment[0], '%H:%M') \
-                                                                 > datetime.strptime(resource_segment[0], '%H:%M') else \
-                            resource_segment[0]
-
-                            end_overlap = demand_segment[1] if datetime.strptime(demand_segment[1], '%H:%M') \
-                                                               < datetime.strptime(resource_segment[1], '%H:%M') else \
-                            demand_segment[1]
-
-                            # print("start overlap is {} and end is {}".format(start_overlap, end_overlap))
-                            # self.resourceSchedule.getKeySchedule(resourceKey)[date]['available'].remove(resource_segment)
-                            if demandKey in self.resource_schedule.get_key_schedule(resourceKey)[date].keys():
-                                self.resource_schedule.get_key_schedule(resourceKey)[date][demandKey] = \
-                                self.resource_schedule.get_key_schedule(resourceKey)[date][demandKey] \
-                                + [(start_overlap, end_overlap)]
-                            else:
-                                self.resource_schedule.get_key_schedule(resourceKey)[date][demandKey] = [
-                                    (start_overlap, end_overlap)]
-
-                            if resourceKey in self.demandSchedule.get_key_schedule(demandKey)[date].keys():
-                                self.demandSchedule.get_key_schedule(demandKey)[date][resourceKey] = \
-                                self.demandSchedule.get_key_schedule(demandKey)[date][resourceKey] \
-                                + [(start_overlap, end_overlap)]
-                            else:
-                                self.demandSchedule.get_key_schedule(demandKey)[date][resourceKey] = [
-                                    (start_overlap, end_overlap)]
-                                # self.demandSchedule.getKeySchedule(demandKey)[date]['need'].remove(demand_segment)
-
-                                # self.demandSchedule.getKeySchedule(demandKey)[date] = {resourceKey: [('8:00', '12:00'), ('13:00', '18:00')]}
-                                # self.resourceSchedule.getKeySchedule(resourceKey)[date] = {demandKey: [('8:00', '12:00'), ('13:00', '18:00')]}
 
 
 def solveDemandResourceSchedule(demand_schedule, resource_schedule, instructions):

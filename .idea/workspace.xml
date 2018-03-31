@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="098c6534-eaa7-4cd3-ba3a-3b4b50c1ce2d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rooming_assignments.py" afterPath="$PROJECT_DIR$/rooming_assignments.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/roomingtest.py" afterPath="$PROJECT_DIR$/roomingtest.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -34,8 +33,8 @@
       <file leaf-file-name="rooming_assignments.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/rooming_assignments.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="260">
-              <caret line="280" column="53" lean-forward="false" selection-start-line="280" selection-start-column="13" selection-end-line="280" selection-end-column="53" />
+            <state relative-caret-position="400">
+              <caret line="402" column="0" lean-forward="true" selection-start-line="402" selection-start-column="0" selection-end-line="402" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -116,11 +115,12 @@
       <find>Schedule</find>
       <find>addDemandSchedule</find>
       <find>solve</find>
-      <find>__assignOverlap</find>
       <find>mappingKeyToSchedule</find>
       <find>mappingKeyToSchedules</find>
       <find>__applyRules</find>
       <find>get_resources_for_demand_ordered_by_priority</find>
+      <find>demand_to_resources_by_resource_priority</find>
+      <find>__assignOverlap</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -133,8 +133,8 @@
         <option value="$PROJECT_DIR$/test.py" />
         <option value="$PROJECT_DIR$/app.py" />
         <option value="$PROJECT_DIR$/task_assignments.py" />
-        <option value="$PROJECT_DIR$/rooming_assignments.py" />
         <option value="$PROJECT_DIR$/roomingtest.py" />
+        <option value="$PROJECT_DIR$/rooming_assignments.py" />
       </list>
     </option>
   </component>
@@ -145,10 +145,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-1313" />
-    <option name="y" value="61" />
-    <option name="width" value="1281" />
-    <option name="height" value="963" />
+    <option name="x" value="-1240" />
+    <option name="y" value="23" />
+    <option name="width" value="1280" />
+    <option name="height" value="877" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -299,7 +299,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32992327" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.40728477" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19315673" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15508886" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23730685" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -756,8 +756,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/rooming_assignments.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="280" column="53" lean-forward="false" selection-start-line="280" selection-start-column="13" selection-end-line="280" selection-end-column="53" />
+        <state relative-caret-position="400">
+          <caret line="402" column="0" lean-forward="true" selection-start-line="402" selection-start-column="0" selection-end-line="402" selection-end-column="0" />
           <folding />
         </state>
       </provider>
