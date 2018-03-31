@@ -468,7 +468,7 @@ def solveDemandResourceSchedule(demand_info, resource_info, given_rules):
     demand = Schedule(demand_info, ["available"])
     resource = Schedule(resource_info, ["available"])
     rule_obj = Rules(given_rules)
-    print(type(rule_obj))
+
     solver = Solver()
     solver.addDemandSchedule(demand)
     solver.addResourceSchedule(resource)
