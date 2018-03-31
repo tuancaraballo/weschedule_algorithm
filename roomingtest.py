@@ -7,11 +7,11 @@ given_rules = [{"key": "mapping", "priority": 1, "map": [{"key": "Nelligan", 1: 
 
 x = ra.MappingRule(given_rules[0]["map"])
 
-y = ra.Rules(given_rules)
-print(x.demand_to_resources)
-print(y.mapping_rule.demand_to_resources)
+y = ra.Instructions(given_rules)
+print(x.demand_to_resources_by_resource_priority)
+print(y.mapping_rule.demand_to_resources_by_resource_priority)
 
-print(x.get_resources_for_demand_by_priority("Nelligan"))
+print(x.get_resources_for_demand_ordered_by_priority("Nelligan"))
 
 
 
