@@ -1,7 +1,7 @@
 import rooming_assignments as ra
 
 
-given_rules = [{"key": "mapping", "priority": 1, "map": [{"key": "Nelligan", 1: "Sally", "priority": 1, "num": 1},
+given_rules = [{"key": "mapping", "order": 1, "map": [{"key": "Nelligan", 1: "Sally", "priority": 1, "num": 1},
                                                          {"key": "Montecute", 1: "Diego", "priority": 2, "num": 1}]}]
 
 
@@ -30,7 +30,7 @@ resource_info = [{"key": "Sally",
                  {"date": "3/5/2018", "time": [("8:00", "12:00"), ("13:00", "18:00")]}
                   ]}]
 demand_info = [{"key": "Montecute",
-                  "schedule":[{"date": "3/1/2018", "time": [("8:00", "12:00"), ("13:00", "18:00")]},
+                  "schedule": [{"date": "3/1/2018", "time": [("8:00", "12:00"), ("13:00", "18:00")]},
                  {"date": "3/2/2018", "time": [("8:00", "12:00"), ("13:00", "18:00")]},
                  {"date": "3/3/2018", "time": [("8:00", "12:00"), ("13:00", "18:00")]},
                  {"date": "3/4/2018", "time": [("8:00", "12:00"), ("13:00", "18:00")]},
@@ -46,7 +46,7 @@ demand_info = [{"key": "Montecute",
 
 #priority, what order should the preferences be done in.
 given_rules = [{"key"      :"mapping",
-          "priority" : 1,
+          "order" : 1,
           "map"      : [{"key": "Nelligan", 1: "Sally","priority": 1,"num": 1},
                         {"key": "Montecute", 1: "Diego","priority": 2,"num": 1}]},
        ]

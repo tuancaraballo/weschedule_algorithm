@@ -28,19 +28,12 @@ class Schedule:
         return datetime.strptime(time_interval[0], '%H:%M'),datetime.strptime(time_interval[1], '%H:%M')
 
     def get_key_schedule(self, key):
+        return self.schedule[key]
 
-        try:
-            return self.schedule[key]
-
-        except KeyError:
-            print("We did not find key")
-            raise
     def get_dates_key(self, key):
-
         return self.schedule[key].keys()
 
     def get_key_schedule_date(self, key, date):
-
         return self.schedule[key][date]
 
     def find_overlap_single_day(self, int_avail_schedule, ext_avail_schedule, internal_key, external_key):
@@ -52,10 +45,6 @@ class Schedule:
         :param external_schedule:
         :return: a list of overlapping segments for the two schedules
         '''
-
-
-        def start_end_overlap(int_seg, ext_seg):
-            return max([int_seg[0], ext_seg[0]]), min([int_seg[1], ext_seg[1]])
 
         def replace_segment(old_seg, overlap_seg):
             if old_seg[0] == overlap_seg[0] and old_seg[1] == overlap_seg[1]:
@@ -264,14 +253,30 @@ class Schedule:
 
 class Instructions:
 
-    def __init__(self, rules):
-        self.rules = rules
-        self.mapping_rule = self.__get_mapping_rule(rules)
+    def __init__(self, instructions):
+        self.instructions_by_order = self._order_instructions(instructions)
+        self.number_of_instructions = len(instructions)
+        self.mapping_rule = self.__get_mapping_rule(instructions)
 
     def __get_mapping_rule(self, rules):
         for rule in rules:
             if rule["key"] == "mapping":
                 return MappingRule(rule["map"])
+
+    def _order_instructions(self, instructions):
+        instructions_by_order = [None] * len(instructions)
+        print(instructions)
+        for num_order in range(0, len(instructions)):
+            index_order = instructions[num_order]["order"] - 1
+            instructions_by_order[index_order] = instructions[num_order]
+
+        return instructions_by_order
+
+    def get_instructions_by_order(self):
+        print("we sent these ")
+        print(self.instructions_by_order)
+        print()
+        return self.instructions_by_order
 
 
 class MappingRule:
@@ -348,12 +353,29 @@ class Solver:
 
     def set_instructions(self, instructions):
         self.instructions = Instructions(instructions)
+    def applyInstruction(self, instruction):
 
+        algorithm = self.find_algorithm(instruction)
+        print(algorithm)
+        algorithm()
+
+    def find_algorithm(self, instruction):
+        switcher = {
+            "mapping": self.__applyMapping
+
+        }
+
+        return switcher[instruction["key"]]
+
+        return
     def solve(self):
 
-        #for instruction in self.instructions:
-            #self.applyInstruction(instruction)
-        self.__applyRules()
+        for instruction in self.instructions.get_instructions_by_order():
+            print(instruction)
+            self.applyInstruction(instruction)
+
+
+        #self.__applyRules()
 
         # what optimizatinations are going to be applied
         # self.optimze()
@@ -394,7 +416,7 @@ class Solver:
         }
         return switcher[key]
 
-    def __applyMapping(self, rule):
+    def __applyMapping(self):
 
         for demand in self.instructions.mapping_rule.get_demands_ordered_by_priority():
             for resource in self.instructions.mapping_rule.get_resources_for_demand_ordered_by_priority(demand):
