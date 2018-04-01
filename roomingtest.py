@@ -47,10 +47,10 @@ given_rules = [{"key": "mapping",
                         {"key": "Montecute", 1: "Diego", "priority": 2, "num": 1}]},
                ]
 
-print(ra.solveDemandResourceSchedule(demand_info, resource_info, given_rules))
+print(ra.solve_demand_resource_schedule(demand_info, resource_info, given_rules))
 
-x = ra.solveDemandResourceSchedule(demand_info, resource_info, given_rules)
-print(len(ra.solveDemandResourceSchedule(demand_info, resource_info, given_rules)))
+x = ra.solve_demand_resource_schedule(demand_info, resource_info, given_rules)
+print(len(ra.solve_demand_resource_schedule(demand_info, resource_info, given_rules)))
 
 for physician, dates_assignments in x.items():
     print(physician)

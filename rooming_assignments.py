@@ -49,7 +49,7 @@ class Schedule:
     def get_key_schedule_date(self, key, date):
         return self.schedule[key][date]
 
-    def apply_mapping(self, resource_schedule, mapping_obj):
+    def run_mapping_with(self, resource_schedule, mapping_obj):
         '''
         The mapping algorithm works by:
         For each demand-resource pair:
@@ -61,9 +61,7 @@ class Schedule:
         '''
 
         # for every demand we have a mapping for
-
         for demand in mapping_obj.get_demands_ordered_by_priority():
-
             # for resources that a demand has a possible match with
             for resource in mapping_obj.get_resources_for_demand_ordered_by_priority(demand):
                 self.apply_a_single_mapping_between(demand,
@@ -121,18 +119,29 @@ class Schedule:
 
     def _find_overlap(self, t1, t2):
 
+        def segments_non_overlapping(segment1, segment2):
+            return segment1[1] < segment2[0] or segment2[1] < segment1[0]
+        def segment1_ahead_segment2(segment1, segment2):
+            return segment2[1] < segment1[0]
+        def segment2_ahead_segment1(segment1, segment2):
+            return segment1[1] < segment2[0]
+        def remove_earlier_segment(segment1, segment2, t1, t2):
+            if segment1_ahead_segment2(segment1, segment2):
+                # no overlap,so remover trailing from list1 and add to to available
+                t1.pop(0)
+                return [segment1], [], []
+            if segment2_ahead_segment1(segment1, segment2):
+                # no overlap and segment2 is trailing
+                t2.pop(0)
+                return [], [segment2], []
+
         # TODO:break down this method
+
         segment1 = t1[0]
         segment2 = t2[0]
 
-        if segment1[1] < segment2[0]:
-            # no overlap,so remover trailing from list1 and add to to available
-            t1.pop(0)
-            return [segment1], [], []
-        if segment2[1] < segment1[0]:
-            # no overlap and segment2 is trailing
-            t2.pop(0)
-            return [], [segment2], []
+        if segments_non_overlapping(segment1, segment2):
+            return remove_earlier_segment(segment1, segment2, t1, t2)
 
         overlap = (max(segment1[0], segment2[0]), min(segment1[1], segment2[1]))
 
@@ -220,7 +229,8 @@ class Schedule:
 
         assert ("Should have not gotten here")
 
-    def segments_overlap(self, int_seg, ext_seg):
+    @staticmethod
+    def segments_overlap(int_seg, ext_seg):
         return int_seg[1] > ext_seg[0] and ext_seg[1] > int_seg[0]
 
     def remove_overlap_single_day_and_label(self, overlap_segments, date, overlap_label, internal_key):
@@ -275,7 +285,7 @@ class Instructions:
 
     def _order_instructions(self, instructions):
         instructions_by_order = [None] * len(instructions)
-        print(instructions)
+
         for num_order in range(0, len(instructions)):
             index_order = instructions[num_order]["order"] - 1
             instructions_by_order[index_order] = instructions[num_order]
@@ -366,56 +376,53 @@ class Solver:
     def set_instructions(self, instructions):
         self.instructions = Instructions(instructions)
 
-    def applyInstruction(self, instruction):
+    def apply_instruction(self, instruction):
 
         algorithm = self.find_algorithm(instruction)
         algorithm()
 
     def find_algorithm(self, instruction):
         switcher = {
-            "mapping": self.__call_mapping_algorithm
+            "mapping": self._call_mapping_algorithm
 
         }
-
         return switcher[instruction["key"]]
 
     def solve(self):
 
         for instruction in self.instructions.get_instructions_by_order():
-            self.applyInstruction(instruction)
+            self.apply_instruction(instruction)
 
-        self.__prep_solution()
+        self._prep_solution()
 
-    def returnSolution(self):
+    def return_solution(self):
         return self.solution
 
-    def __prep_solution(self):
+    def _prep_solution(self):
         self.solution = {}
-
         self.solution["demand"] = self.demand_schedule.format_solution()
         self.solution["resource"] = self.resource_schedule.format_solution()
 
-    def __switchRules(self, key):
+    def _switch_rules(self, key):
         switcher = {
-            "mapping": self.__call_mapping_algorithm
+            "mapping": self._call_mapping_algorithm
         }
         return switcher[key]
 
-    def __call_mapping_algorithm(self):
+    def _call_mapping_algorithm(self):
 
         # call mapping algorithm on Demand Schedule with resource and mapping
-        self.demand_schedule.apply_mapping(self.resource_schedule,
-                                           self.instructions.get_mapping())
+        self.demand_schedule.run_mapping_with(self.resource_schedule,
+                                              self.instructions.get_mapping())
 
 
 ##########################################
-def solveDemandResourceSchedule(demand_schedule, resource_schedule, instructions):
+def solve_demand_resource_schedule(demand_schedule, resource_schedule, instructions):
     # set up solver and add information
     solver = Solver()
     solver.set_demand_schedule(demand_schedule)
     solver.set_resource_schedule(resource_schedule)
     solver.set_instructions(instructions)
 
-    # solve
     solver.solve()
-    return solver.returnSolution()
+    return solver.return_solution()
