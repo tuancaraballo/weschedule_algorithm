@@ -8,6 +8,7 @@ class Schedule:
         self.schedule = self._get_schedules_for_keys(schedule_info)
 
     def _get_schedules_for_keys(self, all_key_schedules):
+        #TODO: breakdown this method
         reformatted_schedule = {}
 
         for individual_key_schedule in all_key_schedules:
@@ -27,8 +28,8 @@ class Schedule:
     def convert_to_datetime_obj(self, time_interval):
         return datetime.strptime(time_interval[0], '%H:%M'),datetime.strptime(time_interval[1], '%H:%M')
 
-    def get_key_schedule(self, key):
-        return self.schedule[key]
+    def get_key_dates(self, key):
+        return self.schedule[key].keys()
 
     def get_dates_key(self, key):
         return self.schedule[key].keys()
@@ -37,11 +38,25 @@ class Schedule:
         return self.schedule[key][date]
 
     def apply_mapping(self, resource_schedule, mapping_obj):
+        '''
+        The mapping algorithm works by:
+        For each demand-resource pair:
+            for each date that both demand-resource pair are available:
+                Find overlapping segments and assign to each other
+        :param resource_schedule: scehdule of the availability of the resource
+        :param mapping_obj: of Class Mapping
+        :return:
+        '''
 
+        #for every demand we have a mapping for
         for demand in mapping_obj.get_demands_ordered_by_priority():
+
+            #for resources that a demand has a possible match with
             for resource in mapping_obj.get_resources_for_demand_ordered_by_priority(demand):
-                #call method in Schedule object that takes a scehdule
-                self.assignOverlap(demand, resource, resource_schedule)
+
+                self.apply_a_single_mapping_between(demand,
+                                                    resource,
+                                                    resource_schedule)
 
 
     def find_overlap_single_day(self, int_avail_schedule, ext_avail_schedule, internal_key, external_key):
@@ -190,31 +205,6 @@ class Schedule:
 
         assert ("Should have not gotten here")
 
-        for int_seg in int_avail_schedule["available"]:
-            for ext_seg in ext_avail_schedule["available"]:
-                if self.segments_overlap(int_seg, ext_seg):
-
-                    single_overlap = start_end_overlap(int_seg, ext_seg)
-                    x = replace_segment(int_seg, single_overlap)
-                    print(x)
-
-                    new_int_avail.append(replace_segment(int_seg, single_overlap))
-                    new_ext_avail.append(replace_segment(ext_seg, single_overlap))
-                    overlap.append(single_overlap)
-
-                else:
-                    new_int_avail.append(int_seg)
-                    new_ext_avail.append(ext_seg)
-
-        int_avail_schedule["available"] = [time_seg for time_seg in new_int_avail if time_seg is not None]
-        int_avail_schedule[external_key] = overlap
-        ext_avail_schedule["available"] = [time_seg for time_seg in new_ext_avail if time_seg is not None]
-        ext_avail_schedule[internal_key] = overlap
-
-
-        print("new internal schedule ")
-        print(self.schedule)
-        return overlap
     def segments_overlap(self, int_seg, ext_seg):
         return int_seg[1] > ext_seg[0] and ext_seg[1] > int_seg[0]
 
@@ -232,32 +222,27 @@ class Schedule:
                     self.get_key_schedule_date(internal_key, date)[overlap_label] = single_overlap_segment
 
     #TODO: finish implemting assign overlap
-    def assignOverlap(self, internal_key, external_key, external_schedule):
+    def apply_a_single_mapping_between(self, demand_key, resource_key, external_schedule):
         '''
-
-        :param internal_key: key for either resource or demand
-        :param external_key: key for either reosource or demand for other schedule
+        For a combination of demand and resource, this method will assign any overlap to each other
+        :param demand_key: id for demand, given that this method will be called in the context of
+                            schedule that has demand, demand_key_schedule will be called with self.
+        :param resource_key: id for resource
         :param external_schedule: Schedule for other object
         :return: Does not return, just changes both Schedules in place.
         '''
 
-        internal_key_schedule = self.get_key_schedule(internal_key)
-        external_key_schedule = external_schedule.get_key_schedule(external_key)
+        demand_key_schedule = self.get_key_dates(demand_key)
+        resource_key_schedule = external_schedule.get_key_dates(resource_key)
 
-        #find overlap between two scheduels of two keys
+        #find overlap between two scheduels of two keys, overlap
         overlap = {}
-        for date in internal_key_schedule.keys():
-            if date in external_key_schedule.keys():
-                overlap[date] = self.find_overlap_single_day(self.get_key_schedule_date(internal_key, date),
-                                                             external_schedule.get_key_schedule_date(external_key, date), internal_key, external_key)
-
-
-        #then reveal the overlapping schedules
-        for date in internal_key_schedule.keys():
-            if date in external_key_schedule.keys():
-
-                self.remove_overlap_single_day_and_label(overlap[date],date, external_key, internal_key)
-                external_schedule.remove_overlap_single_day_and_label(overlap[date], date, internal_key, external_key)
+        for date in demand_key_schedule:
+            if date in resource_key_schedule:
+                self.find_overlap_single_day(self.get_key_schedule_date(demand_key, date),
+                                             external_schedule.get_key_schedule_date(resource_key, date),
+                                             demand_key,
+                                             resource_key)
 
 class Instructions:
 
@@ -269,7 +254,7 @@ class Instructions:
     def __create_mapping(self, rules):
         for rule in rules:
             if rule["key"] == "mapping":
-                return MappingRule(rule["map"])
+                return Mapping(rule["map"])
 
     def _order_instructions(self, instructions):
         instructions_by_order = [None] * len(instructions)
@@ -284,13 +269,10 @@ class Instructions:
         return self.mapping
 
     def get_instructions_by_order(self):
-        print("we sent these ")
-        print(self.instructions_by_order)
-        print()
         return self.instructions_by_order
 
 
-class MappingRule:
+class Mapping:
 
     def __init__(self, mapping):
         #need to reformat mapping of demands to resources to enable getters
@@ -372,7 +354,7 @@ class Solver:
 
     def find_algorithm(self, instruction):
         switcher = {
-            "mapping": self.__applyMapping
+            "mapping": self.__call_mapping_algorithm
 
         }
 
@@ -416,15 +398,15 @@ class Solver:
 
     def __switchRules(self, key):
         switcher = {
-            "mapping": self.__applyMapping
+            "mapping": self.__call_mapping_algorithm
         }
         return switcher[key]
 
-    def __applyMapping(self):
+    def __call_mapping_algorithm(self):
 
         #call mapping algorithm on Demand Schedule with resource and mapping
         self.demandSchedule.apply_mapping(self.resource_schedule,
-                                         self.instructions.get_mapping())
+                                          self.instructions.get_mapping())
 
 
 def solveDemandResourceSchedule(demand_schedule, resource_schedule, instructions):

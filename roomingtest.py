@@ -5,7 +5,7 @@ given_rules = [{"key": "mapping", "order": 1, "map": [{"key": "Nelligan", 1: "Sa
                                                          {"key": "Montecute", 1: "Diego", "priority": 2, "num": 1}]}]
 
 
-x = ra.MappingRule(given_rules[0]["map"])
+x = ra.Mapping(given_rules[0]["map"])
 
 y = ra.Instructions(given_rules)
 print(x.demand_to_resources_by_resource_priority)
