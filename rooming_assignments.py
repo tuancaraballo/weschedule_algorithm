@@ -59,7 +59,7 @@ class Schedule:
                                                     resource_schedule)
 
 
-    def find_overlap_single_day(self, int_avail_schedule, ext_avail_schedule, internal_key, external_key):
+    def find_overlap_single_day(self,schedule_pair , key_pair):
         '''
 
         :param internal_key:
@@ -68,42 +68,45 @@ class Schedule:
         :param external_schedule:
         :return: a list of overlapping segments for the two schedules
         '''
+        INTERNAL_INDEX = 0
+        EXTERNAL_INDEX = 1
 
-        def replace_segment(old_seg, overlap_seg):
-            if old_seg[0] == overlap_seg[0] and old_seg[1] == overlap_seg[1]:
-                return None
+        int_key_schedule = schedule_pair[INTERNAL_INDEX]
+        ext_schedule = schedule_pair[EXTERNAL_INDEX]
+        internal_key = key_pair[INTERNAL_INDEX]
+        external_key = key_pair[EXTERNAL_INDEX]
 
-        overlap = []
-        int_avail_schedule["available"].sort(reverse=True)
-        ext_avail_schedule["available"].sort(reverse=True)
+        int_key_schedule["available"].sort(reverse=True)
+        ext_schedule["available"].sort(reverse=True)
 
-        t1 = int_avail_schedule["available"]
-        t2 = ext_avail_schedule["available"]
+        int_avail_schedule = int_key_schedule["available"]
+        ext_avail_schedule = ext_schedule["available"]
 
-        new_int_avail = []
-        new_ext_avail = []
-
-        t1_result = []
-        t2_result = []
+        updated_int_avail_schedule = []
+        updated_ext_avail_schedule = []
         overlap_result = []
 
-        while (len(t1) > 0 and len(t2) > 0):
+        while (len(int_avail_schedule) > 0 and len(ext_avail_schedule) > 0):
 
-            t1_trailing, t2_trailing, overlap_add = self._find_overlap(t1, t2)
+            t1_trailing, t2_trailing, overlap_add = self._find_overlap(int_avail_schedule, ext_avail_schedule)
 
-            t1_result += t1_trailing
-            t2_result += t2_trailing
+            updated_int_avail_schedule += t1_trailing
+            updated_ext_avail_schedule += t2_trailing
             overlap_result += overlap_add
 
-            if len(t1) == 0 and len(t2) != 0:
-                t2_result += t2
+            if len(int_avail_schedule) == 0 and len(ext_avail_schedule) != 0:
+                updated_ext_avail_schedule += ext_avail_schedule
 
-            if len(t2) == 0 and len(t1) != 0:
-                t1_result += t1
-        int_avail_schedule["available"] = t1
-        ext_avail_schedule["available"] = t2
-        ext_avail_schedule[internal_key] = overlap_result
-        int_avail_schedule[external_key] = overlap_result
+            if len(ext_avail_schedule) == 0 and len(int_avail_schedule) != 0:
+                updated_int_avail_schedule += int_avail_schedule
+
+        int_key_schedule["available"] = updated_int_avail_schedule
+        ext_schedule["available"] = ext_avail_schedule
+
+        ext_schedule[internal_key] = overlap_result
+        int_key_schedule[external_key] = overlap_result
+
+
 
 
     def _find_overlap(self,t1, t2):
@@ -236,13 +239,15 @@ class Schedule:
         resource_key_schedule = external_schedule.get_key_dates(resource_key)
 
         #find overlap between two scheduels of two keys, overlap
-        overlap = {}
         for date in demand_key_schedule:
             if date in resource_key_schedule:
-                self.find_overlap_single_day(self.get_key_schedule_date(demand_key, date),
-                                             external_schedule.get_key_schedule_date(resource_key, date),
-                                             demand_key,
-                                             resource_key)
+                #readability reasons, pair them up.
+                schedule_pair = (self.get_key_schedule_date(demand_key, date),
+                                                       external_schedule.get_key_schedule_date(resource_key, date))
+                key_pair = (demand_key,resource_key)
+
+                self.find_overlap_single_day(schedule_pair, key_pair)
+
 
 class Instructions:
 
