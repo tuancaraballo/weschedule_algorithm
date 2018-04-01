@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="098c6534-eaa7-4cd3-ba3a-3b4b50c1ce2d" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rooming_assignments.py" afterPath="$PROJECT_DIR$/rooming_assignments.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/roomingtest.py" afterPath="$PROJECT_DIR$/roomingtest.py" />
     </list>
@@ -56,11 +57,10 @@
           <file leaf-file-name="rooming_assignments.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/rooming_assignments.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="110">
-                  <caret line="377" column="9" lean-forward="false" selection-start-line="377" selection-start-column="9" selection-end-line="377" selection-end-column="9" />
+                <state relative-caret-position="11">
+                  <caret line="40" column="65" lean-forward="false" selection-start-line="40" selection-start-column="34" selection-end-line="40" selection-end-column="65" />
                   <folding>
-                    <element signature="e#10139#12798#0" expanded="false" />
-                    <element signature="e#11669#12798#0" expanded="false" />
+                    <element signature="e#12085#13214#0" expanded="false" />
                   </folding>
                 </state>
               </provider>
@@ -95,11 +95,11 @@
           <file leaf-file-name="rooming_assignments.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/rooming_assignments.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="60">
-                  <caret line="359" column="19" lean-forward="true" selection-start-line="359" selection-start-column="19" selection-end-line="359" selection-end-column="19" />
+                <state relative-caret-position="81">
+                  <caret line="425" column="41" lean-forward="false" selection-start-line="425" selection-start-column="28" selection-end-line="425" selection-end-column="41" />
                   <folding>
-                    <element signature="e#10139#12798#0" expanded="false" />
-                    <element signature="e#11669#12798#0" expanded="false" />
+                    <element signature="e#10555#13214#0" expanded="false" />
+                    <element signature="e#12085#13214#0" expanded="false" />
                   </folding>
                 </state>
               </provider>
@@ -118,12 +118,7 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Rules(</find>
-      <find>returnSolution</find>
-      <find>demand_by_priority</find>
-      <find>assignOverlap</find>
       <find>assignments</find>
-      <find>__applyMapping</find>
       <find>demandSchedule</find>
       <find>external_key_schedule</find>
       <find>need</find>
@@ -133,21 +128,26 @@
       <find>addDemand</find>
       <find>addRules</find>
       <find>_get_schedules_for_keys</find>
-      <find>Schedule</find>
       <find>addDemandSchedule</find>
       <find>solve</find>
       <find>mappingKeyToSchedule</find>
       <find>mappingKeyToSchedules</find>
-      <find>__applyRules</find>
       <find>get_resources_for_demand_ordered_by_priority</find>
       <find>demand_to_resources_by_resource_priority</find>
       <find>__assignOverlap</find>
       <find>switch</find>
       <find>getListInstructions</find>
       <find>get_instructions_by_order</find>
-      <find>applyInstruction</find>
       <find>rule</find>
       <find>__applyMa</find>
+      <find>__applyRules</find>
+      <find>applyInstruction</find>
+      <find>__applyMapping</find>
+      <find>mapping_rule</find>
+      <find>Schedule</find>
+      <find>applyMapping</find>
+      <find>apply_mapping</find>
+      <find>getMapping</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -326,10 +326,10 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289183" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="FLOATING" visible="true" show_stripe_button="true" weight="0.26048565" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" x="25" y="23" width="1440" height="877" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="FLOATING" visible="true" show_stripe_button="true" weight="0.26048565" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" x="27" y="23" width="1440" height="877" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15508886" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23730685" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23730685" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21205822" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -403,8 +403,8 @@
         <state relative-caret-position="364">
           <caret line="26" column="13" lean-forward="false" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
           <folding>
-            <element signature="e#10139#12798#0" expanded="false" />
-            <element signature="e#11669#12798#0" expanded="false" />
+            <element signature="e#10555#13214#0" expanded="false" />
+            <element signature="e#12085#13214#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -450,8 +450,8 @@
         <state relative-caret-position="280">
           <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding>
-            <element signature="e#10139#12798#0" expanded="false" />
-            <element signature="e#11669#12798#0" expanded="false" />
+            <element signature="e#10555#13214#0" expanded="false" />
+            <element signature="e#12085#13214#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -505,8 +505,8 @@
         <state relative-caret-position="1568">
           <caret line="112" column="27" lean-forward="true" selection-start-line="112" selection-start-column="27" selection-end-line="112" selection-end-column="27" />
           <folding>
-            <element signature="e#10139#12798#0" expanded="false" />
-            <element signature="e#11669#12798#0" expanded="false" />
+            <element signature="e#10555#13214#0" expanded="false" />
+            <element signature="e#12085#13214#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -785,14 +785,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/roomingtest.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="658">
-          <caret line="47" column="11" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -811,13 +803,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/roomingtest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="658">
+          <caret line="47" column="11" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/rooming_assignments.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="377" column="9" lean-forward="false" selection-start-line="377" selection-start-column="9" selection-end-line="377" selection-end-column="9" />
+        <state relative-caret-position="81">
+          <caret line="425" column="41" lean-forward="false" selection-start-line="425" selection-start-column="28" selection-end-line="425" selection-end-column="41" />
           <folding>
-            <element signature="e#10139#12798#0" expanded="false" />
-            <element signature="e#11669#12798#0" expanded="false" />
+            <element signature="e#10555#13214#0" expanded="false" />
+            <element signature="e#12085#13214#0" expanded="false" />
           </folding>
         </state>
       </provider>

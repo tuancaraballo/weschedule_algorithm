@@ -36,6 +36,14 @@ class Schedule:
     def get_key_schedule_date(self, key, date):
         return self.schedule[key][date]
 
+    def apply_mapping(self, resource_schedule, mapping_obj):
+
+        for demand in mapping_obj.get_demands_ordered_by_priority():
+            for resource in mapping_obj.get_resources_for_demand_ordered_by_priority(demand):
+                #call method in Schedule object that takes a scehdule
+                self.assignOverlap(demand, resource, resource_schedule)
+
+
     def find_overlap_single_day(self, int_avail_schedule, ext_avail_schedule, internal_key, external_key):
         '''
 
@@ -256,9 +264,9 @@ class Instructions:
     def __init__(self, instructions):
         self.instructions_by_order = self._order_instructions(instructions)
         self.number_of_instructions = len(instructions)
-        self.mapping_rule = self.__get_mapping_rule(instructions)
+        self.mapping = self.__create_mapping(instructions)
 
-    def __get_mapping_rule(self, rules):
+    def __create_mapping(self, rules):
         for rule in rules:
             if rule["key"] == "mapping":
                 return MappingRule(rule["map"])
@@ -271,6 +279,9 @@ class Instructions:
             instructions_by_order[index_order] = instructions[num_order]
 
         return instructions_by_order
+
+    def get_mapping(self):
+        return self.mapping
 
     def get_instructions_by_order(self):
         print("we sent these ")
@@ -353,10 +364,10 @@ class Solver:
 
     def set_instructions(self, instructions):
         self.instructions = Instructions(instructions)
+
     def applyInstruction(self, instruction):
 
         algorithm = self.find_algorithm(instruction)
-        print(algorithm)
         algorithm()
 
     def find_algorithm(self, instruction):
@@ -371,7 +382,6 @@ class Solver:
     def solve(self):
 
         for instruction in self.instructions.get_instructions_by_order():
-            print(instruction)
             self.applyInstruction(instruction)
 
 
@@ -404,12 +414,6 @@ class Solver:
                 demand_dic[demand][date] = assignments
             self.solution = {**self.solution, **demand_dic}
 
-    def __applyRules(self):
-
-        for rule in self.instructions.rules:
-            func = self.__switchRules(rule["key"])
-            func(rule)
-
     def __switchRules(self, key):
         switcher = {
             "mapping": self.__applyMapping
@@ -418,10 +422,9 @@ class Solver:
 
     def __applyMapping(self):
 
-        for demand in self.instructions.mapping_rule.get_demands_ordered_by_priority():
-            for resource in self.instructions.mapping_rule.get_resources_for_demand_ordered_by_priority(demand):
-                #call method in Schedule object that takes a scehdule
-                self.demandSchedule.assignOverlap(demand, resource, self.resource_schedule)
+        #call mapping algorithm on Demand Schedule with resource and mapping
+        self.demandSchedule.apply_mapping(self.resource_schedule,
+                                         self.instructions.get_mapping())
 
 
 def solveDemandResourceSchedule(demand_schedule, resource_schedule, instructions):
