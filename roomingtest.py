@@ -220,7 +220,7 @@ for physician, dates_assignments in x.items():
 #
 #
 #
-# #Todo: finish last two test
+#
 # #segment overlaps with a leading segment 1
 #
 # t1 = [(1, 5)]

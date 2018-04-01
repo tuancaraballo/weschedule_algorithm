@@ -2,9 +2,8 @@ from unittest import TestCase
 
 
 class TestSolveDemandResourceSchedule(TestCase):
-    def test_solveDemandResourceSchedule(self):
+    def test_solve_simple_all_overlapping(self):
         #end to end testing
-
         from rooming_assignments import solve_demand_resource_schedule
         import datetime
         resource_info = [{"key": "Sally",
@@ -47,5 +46,141 @@ class TestSolveDemandResourceSchedule(TestCase):
         sol  = solve_demand_resource_schedule(demand_info, resource_info, instructions)
         assert sol == correc_sol
 
-    def test_2(self):
-        pass
+    def test_solver_all_non_overlapping(self):
+        from rooming_assignments import solve_demand_resource_schedule
+        import datetime
+        import pprint
+        resource_info = [{"key": "Sally",
+                          "schedule": [{"date": "3/1/2018", "time": [("1:00", "5:00"), ("19:00", "22:00")]},
+                                       {"date": "3/2/2018", "time": [("1:00", "6:00"), ("19:00", "22:00")]},
+                                       {"date": "3/3/2018", "time": [("4:00", "5:00"), ("19:00", "22:00")]},
+                                       {"date": "3/4/2018", "time": [("2:00", "5:00"), ("19:00", "22:00")]},
+                                       {"date": "3/5/2018", "time": [("1:00", "7:00"), ("19:00", "22:00")]}
+                                       ]},
+                         {"key": "Diego",
+                          "schedule": [{"date": "3/1/2018", "time": [("1:00", "5:00"), ("19:00", "22:00")]},
+                                       {"date": "3/2/2018", "time": [("2:00", "5:00"), ("19:00", "22:00")]},
+                                       {"date": "3/3/2018", "time": [("1:00", "5:00"), ("19:00", "22:00")]},
+                                       {"date": "3/4/2018", "time": [("4:00", "5:00"), ("19:00", "22:00")]},
+                                       {"date": "3/5/2018", "time": [("1:00", "5:00"), ("19:00", "22:00")]}
+                                       ]}]
+        demand_info = [{"key": "Montecute",
+                        "schedule": [{"date": "3/1/2018", "time": [("8:00", "12:00"), ("13:00", "18:00")]},
+                                     {"date": "3/2/2018", "time": [("8:00", "12:00"), ("13:00", "18:00")]},
+                                     {"date": "3/3/2018", "time": [("8:00", "12:00"), ("13:00", "18:00")]},
+                                     {"date": "3/4/2018", "time": [("8:00", "12:00"), ("13:00", "18:00")]},
+                                     {"date": "3/5/2018", "time": [("8:00", "12:00"), ("13:00", "18:00")]}
+                                     ]},
+                       {"key": "Nelligan",
+                        "schedule": [{"date": "3/1/2018", "time": [("8:00", "12:00"), ("13:00", "18:00")]},
+                                     {"date": "3/2/2018", "time": [("8:00", "12:00"), ("13:00", "18:00")]},
+                                     {"date": "3/3/2018", "time": [("8:00", "12:00"), ("13:00", "18:00")]},
+                                     {"date": "3/4/2018", "time": [("8:00", "12:00"), ("13:00", "18:00")]},
+                                     {"date": "3/5/2018", "time": [("8:00", "12:00"), ("13:00", "18:00")]}
+                                     ]}]
+        instructions = [{"key": "mapping", "order": 1, "map": [{"key": "Nelligan", 1: "Sally", "priority": 1, "num": 1},
+                                                              {"key": "Montecute", 1: "Diego", "priority": 2,
+                                                               "num": 1}]}]
+        correct_sol = {'demand': {'Montecute': {'3/1/2018': {'Diego': [],
+                                       'available': [(datetime.datetime(1900, 1, 1, 13, 0),
+                                                      datetime.datetime(1900, 1, 1, 18, 0)),
+                                                     (datetime.datetime(1900, 1, 1, 8, 0),
+                                                      datetime.datetime(1900, 1, 1, 12, 0))]},
+                          '3/2/2018': {'Diego': [],
+                                       'available': [(datetime.datetime(1900, 1, 1, 13, 0),
+                                                      datetime.datetime(1900, 1, 1, 18, 0)),
+                                                     (datetime.datetime(1900, 1, 1, 8, 0),
+                                                      datetime.datetime(1900, 1, 1, 12, 0))]},
+                          '3/3/2018': {'Diego': [],
+                                       'available': [(datetime.datetime(1900, 1, 1, 13, 0),
+                                                      datetime.datetime(1900, 1, 1, 18, 0)),
+                                                     (datetime.datetime(1900, 1, 1, 8, 0),
+                                                      datetime.datetime(1900, 1, 1, 12, 0))]},
+                          '3/4/2018': {'Diego': [],
+                                       'available': [(datetime.datetime(1900, 1, 1, 13, 0),
+                                                      datetime.datetime(1900, 1, 1, 18, 0)),
+                                                     (datetime.datetime(1900, 1, 1, 8, 0),
+                                                      datetime.datetime(1900, 1, 1, 12, 0))]},
+                          '3/5/2018': {'Diego': [],
+                                       'available': [(datetime.datetime(1900, 1, 1, 13, 0),
+                                                      datetime.datetime(1900, 1, 1, 18, 0)),
+                                                     (datetime.datetime(1900, 1, 1, 8, 0),
+                                                      datetime.datetime(1900, 1, 1, 12, 0))]}},
+                'Nelligan': {'3/1/2018': {'Sally': [],
+                                      'available': [(datetime.datetime(1900, 1, 1, 13, 0),
+                                                     datetime.datetime(1900, 1, 1, 18, 0)),
+                                                    (datetime.datetime(1900, 1, 1, 8, 0),
+                                                     datetime.datetime(1900, 1, 1, 12, 0))]},
+                         '3/2/2018': {'Sally': [],
+                                      'available': [(datetime.datetime(1900, 1, 1, 13, 0),
+                                                     datetime.datetime(1900, 1, 1, 18, 0)),
+                                                    (datetime.datetime(1900, 1, 1, 8, 0),
+                                                     datetime.datetime(1900, 1, 1, 12, 0))]},
+                         '3/3/2018': {'Sally': [],
+                                      'available': [(datetime.datetime(1900, 1, 1, 13, 0),
+                                                     datetime.datetime(1900, 1, 1, 18, 0)),
+                                                    (datetime.datetime(1900, 1, 1, 8, 0),
+                                                     datetime.datetime(1900, 1, 1, 12, 0))]},
+                         '3/4/2018': {'Sally': [],
+                                      'available': [(datetime.datetime(1900, 1, 1, 13, 0),
+                                                     datetime.datetime(1900, 1, 1, 18, 0)),
+                                                    (datetime.datetime(1900, 1, 1, 8, 0),
+                                                     datetime.datetime(1900, 1, 1, 12, 0))]},
+                         '3/5/2018': {'Sally': [],
+                                      'available': [(datetime.datetime(1900, 1, 1, 13, 0),
+                                                     datetime.datetime(1900, 1, 1, 18, 0)),
+                                                    (datetime.datetime(1900, 1, 1, 8, 0),
+                                                     datetime.datetime(1900, 1, 1, 12, 0))]}}},
+                'resource': {'Diego': {'3/1/2018': {'Montecute': [],
+                                     'available': [(datetime.datetime(1900, 1, 1, 19, 0),
+                                                    datetime.datetime(1900, 1, 1, 22, 0)),
+                                                   (datetime.datetime(1900, 1, 1, 1, 0),
+                                                    datetime.datetime(1900, 1, 1, 5, 0))]},
+                        '3/2/2018': {'Montecute': [],
+                                     'available': [(datetime.datetime(1900, 1, 1, 19, 0),
+                                                    datetime.datetime(1900, 1, 1, 22, 0)),
+                                                   (datetime.datetime(1900, 1, 1, 2, 0),
+                                                    datetime.datetime(1900, 1, 1, 5, 0))]},
+                        '3/3/2018': {'Montecute': [],
+                                     'available': [(datetime.datetime(1900, 1, 1, 19, 0),
+                                                    datetime.datetime(1900, 1, 1, 22, 0)),
+                                                   (datetime.datetime(1900, 1, 1, 1, 0),
+                                                    datetime.datetime(1900, 1, 1, 5, 0))]},
+                        '3/4/2018': {'Montecute': [],
+                                     'available': [(datetime.datetime(1900, 1, 1, 19, 0),
+                                                    datetime.datetime(1900, 1, 1, 22, 0)),
+                                                   (datetime.datetime(1900, 1, 1, 4, 0),
+                                                    datetime.datetime(1900, 1, 1, 5, 0))]},
+                        '3/5/2018': {'Montecute': [],
+                                     'available': [(datetime.datetime(1900, 1, 1, 19, 0),
+                                                    datetime.datetime(1900, 1, 1, 22, 0)),
+                                                   (datetime.datetime(1900, 1, 1, 1, 0),
+                                                    datetime.datetime(1900, 1, 1, 5, 0))]}},
+              'Sally': {'3/1/2018': {'Nelligan': [],
+                                     'available': [(datetime.datetime(1900, 1, 1, 19, 0),
+                                                    datetime.datetime(1900, 1, 1, 22, 0)),
+                                                   (datetime.datetime(1900, 1, 1, 1, 0),
+                                                    datetime.datetime(1900, 1, 1, 5, 0))]},
+                        '3/2/2018': {'Nelligan': [],
+                                     'available': [(datetime.datetime(1900, 1, 1, 19, 0),
+                                                    datetime.datetime(1900, 1, 1, 22, 0)),
+                                                   (datetime.datetime(1900, 1, 1, 1, 0),
+                                                    datetime.datetime(1900, 1, 1, 6, 0))]},
+                        '3/3/2018': {'Nelligan': [],
+                                     'available': [(datetime.datetime(1900, 1, 1, 19, 0),
+                                                    datetime.datetime(1900, 1, 1, 22, 0)),
+                                                   (datetime.datetime(1900, 1, 1, 4, 0),
+                                                    datetime.datetime(1900, 1, 1, 5, 0))]},
+                        '3/4/2018': {'Nelligan': [],
+                                     'available': [(datetime.datetime(1900, 1, 1, 19, 0),
+                                                    datetime.datetime(1900, 1, 1, 22, 0)),
+                                                   (datetime.datetime(1900, 1, 1, 2, 0),
+                                                    datetime.datetime(1900, 1, 1, 5, 0))]},
+                        '3/5/2018': {'Nelligan': [],
+                                     'available': [(datetime.datetime(1900, 1, 1, 19, 0),
+                                                    datetime.datetime(1900, 1, 1, 22, 0)),
+                                                   (datetime.datetime(1900, 1, 1, 1, 0),
+                                                    datetime.datetime(1900, 1, 1, 7, 0))]}}}}
+
+        sol = solve_demand_resource_schedule(demand_info, resource_info, instructions)
+        assert sol == correct_sol

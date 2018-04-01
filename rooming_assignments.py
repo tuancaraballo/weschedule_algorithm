@@ -92,32 +92,32 @@ class Schedule:
         int_avail_schedule = int_key_schedule["available"]
         ext_avail_schedule = ext_key_schedule["available"]
 
-        updated_int_avail_schedule = []
-        updated_ext_avail_schedule = []
+        updated_demand_avail_schedule = []
+        updated_resource_avail_schedule = []
         overlap_result = []
 
         while (len(int_avail_schedule) > 0 and len(ext_avail_schedule) > 0):
 
             t1_trailing, t2_trailing, overlap_add = self._find_overlap(int_avail_schedule, ext_avail_schedule)
 
-            updated_int_avail_schedule += t1_trailing
-            updated_ext_avail_schedule += t2_trailing
+            updated_demand_avail_schedule   += t1_trailing
+            updated_resource_avail_schedule += t2_trailing
             overlap_result += overlap_add
 
             if len(int_avail_schedule) == 0 and len(ext_avail_schedule) != 0:
-                updated_ext_avail_schedule += ext_avail_schedule
+                updated_resource_avail_schedule += ext_avail_schedule
 
             if len(ext_avail_schedule) == 0 and len(int_avail_schedule) != 0:
-                updated_int_avail_schedule += int_avail_schedule
+                updated_demand_avail_schedule += int_avail_schedule
 
         # update schedules
-        int_key_schedule["available"] = updated_int_avail_schedule
-        ext_key_schedule["available"] = updated_ext_avail_schedule
+        int_key_schedule["available"] = updated_demand_avail_schedule
+        ext_key_schedule["available"] = updated_resource_avail_schedule
 
         ext_key_schedule[internal_key] = overlap_result
         int_key_schedule[external_key] = overlap_result
 
-    def _find_overlap(self, t1, t2):
+    def _find_overlap(self, demand_avail_schedule, resource_avail_schedule):
 
         def segments_non_overlapping(segment1, segment2):
             return segment1[1] < segment2[0] or segment2[1] < segment1[0]
@@ -137,11 +137,11 @@ class Schedule:
 
         # TODO:break down this method
 
-        segment1 = t1[0]
-        segment2 = t2[0]
+        segment1 = demand_avail_schedule[0]
+        segment2 = resource_avail_schedule[0]
 
         if segments_non_overlapping(segment1, segment2):
-            return remove_earlier_segment(segment1, segment2, t1, t2)
+            return remove_earlier_segment(segment1, segment2, demand_avail_schedule, resource_avail_schedule)
 
         overlap = (max(segment1[0], segment2[0]), min(segment1[1], segment2[1]))
 
@@ -149,8 +149,8 @@ class Schedule:
         # case 1: they are exactly same segment
         if segment1[0] == overlap[0] and segment1[1] == overlap[1] and segment1[0] == overlap[0] and segment2[1] == \
                 overlap[1]:
-            t1.pop(0)
-            t2.pop(0)
+            demand_avail_schedule.pop(0)
+            resource_avail_schedule.pop(0)
 
             return [], [], [overlap]
 
@@ -161,17 +161,17 @@ class Schedule:
 
             if segment1[1] > segment2[1]:
 
-                t2.pop(0)
-                t1.pop(0)
+                resource_avail_schedule.pop(0)
+                demand_avail_schedule.pop(0)
 
-                t1.insert(0, (overlap[1], segment1[1]))
+                demand_avail_schedule.insert(0, (overlap[1], segment1[1]))
 
                 return [], [], [overlap]
             else:
-                t2.pop(0)
-                t1.pop(0)
+                resource_avail_schedule.pop(0)
+                demand_avail_schedule.pop(0)
 
-                t2.insert(0, (overlap[1], segment2[1]))
+                resource_avail_schedule.insert(0, (overlap[1], segment2[1]))
 
                 return [], [], [overlap]
 
@@ -181,49 +181,49 @@ class Schedule:
 
             if segment1[0] < segment2[0]:
 
-                t1.pop(0)
-                t2.pop(0)
+                demand_avail_schedule.pop(0)
+                resource_avail_schedule.pop(0)
 
                 return [(segment1[0], overlap[0])], [], [overlap]
 
             else:
-                t1.pop(0)
-                t2.pop(0)
+                demand_avail_schedule.pop(0)
+                resource_avail_schedule.pop(0)
 
                 return [], [(segment2[0], overlap[0])], [overlap]
         # case4: one is starts sooner and ends later, completely overlapping one
 
         if segment1[0] > segment2[0] and segment1[1] < segment2[1]:
-            t1.pop()
-            t2.pop()
+            demand_avail_schedule.pop()
+            resource_avail_schedule.pop()
 
-            t2.insert(0, (overlap[1], segment2[1]))
+            resource_avail_schedule.insert(0, (overlap[1], segment2[1]))
 
             return [], [(segment2[0], overlap[0])], [overlap]
 
         if segment2[0] > segment1[0] and segment2[1] < segment1[1]:
-            t1.pop()
-            t2.pop()
+            demand_avail_schedule.pop()
+            resource_avail_schedule.pop()
 
-            t1.insert(0, (overlap[1], segment1[1]))
+            demand_avail_schedule.insert(0, (overlap[1], segment1[1]))
 
             return [(segment1[0], overlap[0])], [], [overlap]
 
         # case 5: segments do not either start together or end together, but overlap. like a random middle segemnt
 
         if segment1[1] > segment2[1]:
-            t1.pop()
-            t2.pop()
+            demand_avail_schedule.pop()
+            resource_avail_schedule.pop()
 
-            t1.insert(0, (overlap[1], segment1[1]))
+            demand_avail_schedule.insert(0, (overlap[1], segment1[1]))
 
             return [], [(segment2[0], overlap[0])], [overlap]
 
         if segment2[1] > segment1[1]:
-            t1.pop()
-            t2.pop()
+            demand_avail_schedule.pop()
+            resource_avail_schedule.pop()
 
-            t2.insert(0, (overlap[1], segment2[1]))
+            resource_avail_schedule.insert(0, (overlap[1], segment2[1]))
 
             return [(segment1[0], overlap[0])], [], [overlap]
 
