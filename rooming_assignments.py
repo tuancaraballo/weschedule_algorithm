@@ -147,6 +147,7 @@ class Schedule:
 
         int_avail_schedule = int_key_schedule["available"]
         ext_avail_schedule = ext_key_schedule["available"]
+
         if either_avail_schedule_empty(int_avail_schedule, ext_avail_schedule):
             return
 
@@ -161,6 +162,7 @@ class Schedule:
             overlap_result += overlap_add
 
             if len(int_avail_schedule) == 0 and len(ext_avail_schedule) != 0:
+
                 updated_resource_avail_schedule += ext_avail_schedule
 
             if len(ext_avail_schedule) == 0 and len(int_avail_schedule) != 0:
@@ -216,8 +218,8 @@ class Schedule:
 
         # case2: they start same time, but 1 is ends later  than other
 
-        if segment1[0] == overlap[0] and segment2[0] == overlap[0] and segment1[1] != overlap[1] or segment2[1] != \
-                overlap[1]:
+        if segment1[0] == overlap[0] and segment2[0] == overlap[0] and (segment1[1] != overlap[1] or segment2[1] != \
+                overlap[1]):
 
             if segment1[1] > segment2[1]:
 
@@ -236,8 +238,8 @@ class Schedule:
                 return [], [], [overlap]
 
         # case3: they end same time, but 1 is starts sooner than other
-        if segment1[1] == overlap[1] and segment2[1] == overlap[1] and segment1[0] != overlap[0] or segment2[0] != \
-                overlap[1]:
+        if segment1[1] == overlap[1] and segment2[1] == overlap[1] and (segment1[0] != overlap[0] or segment2[0] != \
+                overlap[1]):
 
             if segment1[0] < segment2[0]:
 
@@ -254,16 +256,17 @@ class Schedule:
         # case4: one is starts sooner and ends later, completely overlapping one
 
         if segment1[0] > segment2[0] and segment1[1] < segment2[1]:
-            demand_avail_schedule.pop()
-            resource_avail_schedule.pop()
+
+            demand_avail_schedule.pop(0)
+            resource_avail_schedule.pop(0)
 
             resource_avail_schedule.insert(0, (overlap[1], segment2[1]))
 
             return [], [(segment2[0], overlap[0])], [overlap]
 
         if segment2[0] > segment1[0] and segment2[1] < segment1[1]:
-            demand_avail_schedule.pop()
-            resource_avail_schedule.pop()
+            demand_avail_schedule.pop(0)
+            resource_avail_schedule.pop(0)
 
             demand_avail_schedule.insert(0, (overlap[1], segment1[1]))
 
@@ -272,16 +275,16 @@ class Schedule:
         # case 5: segments do not either start together or end together, but overlap. like a random middle segemnt
 
         if segment1[1] > segment2[1]:
-            demand_avail_schedule.pop()
-            resource_avail_schedule.pop()
+            demand_avail_schedule.pop(0)
+            resource_avail_schedule.pop(0)
 
             demand_avail_schedule.insert(0, (overlap[1], segment1[1]))
 
             return [], [(segment2[0], overlap[0])], [overlap]
 
         if segment2[1] > segment1[1]:
-            demand_avail_schedule.pop()
-            resource_avail_schedule.pop()
+            demand_avail_schedule.pop(0)
+            resource_avail_schedule.pop(0)
 
             resource_avail_schedule.insert(0, (overlap[1], segment2[1]))
 
@@ -374,7 +377,7 @@ class Mapping:
     @staticmethod
     def _set_demand_to_resources_by_resource_priority(mapping):
         """
-        converts the mapping dictionary to a dictionary that maps demand => list of resouces organized in descending order. 
+        converts the mapping dictionary to a dictionary that maps demand => list of resouces organized in descending order.
         :param mapping:  a list of dictionaries with field key, and priority
         :return:  Dictionary that maps demand to resources by order of priority
         """

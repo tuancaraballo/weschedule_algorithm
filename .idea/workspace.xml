@@ -20,7 +20,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/weschedule_algorithm$weschedule_algorithm.coverage" NAME="weschedule_algorithm Coverage Results" MODIFIED="1522442160017" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/weschedule_algorithm$Unittests_in_test_rooming_assignment_py.coverage" NAME="Unittests in test_rooming_assignment.py Coverage Results" MODIFIED="1522637919980" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/weschedule_algorithm$Unittests_in_test_rooming_assignment_py.coverage" NAME="Unittests in test_rooming_assignment.py Coverage Results" MODIFIED="1522641177157" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/weschedule_algorithm$Unittests_in_test_schedule_py.coverage" NAME="Unittests in test_schedule.py Coverage Results" MODIFIED="1522609811899" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/weschedule_algorithm$rooming_assignments.coverage" NAME="rooming_assignments Coverage Results" MODIFIED="1522442242498" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/weschedule_algorithm$roomingtest.coverage" NAME="roomingtest Coverage Results" MODIFIED="1522561497865" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -30,8 +30,38 @@
       <file leaf-file-name="rooming_assignments.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/rooming_assignments.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="158">
-              <caret line="118" column="0" lean-forward="false" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
+            <state relative-caret-position="279">
+              <caret line="266" column="67" lean-forward="false" selection-start-line="266" selection-start-column="67" selection-end-line="266" selection-end-column="67" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="common.py" pinned="false" current-in-tab="false">
+        <entry file="file://$APPLICATION_HOME_DIR$/helpers/pycharm/teamcity/common.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="38">
+              <caret line="38" column="0" lean-forward="false" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="messages.py" pinned="false" current-in-tab="false">
+        <entry file="file://$APPLICATION_HOME_DIR$/helpers/pycharm/teamcity/messages.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="200">
+              <caret line="147" column="0" lean-forward="false" selection-start-line="147" selection-start-column="0" selection-end-line="147" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="unittestpy.py" pinned="false" current-in-tab="false">
+        <entry file="file://$APPLICATION_HOME_DIR$/helpers/pycharm/teamcity/unittestpy.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="218">
+              <caret line="223" column="0" lean-forward="false" selection-start-line="223" selection-start-column="0" selection-end-line="223" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -40,10 +70,15 @@
       <file leaf-file-name="test_rooming_assignment.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test_rooming_assignment.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="211">
-              <caret line="387" column="88" lean-forward="false" selection-start-line="387" selection-start-column="88" selection-end-line="387" selection-end-column="88" />
+            <state relative-caret-position="351">
+              <caret line="452" column="99" lean-forward="false" selection-start-line="452" selection-start-column="99" selection-end-line="452" selection-end-column="99" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
+                <element signature="e#176#11467#0" expanded="false" />
+                <element signature="e#11524#22933#0" expanded="false" />
+                <element signature="e#22998#31241#0" expanded="false" />
+                <element signature="e#23110#23717#0" expanded="false" />
+                <element signature="e#24376#24975#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -60,9 +95,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>applyInstruction</find>
-      <find>__applyMapping</find>
-      <find>mapping_rule</find>
       <find>applyMapping</find>
       <find>getMapping</find>
       <find>mapping</find>
@@ -80,15 +112,18 @@
       <find>demand</find>
       <find>apply_mapping</find>
       <find>run_mapping_with</find>
-      <find>_find_overlap</find>
       <find>not in</find>
       <find>self.assignments</find>
       <find>sort</find>
       <find>sorted</find>
       <find>get_key_dates</find>
-      <find>apply_a_single_mapping_between</find>
       <find>day</find>
+      <find>apply_a_single_mapping_between</find>
       <find>find_overlap_single_day</find>
+      <find>_find_overlap</find>
+      <find>we are no</find>
+      <find>_find</find>
+      <find>.pop()</find>
       <find>print</find>
     </findStrings>
   </component>
@@ -310,34 +345,34 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.01 at 19h 55m 17s.xml">
+    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.01 at 20h 50m 57s.xml">
       <configuration name="Unittests in test_rooming_assignment.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.01 at 19h 55m 58s.xml">
+    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.01 at 20h 51m 06s.xml">
       <configuration name="Unittests in test_rooming_assignment.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.01 at 19h 56m 11s.xml">
+    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.01 at 20h 51m 11s.xml">
       <configuration name="Unittests in test_rooming_assignment.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.01 at 19h 56m 14s.xml">
+    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.01 at 20h 51m 20s.xml">
       <configuration name="Unittests in test_rooming_assignment.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.01 at 19h 56m 34s.xml">
+    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.01 at 20h 51m 24s.xml">
       <configuration name="Unittests in test_rooming_assignment.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.01 at 19h 56m 44s.xml">
+    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.01 at 20h 51m 33s.xml">
       <configuration name="Unittests in test_rooming_assignment.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.01 at 19h 56m 52s.xml">
+    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.01 at 20h 51m 45s.xml">
       <configuration name="Unittests in test_rooming_assignment.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.01 at 19h 57m 13s.xml">
+    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.01 at 20h 52m 09s.xml">
       <configuration name="Unittests in test_rooming_assignment.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.01 at 19h 57m 27s.xml">
+    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.01 at 20h 52m 50s.xml">
       <configuration name="Unittests in test_rooming_assignment.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.01 at 19h 58m 40s.xml">
+    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.01 at 20h 52m 57s.xml">
       <configuration name="Unittests in test_rooming_assignment.py" configurationId="tests" />
     </history-entry>
   </component>
@@ -349,14 +384,14 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3276316" sideWeight="0.105150215" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289183" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3276316" sideWeight="0.8948498" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" show_stripe_button="true" weight="0.47624433" sideWeight="0.860515" order="2" side_tool="false" content_ui="tabs" x="0" y="22" width="1440" height="878" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" show_stripe_button="true" weight="0.47624433" sideWeight="0.860515" order="2" side_tool="false" content_ui="tabs" x="0" y="22" width="1440" height="878" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.260181" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" x="-1212" y="115" width="1440" height="877" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17932148" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2736842" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14520743" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.47058824" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.44004524" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -436,10 +471,9 @@
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <condition expression="key_pair[1] == &quot;Diego&quot;" language="Python" />
-          <url>file://$PROJECT_DIR$/rooming_assignments.py</url>
-          <line>171</line>
-          <option name="timeStamp" value="14" />
+          <url>file://$PROJECT_DIR$/test_rooming_assignment.py</url>
+          <line>299</line>
+          <option name="timeStamp" value="27" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -449,39 +483,11 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="19" />
+      <option name="time" value="28" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rooming_assignments.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="26" column="13" lean-forward="false" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/task_assignments.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#42#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -872,20 +878,49 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pycharm/teamcity/unittestpy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="223" column="0" lean-forward="false" selection-start-line="223" selection-start-column="0" selection-end-line="223" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pycharm/teamcity/messages.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="147" column="0" lean-forward="false" selection-start-line="147" selection-start-column="0" selection-end-line="147" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pycharm/teamcity/common.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="38" column="0" lean-forward="false" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/rooming_assignments.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="118" column="0" lean-forward="false" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
+        <state relative-caret-position="279">
+          <caret line="266" column="67" lean-forward="false" selection-start-line="266" selection-start-column="67" selection-end-line="266" selection-end-column="67" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test_rooming_assignment.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="387" column="88" lean-forward="false" selection-start-line="387" selection-start-column="88" selection-end-line="387" selection-end-column="88" />
+        <state relative-caret-position="351">
+          <caret line="452" column="99" lean-forward="false" selection-start-line="452" selection-start-column="99" selection-end-line="452" selection-end-column="99" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
+            <element signature="e#176#11467#0" expanded="false" />
+            <element signature="e#11524#22933#0" expanded="false" />
+            <element signature="e#22998#31241#0" expanded="false" />
+            <element signature="e#23110#23717#0" expanded="false" />
+            <element signature="e#24376#24975#0" expanded="false" />
           </folding>
         </state>
       </provider>
