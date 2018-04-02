@@ -671,6 +671,76 @@ class TestSolveDemandResourceSchedule(TestCase):
                                                                 1: "Sally", "priority": 1, "num": 2,
                                                                 2: "Diego"}]}]
         sol = solve_demand_resource_schedule(demand_info, resource_info, instructions)
-        pprint.pprint(sol)
+        correct_sol = {'demand': {'Montecute': {'3/1/2018': {'Diego': [(datetime.datetime(1900, 1, 1, 10, 0),
+                                                  datetime.datetime(1900, 1, 1, 11, 0))],
+                                       'Sally': [(datetime.datetime(1900, 1, 1, 8, 0),
+                                                  datetime.datetime(1900, 1, 1, 10, 0)),
+                                                 (datetime.datetime(1900, 1, 1, 11, 0),
+                                                  datetime.datetime(1900, 1, 1, 13, 0))],
+                                       'available': []}}},
+                        'resource': {'Diego': {'3/1/2018': {'Montecute': [(datetime.datetime(1900, 1, 1, 10, 0),
+                                                    datetime.datetime(1900, 1, 1, 11, 0))],
+                                     'available': [(datetime.datetime(1900, 1, 1, 8, 0),
+                                                    datetime.datetime(1900, 1, 1, 10, 0)),
+                                                   (datetime.datetime(1900, 1, 1, 11, 0),
+                                                    datetime.datetime(1900, 1, 1, 13, 0))]}},
+                                    'Sally': {'3/1/2018': {'Montecute': [(datetime.datetime(1900, 1, 1, 8, 0),
+                                                    datetime.datetime(1900, 1, 1, 10, 0)),
+                                                   (datetime.datetime(1900, 1, 1, 11, 0),
+                                                    datetime.datetime(1900, 1, 1, 13, 0))],
+                                     'available': []}}}}
+        assert sol == correct_sol
+
+    def test_three_resources(self):
+        from rooming_assignments import solve_demand_resource_schedule
+        import datetime
+        resource_info = [{"key": "Sally",
+                          "schedule": [{"date": "3/1/2018", "time": [("8:00", "10:00")]}
+                                       ]},
+                         {"key": "Diego",
+                          "schedule": [{"date": "3/1/2018", "time": [("6:30", "11:30")]}
+                                       ]},
+                         {"key": "Sandra",
+                          "schedule": [{"date": "3/1/2018", "time": [("5:00", "13:00")]}
+                                       ]}
+                         ]
+        demand_info = [{"key": "Montecute",
+                        "schedule": [{"date": "3/1/2018", "time": [("5:00", "13:00")]}
+                                     ]}]
+        instructions = [{"key": "mapping", "order": 1, "map": [{"key": "Montecute",
+                                                                1: "Sally", "priority": 1, "num": 3,
+                                                                2: "Diego",
+                                                                3: "Sandra"}]}]
+        sol = solve_demand_resource_schedule(demand_info, resource_info, instructions)
+
+        correct_sol = {'demand': {'Montecute': {'3/1/2018': {'Diego': [(datetime.datetime(1900, 1, 1, 6, 30),
+                                                  datetime.datetime(1900, 1, 1, 8, 0)),
+                                                 (datetime.datetime(1900, 1, 1, 10, 0),
+                                                  datetime.datetime(1900, 1, 1, 11, 30))],
+                                       'Sally': [(datetime.datetime(1900, 1, 1, 8, 0),
+                                                  datetime.datetime(1900, 1, 1, 10, 0))],
+                                       'Sandra': [(datetime.datetime(1900, 1, 1, 5, 0),
+                                                   datetime.datetime(1900, 1, 1, 6, 30)),
+                                                  (datetime.datetime(1900, 1, 1, 11, 30),
+                                                   datetime.datetime(1900, 1, 1, 13, 0))],
+                                       'available': []}}},
+                        'resource': {'Diego': {'3/1/2018': {'Montecute': [(datetime.datetime(1900, 1, 1, 6, 30),
+                                                    datetime.datetime(1900, 1, 1, 8, 0)),
+                                                   (datetime.datetime(1900, 1, 1, 10, 0),
+                                                    datetime.datetime(1900, 1, 1, 11, 30))],
+                                     'available': [(datetime.datetime(1900, 1, 1, 8, 0),
+                                                    datetime.datetime(1900, 1, 1, 10, 0))]}},
+              'Sally': {'3/1/2018': {'Montecute': [(datetime.datetime(1900, 1, 1, 8, 0),
+                                                    datetime.datetime(1900, 1, 1, 10, 0))],
+                                     'available': []}},
+              'Sandra': {'3/1/2018': {'Montecute': [(datetime.datetime(1900, 1, 1, 5, 0),
+                                                     datetime.datetime(1900, 1, 1, 6, 30)),
+                                                    (datetime.datetime(1900, 1, 1, 11, 30),
+                                                     datetime.datetime(1900, 1, 1, 13, 0))],
+                                      'available': [(datetime.datetime(1900, 1, 1, 6, 30),
+                                                     datetime.datetime(1900, 1, 1, 11, 30))]}}}}
+        assert sol == correct_sol
+
+
 
 

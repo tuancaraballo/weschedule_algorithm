@@ -296,20 +296,6 @@ class Schedule:
     def segments_overlap(int_seg, ext_seg):
         return int_seg[1] > ext_seg[0] and ext_seg[1] > int_seg[0]
 
-    def remove_overlap_single_day_and_label(self, overlap_segments, date, overlap_label, internal_key):
-        # Get the schedule from the date
-        # For the segment that there is overlap, divide segment into non-overlap and overlap segment
-        # available = non-overlap
-        # label = overlap
-
-        date_key_schedule_avail = self.get_key_schedule_date(internal_key, date)["available"]
-
-        for avail_segment in date_key_schedule_avail:
-            for single_overlap_segment in overlap_segments:
-                if self.segments_overlap(avail_segment, single_overlap_segment):
-                    self.get_key_schedule_date(internal_key, date)[overlap_label] = single_overlap_segment
-
-    # TODO: finish implemting assign overlap
     def apply_a_single_mapping_between(self, demand_key, resource_key, external_schedule):
         '''
         For a combination of demand and resource, this method will assign any overlap to each other
