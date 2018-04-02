@@ -1,7 +1,60 @@
 from datetime import datetime
 
+##########################################
+class Solver:
+    def __init__(self):
+        self.resource_schedule = None
+        self.demand_schedule = None
+        self.instructions = None
 
-# We need three classes to solve the rooming problem
+    def set_resource_schedule(self, schedule):
+        self.resource_schedule = Schedule(schedule)
+
+    def set_demand_schedule(self, schedule):
+        self.demand_schedule = Schedule(schedule)
+
+    def set_instructions(self, instructions):
+        self.instructions = Instructions(instructions)
+
+    def apply_instruction(self, instruction):
+
+        algorithm = self.find_algorithm(instruction)
+        algorithm()
+
+    def find_algorithm(self, instruction):
+        switcher = {
+            "mapping": self._call_mapping_algorithm
+
+        }
+        return switcher[instruction["key"]]
+
+    def solve(self):
+
+        for instruction in self.instructions.get_instructions_by_order():
+            self.apply_instruction(instruction)
+
+        self._prep_solution()
+
+    def return_solution(self):
+        return self.solution
+
+    def _prep_solution(self):
+        self.solution = {}
+        self.solution["demand"] = self.demand_schedule.format_solution()
+        self.solution["resource"] = self.resource_schedule.format_solution()
+
+    def _switch_rules(self, key):
+        switcher = {
+            "mapping": self._call_mapping_algorithm
+        }
+        return switcher[key]
+
+    def _call_mapping_algorithm(self):
+
+        # call mapping algorithm on Demand Schedule with resource and mapping
+        self.demand_schedule.run_mapping_with(self.resource_schedule,
+                                              self.instructions.get_mapping())
+
 class Schedule:
     def __init__(self, schedule_info):
         self.assignments = ["available"]
@@ -21,8 +74,11 @@ class Schedule:
 
     def _get_schedules_for_keys(self, all_key_schedules):
         # TODO: Breakdown this method
-        reformatted_schedule = {}
 
+        def convert_to_datetime_obj(time_interval):
+            return datetime.strptime(time_interval[0], '%H:%M'), datetime.strptime(time_interval[1], '%H:%M')
+
+        reformatted_schedule = {}
         for individual_key_schedule in all_key_schedules:
 
             reformatted_key_schedule = {}
@@ -30,15 +86,12 @@ class Schedule:
             for day_key_schedule in individual_key_schedule["schedule"]:
                 converted_datetime = []
                 for time_interval in day_key_schedule["time"]:
-                    converted_datetime.append(self.convert_to_datetime_obj(time_interval))
-                reformatted_key_schedule[day_key_schedule["date"]] = {self.assignments[0]: converted_datetime}
+                    converted_datetime.append(convert_to_datetime_obj(time_interval))
+
+                reformatted_key_schedule[day_key_schedule["date"]] = {self.assignments[0]: sorted(converted_datetime)}
             reformatted_schedule[individual_key_schedule["key"]] = reformatted_key_schedule
 
         return reformatted_schedule
-
-    @staticmethod
-    def convert_to_datetime_obj(time_interval):
-        return datetime.strptime(time_interval[0], '%H:%M'), datetime.strptime(time_interval[1], '%H:%M')
 
     def get_key_dates(self, key):
         return self.schedule[key].keys()
@@ -63,7 +116,9 @@ class Schedule:
         # for every demand we have a mapping for
         for demand in mapping_obj.get_demands_ordered_by_priority():
             # for resources that a demand has a possible match with
+            print(demand)
             for resource in mapping_obj.get_resources_for_demand_ordered_by_priority(demand):
+                print("\t" + resource)
                 self.apply_a_single_mapping_between(demand,
                                                     resource,
                                                     resource_schedule)
@@ -78,6 +133,9 @@ class Schedule:
         :return: a list of overlapping segments for the two schedules
         '''
         # TODO break donw this method
+        def either_avail_schedule_empty(demand_avail_schedule,resource_avail_schedule):
+            return len(int_avail_schedule) == 0 or len(ext_avail_schedule) == 0
+
         INTERNAL_INDEX = 0
         EXTERNAL_INDEX = 1
 
@@ -86,18 +144,18 @@ class Schedule:
         internal_key = key_pair[INTERNAL_INDEX]
         external_key = key_pair[EXTERNAL_INDEX]
 
-        int_key_schedule["available"].sort(reverse=True)
-        ext_key_schedule["available"].sort(reverse=True)
+        #int_key_schedule["available"].sort(reverse=True)
+        #ext_key_schedule["available"].sort(reverse=True)
 
         int_avail_schedule = int_key_schedule["available"]
         ext_avail_schedule = ext_key_schedule["available"]
+        if either_avail_schedule_empty(int_avail_schedule, ext_avail_schedule):
+            return
 
         updated_demand_avail_schedule = []
         updated_resource_avail_schedule = []
         overlap_result = []
-
         while (len(int_avail_schedule) > 0 and len(ext_avail_schedule) > 0):
-
             t1_trailing, t2_trailing, overlap_add = self._find_overlap(int_avail_schedule, ext_avail_schedule)
 
             updated_demand_avail_schedule   += t1_trailing
@@ -113,7 +171,7 @@ class Schedule:
         # update schedules
         int_key_schedule["available"] = updated_demand_avail_schedule
         ext_key_schedule["available"] = updated_resource_avail_schedule
-
+        print("\t\t update {}".format(updated_resource_avail_schedule))
         ext_key_schedule[internal_key] = overlap_result
         int_key_schedule[external_key] = overlap_result
 
@@ -121,10 +179,13 @@ class Schedule:
 
         def segments_non_overlapping(segment1, segment2):
             return segment1[1] < segment2[0] or segment2[1] < segment1[0]
+
         def segment1_ahead_segment2(segment1, segment2):
             return segment2[1] < segment1[0]
+
         def segment2_ahead_segment1(segment1, segment2):
             return segment1[1] < segment2[0]
+
         def remove_earlier_segment(segment1, segment2, t1, t2):
             if segment1_ahead_segment2(segment1, segment2):
                 # no overlap,so remover trailing from list1 and add to to available
@@ -135,20 +196,22 @@ class Schedule:
                 t2.pop(0)
                 return [], [segment2], []
 
+        def overlap_of_segments(segment1, segment2):
+            return (max(segment1[0], segment2[0]), min(segment1[1], segment2[1]))
         # TODO:break down this method
 
         segment1 = demand_avail_schedule[0]
         segment2 = resource_avail_schedule[0]
-
         if segments_non_overlapping(segment1, segment2):
             return remove_earlier_segment(segment1, segment2, demand_avail_schedule, resource_avail_schedule)
 
-        overlap = (max(segment1[0], segment2[0]), min(segment1[1], segment2[1]))
+        overlap = overlap_of_segments(segment1, segment2)
 
         # now we have to figure out how to update available time, both for
         # case 1: they are exactly same segment
-        if segment1[0] == overlap[0] and segment1[1] == overlap[1] and segment1[0] == overlap[0] and segment2[1] == \
-                overlap[1]:
+        if segment1[0] == overlap[0] and segment1[1] == overlap[1] and segment1[0] == overlap[0] and \
+                        segment2[1] == overlap[1]:
+
             demand_avail_schedule.pop(0)
             resource_avail_schedule.pop(0)
 
@@ -268,7 +331,9 @@ class Schedule:
                                  external_schedule.get_key_schedule_date(resource_key, date))
                 key_pair = (demand_key, resource_key)
 
+                print("\t {}".format(external_schedule.get_key_schedule_date(resource_key, date)))
                 self.find_overlap_single_day(schedule_pair, key_pair)
+                print(external_schedule.get_key_schedule_date(resource_key,date))
 
 
 ##########################################
@@ -297,7 +362,6 @@ class Instructions:
 
     def get_instructions_by_order(self):
         return self.instructions_by_order
-
 
 ##########################################
 class Mapping:
@@ -358,63 +422,6 @@ class Mapping:
         demands_ordered_by_priority = remove_priority(demands_ordered_by_priority)
 
         return demands_ordered_by_priority
-
-
-##########################################
-class Solver:
-    def __init__(self):
-        self.resource_schedule = None
-        self.demand_schedule = None
-        self.instructions = None
-
-    def set_resource_schedule(self, schedule):
-        self.resource_schedule = Schedule(schedule)
-
-    def set_demand_schedule(self, schedule):
-        self.demand_schedule = Schedule(schedule)
-
-    def set_instructions(self, instructions):
-        self.instructions = Instructions(instructions)
-
-    def apply_instruction(self, instruction):
-
-        algorithm = self.find_algorithm(instruction)
-        algorithm()
-
-    def find_algorithm(self, instruction):
-        switcher = {
-            "mapping": self._call_mapping_algorithm
-
-        }
-        return switcher[instruction["key"]]
-
-    def solve(self):
-
-        for instruction in self.instructions.get_instructions_by_order():
-            self.apply_instruction(instruction)
-
-        self._prep_solution()
-
-    def return_solution(self):
-        return self.solution
-
-    def _prep_solution(self):
-        self.solution = {}
-        self.solution["demand"] = self.demand_schedule.format_solution()
-        self.solution["resource"] = self.resource_schedule.format_solution()
-
-    def _switch_rules(self, key):
-        switcher = {
-            "mapping": self._call_mapping_algorithm
-        }
-        return switcher[key]
-
-    def _call_mapping_algorithm(self):
-
-        # call mapping algorithm on Demand Schedule with resource and mapping
-        self.demand_schedule.run_mapping_with(self.resource_schedule,
-                                              self.instructions.get_mapping())
-
 
 ##########################################
 def solve_demand_resource_schedule(demand_schedule, resource_schedule, instructions):

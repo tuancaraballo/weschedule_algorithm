@@ -8,8 +8,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="098c6534-eaa7-4cd3-ba3a-3b4b50c1ce2d" name="Default" comment="">
+      <change type="MOVED" beforePath="$PROJECT_DIR$/roomingtest.py" afterPath="$PROJECT_DIR$/tests/roomingtest.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rooming_assignments.py" afterPath="$PROJECT_DIR$/rooming_assignments.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/roomingtest.py" afterPath="$PROJECT_DIR$/roomingtest.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test_rooming_assignment.py" afterPath="$PROJECT_DIR$/test_rooming_assignment.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,39 +22,31 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/weschedule_algorithm$weschedule_algorithm.coverage" NAME="weschedule_algorithm Coverage Results" MODIFIED="1522442160017" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/weschedule_algorithm$Unittests_in_test_rooming_assignment_py.coverage" NAME="Unittests in test_rooming_assignment.py Coverage Results" MODIFIED="1522615556369" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/weschedule_algorithm$Unittests_in_test_rooming_assignment_py.coverage" NAME="Unittests in test_rooming_assignment.py Coverage Results" MODIFIED="1522637017327" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/weschedule_algorithm$Unittests_in_test_schedule_py.coverage" NAME="Unittests in test_schedule.py Coverage Results" MODIFIED="1522609811899" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/weschedule_algorithm$rooming_assignments.coverage" NAME="rooming_assignments Coverage Results" MODIFIED="1522442242498" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/weschedule_algorithm$roomingtest.coverage" NAME="roomingtest Coverage Results" MODIFIED="1522561497865" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="roomingtest.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/roomingtest.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="197">
-              <caret line="222" column="1" lean-forward="false" selection-start-line="222" selection-start-column="1" selection-end-line="222" selection-end-column="1" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="rooming_assignments.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="rooming_assignments.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/rooming_assignments.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="379">
-              <caret line="427" column="33" lean-forward="false" selection-start-line="427" selection-start-column="18" selection-end-line="427" selection-end-column="33" />
+            <state relative-caret-position="287">
+              <caret line="151" column="77" lean-forward="false" selection-start-line="151" selection-start-column="77" selection-end-line="151" selection-end-column="77" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test_rooming_assignment.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="test_rooming_assignment.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test_rooming_assignment.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2590">
-              <caret line="185" column="33" lean-forward="false" selection-start-line="185" selection-start-column="33" selection-end-line="185" selection-end-column="33" />
-              <folding />
+            <state relative-caret-position="497">
+              <caret line="310" column="9" lean-forward="false" selection-start-line="310" selection-start-column="9" selection-end-line="310" selection-end-column="9" />
+              <folding>
+                <element signature="e#0#29#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -69,13 +62,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>__assignOverlap</find>
-      <find>switch</find>
-      <find>getListInstructions</find>
-      <find>get_instructions_by_order</find>
-      <find>rule</find>
-      <find>__applyMa</find>
-      <find>__applyRules</find>
       <find>applyInstruction</find>
       <find>__applyMapping</find>
       <find>mapping_rule</find>
@@ -87,7 +73,6 @@
       <find>find_overla</find>
       <find>replace_segment</find>
       <find>int_avail_schedule</find>
-      <find>find_overlap_single_day</find>
       <find>datetime</find>
       <find>demandSchedule</find>
       <find>Schedule</find>
@@ -95,10 +80,18 @@
       <find>create_format_solution</find>
       <find>__</find>
       <find>demand</find>
-      <find>print</find>
       <find>apply_mapping</find>
       <find>run_mapping_with</find>
       <find>_find_overlap</find>
+      <find>not in</find>
+      <find>self.assignments</find>
+      <find>sort</find>
+      <find>sorted</find>
+      <find>print</find>
+      <find>get_key_dates</find>
+      <find>apply_a_single_mapping_between</find>
+      <find>day</find>
+      <find>find_overlap_single_day</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -113,9 +106,9 @@
         <option value="$PROJECT_DIR$/task_assignments.py" />
         <option value="$PROJECT_DIR$/test_solver.py" />
         <option value="$PROJECT_DIR$/test_schedule.py" />
-        <option value="$PROJECT_DIR$/rooming_assignments.py" />
         <option value="$PROJECT_DIR$/roomingtest.py" />
         <option value="$PROJECT_DIR$/test_rooming_assignment.py" />
+        <option value="$PROJECT_DIR$/rooming_assignments.py" />
       </list>
     </option>
   </component>
@@ -126,9 +119,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-9" />
+    <option name="x" value="-1571" />
     <option name="y" value="22" />
-    <option name="width" value="1427" />
+    <option name="width" value="1440" />
     <option name="height" value="878" />
   </component>
   <component name="ProjectView">
@@ -153,11 +146,6 @@
               <item name="weschedule_algorithm" type="b2602c69:ProjectViewProjectNode" />
               <item name="weschedule_algorithm" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="weschedule_algorithm" type="b2602c69:ProjectViewProjectNode" />
-              <item name="weschedule_algorithm" type="462c0819:PsiDirectoryNode" />
-              <item name="tests" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -172,7 +160,6 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/gustavochavez/Documents/GitHub/weschedule_algorithm/test.py" />
     <property name="full.screen.before.presentation.mode" value="false" />
-    <property name="auto.test.manager.delay" value="1000" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -184,6 +171,12 @@
   </component>
   <component name="PyCoverageOptionsProvider">
     <option name="myUseBundledCoveragePy" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/tests" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -259,7 +252,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="weschedule_algorithm" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/roomingtest.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/roomingtest.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -319,53 +312,53 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.01 at 13h 44m 58s.xml">
+    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.01 at 19h 31m 41s.xml">
       <configuration name="Unittests in test_rooming_assignment.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.01 at 13h 45m 01s.xml">
+    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.01 at 19h 33m 00s.xml">
       <configuration name="Unittests in test_rooming_assignment.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.01 at 13h 45m 04s.xml">
+    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.01 at 19h 33m 05s.xml">
       <configuration name="Unittests in test_rooming_assignment.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.01 at 13h 45m 16s.xml">
+    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.01 at 19h 33m 20s.xml">
       <configuration name="Unittests in test_rooming_assignment.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.01 at 13h 45m 22s.xml">
+    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.01 at 19h 34m 01s.xml">
       <configuration name="Unittests in test_rooming_assignment.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.01 at 13h 45m 26s.xml">
+    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.01 at 19h 34m 53s.xml">
       <configuration name="Unittests in test_rooming_assignment.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.01 at 13h 45m 28s.xml">
+    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.01 at 19h 35m 06s.xml">
       <configuration name="Unittests in test_rooming_assignment.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.01 at 13h 45m 31s.xml">
+    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.01 at 19h 41m 53s.xml">
       <configuration name="Unittests in test_rooming_assignment.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.01 at 13h 45m 34s.xml">
+    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.01 at 19h 43m 18s.xml">
       <configuration name="Unittests in test_rooming_assignment.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.01 at 13h 45m 56s.xml">
+    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.01 at 19h 43m 37s.xml">
       <configuration name="Unittests in test_rooming_assignment.py" configurationId="tests" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1440" height="878" extended-state="6" />
+    <frame x="-1280" y="22" width="1280" height="1002" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3276316" sideWeight="0.105150215" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289183" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3276316" sideWeight="0.8948498" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3105263" sideWeight="0.860515" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" show_stripe_button="true" weight="0.47624433" sideWeight="0.860515" order="2" side_tool="false" content_ui="tabs" x="0" y="22" width="1440" height="878" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.260181" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" x="-1212" y="115" width="1440" height="877" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15879828" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17932148" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2736842" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14520743" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31236205" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.47058824" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -440,9 +433,15 @@
           <url>file://$PROJECT_DIR$/app.py</url>
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/roomingtest.py</url>
+          <url>file://$PROJECT_DIR$/tests/roomingtest.py</url>
           <line>27</line>
           <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <condition expression="key_pair[1] == &quot;Diego&quot;" language="Python" />
+          <url>file://$PROJECT_DIR$/rooming_assignments.py</url>
+          <line>174</line>
+          <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -452,7 +451,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="9" />
+      <option name="time" value="19" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -502,7 +501,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/roomingtest.py">
+    <entry file="file://$PROJECT_DIR$/tests/roomingtest.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2940">
           <caret line="210" column="0" lean-forward="true" selection-start-line="210" selection-start-column="0" selection-end-line="210" selection-end-column="0" />
@@ -851,16 +850,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/task_assignments.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-608">
-          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#42#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-92">
@@ -869,17 +858,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rooming_assignments.py">
+    <entry file="file://$PROJECT_DIR$/task_assignments.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="379">
-          <caret line="427" column="33" lean-forward="false" selection-start-line="427" selection-start-column="18" selection-end-line="427" selection-end-column="33" />
+        <state relative-caret-position="224">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/roomingtest.py">
+    <entry file="file://$PROJECT_DIR$/tests/roomingtest.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
+        <state relative-caret-position="3108">
           <caret line="222" column="1" lean-forward="false" selection-start-line="222" selection-start-column="1" selection-end-line="222" selection-end-column="1" />
           <folding />
         </state>
@@ -887,8 +876,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test_rooming_assignment.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2590">
-          <caret line="185" column="33" lean-forward="false" selection-start-line="185" selection-start-column="33" selection-end-line="185" selection-end-column="33" />
+        <state relative-caret-position="497">
+          <caret line="310" column="9" lean-forward="false" selection-start-line="310" selection-start-column="9" selection-end-line="310" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rooming_assignments.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="287">
+          <caret line="151" column="77" lean-forward="false" selection-start-line="151" selection-start-column="77" selection-end-line="151" selection-end-column="77" />
           <folding />
         </state>
       </provider>
