@@ -278,6 +278,7 @@ class TestSolveDemandResourceSchedule(TestCase):
                                                     datetime.datetime(1900, 1, 1, 22, 0))]}}}}
 
         sol = solve_demand_resource_schedule(demand_info, resource_info, instructions)
+        pprint.pprint(sol)
         assert sol == correct_sol
 
     def test_solver_multiple_matching_resources(self):
@@ -453,4 +454,96 @@ class TestSolveDemandResourceSchedule(TestCase):
                                                                 1: "Sally", "priority": 1, "num": 2,2:"Diego"}]}]
 
         sol = solve_demand_resource_schedule(demand_info, resource_info, instructions)
-        pprint.pprint(sol)
+        correct_sol = {'demand': {'Montecute': {'3/1/2018': {'Diego': [(datetime.datetime(1900, 1, 1, 9, 0),
+                                                  datetime.datetime(1900, 1, 1, 10, 0)),
+                                                 (datetime.datetime(1900, 1, 1, 11, 0),
+                                                  datetime.datetime(1900, 1, 1, 12, 0)),
+                                                 (datetime.datetime(1900, 1, 1, 13, 0),
+                                                  datetime.datetime(1900, 1, 1, 14, 0)),
+                                                 (datetime.datetime(1900, 1, 1, 15, 0),
+                                                  datetime.datetime(1900, 1, 1, 16, 0)),
+                                                 (datetime.datetime(1900, 1, 1, 17, 0),
+                                                  datetime.datetime(1900, 1, 1, 18, 0))],
+                                       'Sally': [(datetime.datetime(1900, 1, 1, 8, 0),
+                                                  datetime.datetime(1900, 1, 1, 9, 0)),
+                                                 (datetime.datetime(1900, 1, 1, 10, 0),
+                                                  datetime.datetime(1900, 1, 1, 11, 0)),
+                                                 (datetime.datetime(1900, 1, 1, 12, 0),
+                                                  datetime.datetime(1900, 1, 1, 13, 0)),
+                                                 (datetime.datetime(1900, 1, 1, 14, 0),
+                                                  datetime.datetime(1900, 1, 1, 15, 0)),
+                                                 (datetime.datetime(1900, 1, 1, 16, 0),
+                                                  datetime.datetime(1900, 1, 1, 17, 0))],
+                                       'available': []}}},
+ 'resource': {'Diego': {'3/1/2018': {'Montecute': [(datetime.datetime(1900, 1, 1, 9, 0),
+                                                    datetime.datetime(1900, 1, 1, 10, 0)),
+                                                   (datetime.datetime(1900, 1, 1, 11, 0),
+                                                    datetime.datetime(1900, 1, 1, 12, 0)),
+                                                   (datetime.datetime(1900, 1, 1, 13, 0),
+                                                    datetime.datetime(1900, 1, 1, 14, 0)),
+                                                   (datetime.datetime(1900, 1, 1, 15, 0),
+                                                    datetime.datetime(1900, 1, 1, 16, 0)),
+                                                   (datetime.datetime(1900, 1, 1, 17, 0),
+                                                    datetime.datetime(1900, 1, 1, 18, 0))],
+                                     'available': []}},
+              'Sally': {'3/1/2018': {'Montecute': [(datetime.datetime(1900, 1, 1, 8, 0),
+                                                    datetime.datetime(1900, 1, 1, 9, 0)),
+                                                   (datetime.datetime(1900, 1, 1, 10, 0),
+                                                    datetime.datetime(1900, 1, 1, 11, 0)),
+                                                   (datetime.datetime(1900, 1, 1, 12, 0),
+                                                    datetime.datetime(1900, 1, 1, 13, 0)),
+                                                   (datetime.datetime(1900, 1, 1, 14, 0),
+                                                    datetime.datetime(1900, 1, 1, 15, 0)),
+                                                   (datetime.datetime(1900, 1, 1, 16, 0),
+                                                    datetime.datetime(1900, 1, 1, 17, 0))],
+                                     'available': []}}}}
+        assert sol == correct_sol
+
+    def test_middle_overlap(self):
+        from rooming_assignments import solve_demand_resource_schedule
+        import datetime
+
+        resource_info = [{"key": "Sally",
+                          "schedule": [{"date": "3/1/2018", "time": [("5:00", "9:00")]}
+                                       ]}]
+        demand_info = [{"key": "Montecute",
+                        "schedule": [{"date": "3/1/2018", "time": [("8:00", "18:00")]}
+                                     ]}]
+        instructions = [{"key": "mapping", "order": 1, "map": [{"key": "Montecute",
+                                                                1: "Sally", "priority": 1, "num": 1}]}]
+        sol = solve_demand_resource_schedule(demand_info, resource_info, instructions)
+
+        correct_sol = {'demand': {'Montecute': {'3/1/2018': {'Sally': [(datetime.datetime(1900, 1, 1, 8, 0),
+                                                  datetime.datetime(1900, 1, 1, 9, 0))],
+                                       'available': [(datetime.datetime(1900, 1, 1, 9, 0),
+                                                      datetime.datetime(1900, 1, 1, 18, 0))]}}},
+ 'resource': {'Sally': {'3/1/2018': {'Montecute': [(datetime.datetime(1900, 1, 1, 8, 0),
+                                                    datetime.datetime(1900, 1, 1, 9, 0))],
+                                     'available': [(datetime.datetime(1900, 1, 1, 5, 0),
+                                                    datetime.datetime(1900, 1, 1, 8, 0))]}}}}
+
+        assert sol == correct_sol
+
+    def test_multiple_middle_overlap(self):
+        from rooming_assignments import solve_demand_resource_schedule
+        import datetime
+
+        resource_info = [{"key": "Sally",
+                          "schedule": [{"date": "3/1/2018", "time": [("5:00", "6:00"),("7:00", "8:00"),
+                                                                     ("9:00", "10:00"),("11:00", "12:00"),
+                                                                     ("13:00", "14:00"), ("15:00", "16:00")]}
+                                       ]}]
+        demand_info = [{"key": "Montecute",
+                        "schedule": [{"date": "3/1/2018", "time": [("5:30", "6:30"),("7:30", "8:30"),
+                                                                   ("9:30", "10:30"), ("11:30", "12:30"),
+                                                                   ("13:30", "14:30"), ("15:30", "16:30"),
+                                                                   ]}
+                                     ]}]
+        instructions = [{"key": "mapping", "order": 1, "map": [{"key": "Montecute",
+                                                                1: "Sally", "priority": 1, "num": 1}]}]
+        sol = solve_demand_resource_schedule(demand_info, resource_info, instructions)
+        #pprint.pprint(sol)
+
+
+#     def test_resource_greater_than_demand(self):
+#         pass

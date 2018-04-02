@@ -155,19 +155,21 @@ class Schedule:
         updated_resource_avail_schedule = []
         overlap_result = []
         while (len(int_avail_schedule) > 0 and len(ext_avail_schedule) > 0):
-            t1_trailing, t2_trailing, overlap_add = self._find_overlap(int_avail_schedule, ext_avail_schedule)
+            demand_trailing, resource_trailing, overlap_add = self._find_overlap(int_avail_schedule, ext_avail_schedule)
 
-            updated_demand_avail_schedule   += t1_trailing
-            updated_resource_avail_schedule += t2_trailing
+            updated_demand_avail_schedule   += demand_trailing
+            updated_resource_avail_schedule += resource_trailing
             overlap_result += overlap_add
 
             if len(int_avail_schedule) == 0 and len(ext_avail_schedule) != 0:
-
+                print("we got here")
                 updated_resource_avail_schedule += ext_avail_schedule
 
             if len(ext_avail_schedule) == 0 and len(int_avail_schedule) != 0:
-                updated_demand_avail_schedule += int_avail_schedule
+                print("second ")
 
+                updated_demand_avail_schedule += int_avail_schedule
+                print(updated_demand_avail_schedule)
         # update schedules
         int_key_schedule["available"] = updated_demand_avail_schedule
         ext_key_schedule["available"] = updated_resource_avail_schedule
@@ -188,12 +190,12 @@ class Schedule:
         def remove_earlier_segment(segment1, segment2, t1, t2):
             if segment1_ahead_segment2(segment1, segment2):
                 # no overlap,so remover trailing from list1 and add to to available
-                t1.pop(0)
-                return [segment1], [], []
-            if segment2_ahead_segment1(segment1, segment2):
-                # no overlap and segment2 is trailing
                 t2.pop(0)
                 return [], [segment2], []
+            if segment2_ahead_segment1(segment1, segment2):
+                # no overlap and segment2 is trailing
+                t1.pop(0)
+                return [segment1], [], []
 
         def overlap_of_segments(segment1, segment2):
             return (max(segment1[0], segment2[0]), min(segment1[1], segment2[1]))
