@@ -154,6 +154,7 @@ class Schedule:
         updated_demand_avail_schedule = []
         updated_resource_avail_schedule = []
         overlap_result = []
+
         while (len(int_avail_schedule) > 0 and len(ext_avail_schedule) > 0):
             demand_trailing, resource_trailing, overlap_add = self._find_overlap(int_avail_schedule, ext_avail_schedule)
 
@@ -162,14 +163,12 @@ class Schedule:
             overlap_result += overlap_add
 
             if len(int_avail_schedule) == 0 and len(ext_avail_schedule) != 0:
-                print("we got here")
                 updated_resource_avail_schedule += ext_avail_schedule
 
             if len(ext_avail_schedule) == 0 and len(int_avail_schedule) != 0:
-                print("second ")
 
                 updated_demand_avail_schedule += int_avail_schedule
-                print(updated_demand_avail_schedule)
+
         # update schedules
         int_key_schedule["available"] = updated_demand_avail_schedule
         ext_key_schedule["available"] = updated_resource_avail_schedule
@@ -208,9 +207,10 @@ class Schedule:
 
         overlap = overlap_of_segments(segment1, segment2)
 
+
         # now we have to figure out how to update available time, both for
         # case 1: they are exactly same segment
-        if segment1[0] == overlap[0] and segment1[1] == overlap[1] and segment1[0] == overlap[0] and \
+        if segment1[0] == overlap[0] and segment1[1] == overlap[1] and segment2[0] == overlap[0] and \
                         segment2[1] == overlap[1]:
 
             demand_avail_schedule.pop(0)
@@ -218,8 +218,7 @@ class Schedule:
 
             return [], [], [overlap]
 
-        # case2: they start same time, but 1 is ends later  than other
-
+        # case2: they start same time, but 1 is ends later than other
         if segment1[0] == overlap[0] and segment2[0] == overlap[0] and (segment1[1] != overlap[1] or segment2[1] != \
                 overlap[1]):
 

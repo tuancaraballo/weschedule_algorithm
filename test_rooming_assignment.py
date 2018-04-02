@@ -3,10 +3,11 @@ import pprint
 
 class TestSolveDemandResourceSchedule(TestCase):
     #end to end testing
-    def test_solve_simple_all_overlapping(self):
 
+    def test_solve_simple_all_overlapping(self):
         from rooming_assignments import solve_demand_resource_schedule
         import datetime
+
         resource_info = [{"key": "Sally",
                           "schedule": [{"date": "3/1/2018", "time": [("8:00", "12:00"), ("13:00", "18:00")]},
                                        {"date": "3/2/2018", "time": [("8:00", "12:00"), ("13:00", "18:00")]},
@@ -604,4 +605,52 @@ class TestSolveDemandResourceSchedule(TestCase):
         instructions = [{"key": "mapping", "order": 1, "map": [{"key": "Montecute",
                                                                 1: "Sally", "priority": 1, "num": 1}]}]
         sol = solve_demand_resource_schedule(demand_info, resource_info, instructions)
-        pprint.pprint(sol)
+        correct_sol = {'demand': {'Montecute': {'3/1/2018': {'Sally': [(datetime.datetime(1900, 1, 1, 7, 14),
+                                                          datetime.datetime(1900, 1, 1, 8, 45))],
+                                               'available': []}}},
+         'resource': {'Sally': {'3/1/2018': {'Montecute': [(datetime.datetime(1900, 1, 1, 7, 14),
+                                                            datetime.datetime(1900, 1, 1, 8, 45))],
+                                             'available': [(datetime.datetime(1900, 1, 1, 5, 0),
+                                                            datetime.datetime(1900, 1, 1, 7, 14)),
+                                                           (datetime.datetime(1900, 1, 1, 8, 45),
+                                                            datetime.datetime(1900, 1, 1, 12, 0))]}}}}
+
+        assert sol == correct_sol
+
+    def test_two_resrouces_ends(self):
+        from rooming_assignments import solve_demand_resource_schedule
+        import datetime
+        resource_info = [{"key": "Sally",
+                          "schedule": [{"date": "3/1/2018", "time": [("8:00", "12:00")]}
+                                       ]},
+                         {"key": "Diego",
+                          "schedule": [{"date": "3/1/2018", "time": [("7:00", "13:00")]}
+                                       ]}
+                         ]
+        demand_info = [{"key": "Montecute",
+                        "schedule": [{"date": "3/1/2018", "time": [("7:00", "13:00")]}
+                                     ]}]
+        instructions = [{"key": "mapping", "order": 1, "map": [{"key": "Montecute",
+                                                                1: "Sally", "priority": 1, "num": 2,
+                                                                2:"Diego"}]}]
+
+        sol = solve_demand_resource_schedule(demand_info, resource_info, instructions)
+        correct_sol = {'demand': {'Montecute': {'3/1/2018': {'Diego': [(datetime.datetime(1900, 1, 1, 7, 0),
+                                                  datetime.datetime(1900, 1, 1, 8, 0)),
+                                                 (datetime.datetime(1900, 1, 1, 12, 0),
+                                                  datetime.datetime(1900, 1, 1, 13, 0))],
+                                       'Sally': [(datetime.datetime(1900, 1, 1, 8, 0),
+                                                  datetime.datetime(1900, 1, 1, 12, 0))],
+                                       'available': []}}},
+                        'resource': {'Diego': {'3/1/2018': {'Montecute': [(datetime.datetime(1900, 1, 1, 7, 0),
+                                                    datetime.datetime(1900, 1, 1, 8, 0)),
+                                                   (datetime.datetime(1900, 1, 1, 12, 0),
+                                                    datetime.datetime(1900, 1, 1, 13, 0))],
+                                     'available': [(datetime.datetime(1900, 1, 1, 8, 0),
+                                                    datetime.datetime(1900, 1, 1, 12, 0))]}},
+                        'Sally': {'3/1/2018': {'Montecute': [(datetime.datetime(1900, 1, 1, 8, 0),
+                                                    datetime.datetime(1900, 1, 1, 12, 0))],
+                                     'available': []}}}}
+
+        assert sol == correct_sol
+        
