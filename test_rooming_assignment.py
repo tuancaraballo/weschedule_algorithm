@@ -278,7 +278,6 @@ class TestSolveDemandResourceSchedule(TestCase):
                                                     datetime.datetime(1900, 1, 1, 22, 0))]}}}}
 
         sol = solve_demand_resource_schedule(demand_info, resource_info, instructions)
-        pprint.pprint(sol)
         assert sol == correct_sol
 
     def test_solver_multiple_matching_resources(self):
@@ -542,8 +541,67 @@ class TestSolveDemandResourceSchedule(TestCase):
         instructions = [{"key": "mapping", "order": 1, "map": [{"key": "Montecute",
                                                                 1: "Sally", "priority": 1, "num": 1}]}]
         sol = solve_demand_resource_schedule(demand_info, resource_info, instructions)
-        #pprint.pprint(sol)
+        correct_sol = {'demand': {'Montecute': {'3/1/2018': {'Sally': [(datetime.datetime(1900, 1, 1, 5, 30),
+                                                  datetime.datetime(1900, 1, 1, 6, 0)),
+                                                 (datetime.datetime(1900, 1, 1, 7, 30),
+                                                  datetime.datetime(1900, 1, 1, 8, 0)),
+                                                 (datetime.datetime(1900, 1, 1, 9, 30),
+                                                  datetime.datetime(1900, 1, 1, 10, 0)),
+                                                 (datetime.datetime(1900, 1, 1, 11, 30),
+                                                  datetime.datetime(1900, 1, 1, 12, 0)),
+                                                 (datetime.datetime(1900, 1, 1, 13, 30),
+                                                  datetime.datetime(1900, 1, 1, 14, 0)),
+                                                 (datetime.datetime(1900, 1, 1, 15, 30),
+                                                  datetime.datetime(1900, 1, 1, 16, 0))],
+                                       'available': [(datetime.datetime(1900, 1, 1, 6, 0),
+                                                      datetime.datetime(1900, 1, 1, 6, 30)),
+                                                     (datetime.datetime(1900, 1, 1, 8, 0),
+                                                      datetime.datetime(1900, 1, 1, 8, 30)),
+                                                     (datetime.datetime(1900, 1, 1, 10, 0),
+                                                      datetime.datetime(1900, 1, 1, 10, 30)),
+                                                     (datetime.datetime(1900, 1, 1, 12, 0),
+                                                      datetime.datetime(1900, 1, 1, 12, 30)),
+                                                     (datetime.datetime(1900, 1, 1, 14, 0),
+                                                      datetime.datetime(1900, 1, 1, 14, 30)),
+                                                     (datetime.datetime(1900, 1, 1, 16, 0),
+                                                      datetime.datetime(1900, 1, 1, 16, 30))]}}},
+ 'resource': {'Sally': {'3/1/2018': {'Montecute': [(datetime.datetime(1900, 1, 1, 5, 30),
+                                                    datetime.datetime(1900, 1, 1, 6, 0)),
+                                                   (datetime.datetime(1900, 1, 1, 7, 30),
+                                                    datetime.datetime(1900, 1, 1, 8, 0)),
+                                                   (datetime.datetime(1900, 1, 1, 9, 30),
+                                                    datetime.datetime(1900, 1, 1, 10, 0)),
+                                                   (datetime.datetime(1900, 1, 1, 11, 30),
+                                                    datetime.datetime(1900, 1, 1, 12, 0)),
+                                                   (datetime.datetime(1900, 1, 1, 13, 30),
+                                                    datetime.datetime(1900, 1, 1, 14, 0)),
+                                                   (datetime.datetime(1900, 1, 1, 15, 30),
+                                                    datetime.datetime(1900, 1, 1, 16, 0))],
+                                     'available': [(datetime.datetime(1900, 1, 1, 5, 0),
+                                                    datetime.datetime(1900, 1, 1, 5, 30)),
+                                                   (datetime.datetime(1900, 1, 1, 7, 0),
+                                                    datetime.datetime(1900, 1, 1, 7, 30)),
+                                                   (datetime.datetime(1900, 1, 1, 9, 0),
+                                                    datetime.datetime(1900, 1, 1, 9, 30)),
+                                                   (datetime.datetime(1900, 1, 1, 11, 0),
+                                                    datetime.datetime(1900, 1, 1, 11, 30)),
+                                                   (datetime.datetime(1900, 1, 1, 13, 0),
+                                                    datetime.datetime(1900, 1, 1, 13, 30)),
+                                                   (datetime.datetime(1900, 1, 1, 15, 0),
+                                                    datetime.datetime(1900, 1, 1, 15, 30))]}}}}
 
+        assert sol == correct_sol
 
-#     def test_resource_greater_than_demand(self):
-#         pass
+    def test_resource_greater_than_demand(self):
+        from rooming_assignments import solve_demand_resource_schedule
+        import datetime
+        resource_info = [{"key": "Sally",
+                          "schedule": [{"date": "3/1/2018", "time": [("5:00", "12:00")]}
+                                       ]}]
+        demand_info = [{"key": "Montecute",
+                        "schedule": [{"date": "3/1/2018", "time": [("7:14", "8:45")]}
+                                     ]}]
+        instructions = [{"key": "mapping", "order": 1, "map": [{"key": "Montecute",
+                                                                1: "Sally", "priority": 1, "num": 1}]}]
+        sol = solve_demand_resource_schedule(demand_info, resource_info, instructions)
+        pprint.pprint(sol)
