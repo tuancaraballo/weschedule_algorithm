@@ -741,6 +741,110 @@ class TestSolveDemandResourceSchedule(TestCase):
                                                      datetime.datetime(1900, 1, 1, 11, 30))]}}}}
         assert sol == correct_sol
 
+    def test_mutliple_demands(self):
+        from rooming_assignments import solve_demand_resource_schedule
+        import datetime
+        resource_info = [{"key": "Sally",
+                          "schedule": [{"date": "3/1/2018", "time": [("8:00", "16:00")]}
+                                       ]}
+                         ]
+        demand_info = [{"key": "Montecute",
+                        "schedule": [{"date": "3/1/2018", "time": [("8:00", "9:00"),("10:00", "11:00")
+                                                                   ,("12:00", "13:00"),("14:00", "15:00")]}
+                                     ]},
+                       {"key": "Nelligan",
+                        "schedule": [{"date": "3/1/2018", "time": [("9:00", "10:00"),("11:00", "12:00")
+                                                                   ,("13:00", "14:00"),("15:00", "16:00")]}
+                                     ]}
+                       ]
+        instructions = [{"key": "mapping", "order": 1, "map": [{"key": "Montecute",
+                                                                1: "Sally", "priority": 1, "num": 1},
+                                                               {"key": "Nelligan",
+                                                                1: "Sally", "priority": 2, "num": 1}
+                                                               ]}]
+        sol = solve_demand_resource_schedule(demand_info, resource_info, instructions)
+        correct_sol = {'demand': {'Montecute': {'3/1/2018': {'Sally': [(datetime.datetime(1900, 1, 1, 8, 0),
+                                                  datetime.datetime(1900, 1, 1, 9, 0)),
+                                                 (datetime.datetime(1900, 1, 1, 10, 0),
+                                                  datetime.datetime(1900, 1, 1, 11, 0)),
+                                                 (datetime.datetime(1900, 1, 1, 12, 0),
+                                                  datetime.datetime(1900, 1, 1, 13, 0)),
+                                                 (datetime.datetime(1900, 1, 1, 14, 0),
+                                                  datetime.datetime(1900, 1, 1, 15, 0))],
+                                       'available': []}},
+            'Nelligan': {'3/1/2018': {'Sally': [(datetime.datetime(1900, 1, 1, 9, 0),
+                                                 datetime.datetime(1900, 1, 1, 10, 0)),
+                                                (datetime.datetime(1900, 1, 1, 11, 0),
+                                                 datetime.datetime(1900, 1, 1, 12, 0)),
+                                                (datetime.datetime(1900, 1, 1, 13, 0),
+                                                 datetime.datetime(1900, 1, 1, 14, 0)),
+                                                (datetime.datetime(1900, 1, 1, 15, 0),
+                                                 datetime.datetime(1900, 1, 1, 16, 0))],
+                                      'available': []}}},
+            'resource': {'Sally': {'3/1/2018': {'Montecute': [(datetime.datetime(1900, 1, 1, 8, 0),
+                                                    datetime.datetime(1900, 1, 1, 9, 0)),
+                                                   (datetime.datetime(1900, 1, 1, 10, 0),
+                                                    datetime.datetime(1900, 1, 1, 11, 0)),
+                                                   (datetime.datetime(1900, 1, 1, 12, 0),
+                                                    datetime.datetime(1900, 1, 1, 13, 0)),
+                                                   (datetime.datetime(1900, 1, 1, 14, 0),
+                                                    datetime.datetime(1900, 1, 1, 15, 0))],
+                                     'Nelligan': [(datetime.datetime(1900, 1, 1, 9, 0),
+                                                   datetime.datetime(1900, 1, 1, 10, 0)),
+                                                  (datetime.datetime(1900, 1, 1, 11, 0),
+                                                   datetime.datetime(1900, 1, 1, 12, 0)),
+                                                  (datetime.datetime(1900, 1, 1, 13, 0),
+                                                   datetime.datetime(1900, 1, 1, 14, 0)),
+                                                  (datetime.datetime(1900, 1, 1, 15, 0),
+                                                   datetime.datetime(1900, 1, 1, 16, 0))],
+                                     'available': []}}}}
 
+        assert sol == correct_sol
 
+    def test_second_non_overlapping(self):
+        from rooming_assignments import solve_demand_resource_schedule
+        import datetime
+        resource_info = [{"key": "Sally",
+                          "schedule": [{"date": "3/1/2018", "time": [("8:00", "10:00"), ("11:00", "13:00")]}
+                                       ]},
+                         {"key": "Diego",
+                          "schedule": [{"date": "3/1/2018", "time": [("8:00", "10:00"), ("11:00", "13:00")]}
+                                       ]},
+                         {"key": "Sandra",
+                          "schedule": [{"date": "3/1/2018", "time": [("8:00", "13:00")]}
+                                       ]}
+                         ]
+        demand_info = [{"key": "Montecute",
+                        "schedule": [{"date": "3/1/2018", "time": [("8:00", "13:00")]}
+                                     ]}]
+        instructions = [{"key": "mapping", "order": 1, "map": [{"key": "Montecute",
+                                                                1: "Sally", "priority": 1, "num": 3,
+                                                                2: "Diego",
+                                                                3: "Sandra"}]}]
 
+        sol = solve_demand_resource_schedule(demand_info, resource_info, instructions)
+        correct_sol = {'demand': {'Montecute': {'3/1/2018': {'Diego': [],
+                                       'Sally': [(datetime.datetime(1900, 1, 1, 8, 0),
+                                                  datetime.datetime(1900, 1, 1, 10, 0)),
+                                                 (datetime.datetime(1900, 1, 1, 11, 0),
+                                                  datetime.datetime(1900, 1, 1, 13, 0))],
+                                       'Sandra': [(datetime.datetime(1900, 1, 1, 10, 0),
+                                                   datetime.datetime(1900, 1, 1, 11, 0))],
+                                       'available': []}}},
+ 'resource': {'Diego': {'3/1/2018': {'Montecute': [],
+                                     'available': [(datetime.datetime(1900, 1, 1, 8, 0),
+                                                    datetime.datetime(1900, 1, 1, 10, 0)),
+                                                   (datetime.datetime(1900, 1, 1, 11, 0),
+                                                    datetime.datetime(1900, 1, 1, 13, 0))]}},
+              'Sally': {'3/1/2018': {'Montecute': [(datetime.datetime(1900, 1, 1, 8, 0),
+                                                    datetime.datetime(1900, 1, 1, 10, 0)),
+                                                   (datetime.datetime(1900, 1, 1, 11, 0),
+                                                    datetime.datetime(1900, 1, 1, 13, 0))],
+                                     'available': []}},
+              'Sandra': {'3/1/2018': {'Montecute': [(datetime.datetime(1900, 1, 1, 10, 0),
+                                                     datetime.datetime(1900, 1, 1, 11, 0))],
+                                      'available': [(datetime.datetime(1900, 1, 1, 8, 0),
+                                                     datetime.datetime(1900, 1, 1, 10, 0)),
+                                                    (datetime.datetime(1900, 1, 1, 11, 0),
+                                                     datetime.datetime(1900, 1, 1, 13, 0))]}}}}
+        assert sol == correct_sol

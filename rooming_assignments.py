@@ -177,13 +177,13 @@ class Schedule:
     def _find_overlap(self, demand_avail_schedule, resource_avail_schedule):
 
         def segments_non_overlapping(segment1, segment2):
-            return segment1[1] < segment2[0] or segment2[1] < segment1[0]
+            return segment1[1] <= segment2[0] or segment2[1] <= segment1[0]
 
         def segment1_ahead_segment2(segment1, segment2):
-            return segment2[1] < segment1[0]
+            return segment2[1] <= segment1[0]
 
         def segment2_ahead_segment1(segment1, segment2):
-            return segment1[1] < segment2[0]
+            return segment1[1] <= segment2[0]
 
         def remove_earlier_segment(segment1, segment2, t1, t2):
             if segment1_ahead_segment2(segment1, segment2):

@@ -20,7 +20,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/weschedule_algorithm$weschedule_algorithm.coverage" NAME="weschedule_algorithm Coverage Results" MODIFIED="1522442160017" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/weschedule_algorithm$Unittests_in_test_rooming_assignment_py.coverage" NAME="Unittests in test_rooming_assignment.py Coverage Results" MODIFIED="1522693606248" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/weschedule_algorithm$Unittests_in_test_rooming_assignment_py.coverage" NAME="Unittests in test_rooming_assignment.py Coverage Results" MODIFIED="1522701613814" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/weschedule_algorithm$Unittests_in_test_schedule_py.coverage" NAME="Unittests in test_schedule.py Coverage Results" MODIFIED="1522609811899" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/weschedule_algorithm$rooming_assignments.coverage" NAME="rooming_assignments Coverage Results" MODIFIED="1522442242498" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/weschedule_algorithm$roomingtest.coverage" NAME="roomingtest Coverage Results" MODIFIED="1522561497865" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -41,8 +41,8 @@
       <file leaf-file-name="rooming_assignments.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/rooming_assignments.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4172">
-              <caret line="298" column="0" lean-forward="false" selection-start-line="298" selection-start-column="0" selection-end-line="298" selection-end-column="0" />
+            <state relative-caret-position="145">
+              <caret line="360" column="0" lean-forward="false" selection-start-line="360" selection-start-column="0" selection-end-line="360" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -51,19 +51,10 @@
       <file leaf-file-name="test_rooming_assignment.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test_rooming_assignment.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="549">
-              <caret line="714" column="0" lean-forward="false" selection-start-line="714" selection-start-column="0" selection-end-line="714" selection-end-column="0" />
+            <state relative-caret-position="380">
+              <caret line="850" column="0" lean-forward="true" selection-start-line="850" selection-start-column="0" selection-end-line="850" selection-end-column="0" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
-                <element signature="e#176#11468#0" expanded="false" />
-                <element signature="e#11525#22934#0" expanded="false" />
-                <element signature="e#22999#31242#0" expanded="false" />
-                <element signature="e#31299#35054#0" expanded="false" />
-                <element signature="e#35115#40276#0" expanded="false" />
-                <element signature="e#40321#41813#0" expanded="false" />
-                <element signature="e#41867#47520#0" expanded="false" />
-                <element signature="e#47579#49190#0" expanded="false" />
-                <element signature="e#49239#51683#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -80,10 +71,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>int_avail_schedule</find>
-      <find>datetime</find>
-      <find>demandSchedule</find>
-      <find>Schedule</find>
       <find>_create_format_solution</find>
       <find>create_format_solution</find>
       <find>__</find>
@@ -96,7 +83,6 @@
       <find>sorted</find>
       <find>get_key_dates</find>
       <find>day</find>
-      <find>apply_a_single_mapping_between</find>
       <find>find_overlap_single_day</find>
       <find>we are no</find>
       <find>_find</find>
@@ -104,12 +90,17 @@
       <find>while</find>
       <find>_find_overlap</find>
       <find>pprint</find>
-      <find>print</find>
       <find>x</find>
       <find>algorith</find>
       <find>apply_instruction</find>
       <find>get_dates_key</find>
       <find>remove_overlap_single_day_and_label</find>
+      <find>overlap</find>
+      <find>dates</find>
+      <find>apply_a_single_mapping_between</find>
+      <find>get_resources_for_demand_ordered_by_priority</find>
+      <find>demand_to_resources_by_resource_priority</find>
+      <find>print</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -330,34 +321,34 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.02 at 11h 21m 13s.xml">
+    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.02 at 13h 36m 36s.xml">
       <configuration name="Unittests in test_rooming_assignment.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.02 at 11h 21m 29s.xml">
+    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.02 at 13h 36m 50s.xml">
       <configuration name="Unittests in test_rooming_assignment.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.02 at 11h 23m 45s.xml">
+    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.02 at 13h 36m 56s.xml">
       <configuration name="Unittests in test_rooming_assignment.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.02 at 11h 24m 00s.xml">
+    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.02 at 13h 37m 32s.xml">
       <configuration name="Unittests in test_rooming_assignment.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.02 at 11h 24m 04s.xml">
+    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.02 at 13h 37m 48s.xml">
       <configuration name="Unittests in test_rooming_assignment.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.02 at 11h 24m 23s.xml">
+    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.02 at 13h 39m 25s.xml">
       <configuration name="Unittests in test_rooming_assignment.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.02 at 11h 25m 40s.xml">
+    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.02 at 13h 39m 34s.xml">
       <configuration name="Unittests in test_rooming_assignment.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.02 at 11h 25m 41s.xml">
+    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.02 at 13h 39m 47s.xml">
       <configuration name="Unittests in test_rooming_assignment.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.02 at 11h 25m 53s.xml">
+    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.02 at 13h 40m 09s.xml">
       <configuration name="Unittests in test_rooming_assignment.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.02 at 11h 26m 46s.xml">
+    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.02 at 13h 40m 14s.xml">
       <configuration name="Unittests in test_rooming_assignment.py" configurationId="tests" />
     </history-entry>
   </component>
@@ -372,12 +363,11 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="877" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3276316" sideWeight="0.105150215" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289183" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3276316" sideWeight="0.8948498" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32674572" sideWeight="0.8948498" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="FLOATING" visible="true" show_stripe_button="true" weight="0.22134387" sideWeight="0.860515" order="2" side_tool="false" content_ui="tabs" x="-1920" y="23" width="1920" height="1057" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32904148" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.260181" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" x="-1212" y="115" width="1440" height="877" />
@@ -386,7 +376,7 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2736842" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14520743" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.02108037" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34650856" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297568" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -475,7 +465,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="40" />
+      <option name="time" value="41" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -524,6 +514,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="224">
           <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#42#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -580,6 +573,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
           <caret line="19" column="16" lean-forward="true" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#42#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -604,6 +600,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="12" lean-forward="false" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#42#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -628,6 +627,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="12" lean-forward="false" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#42#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -645,6 +647,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="434">
           <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#42#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -676,6 +681,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1414">
           <caret line="102" column="21" lean-forward="false" selection-start-line="102" selection-start-column="21" selection-end-line="102" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#42#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -693,6 +701,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1414">
           <caret line="102" column="21" lean-forward="true" selection-start-line="102" selection-start-column="21" selection-end-line="102" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#42#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -724,6 +735,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="308">
           <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#42#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -738,6 +752,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="322">
           <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#42#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -772,6 +789,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="308">
           <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#42#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -815,13 +835,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/task_assignments.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/roomingtest.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3108">
@@ -851,29 +864,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/task_assignments.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#42#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/test_rooming_assignment.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="549">
-          <caret line="714" column="0" lean-forward="false" selection-start-line="714" selection-start-column="0" selection-end-line="714" selection-end-column="0" />
+        <state relative-caret-position="380">
+          <caret line="850" column="0" lean-forward="true" selection-start-line="850" selection-start-column="0" selection-end-line="850" selection-end-column="0" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
-            <element signature="e#176#11468#0" expanded="false" />
-            <element signature="e#11525#22934#0" expanded="false" />
-            <element signature="e#22999#31242#0" expanded="false" />
-            <element signature="e#31299#35054#0" expanded="false" />
-            <element signature="e#35115#40276#0" expanded="false" />
-            <element signature="e#40321#41813#0" expanded="false" />
-            <element signature="e#41867#47520#0" expanded="false" />
-            <element signature="e#47579#49190#0" expanded="false" />
-            <element signature="e#49239#51683#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/rooming_assignments.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4172">
-          <caret line="298" column="0" lean-forward="false" selection-start-line="298" selection-start-column="0" selection-end-line="298" selection-end-column="0" />
+        <state relative-caret-position="145">
+          <caret line="360" column="0" lean-forward="false" selection-start-line="360" selection-start-column="0" selection-end-line="360" selection-end-column="0" />
           <folding />
         </state>
       </provider>
