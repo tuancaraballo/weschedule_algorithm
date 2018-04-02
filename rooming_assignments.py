@@ -116,9 +116,7 @@ class Schedule:
         # for every demand we have a mapping for
         for demand in mapping_obj.get_demands_ordered_by_priority():
             # for resources that a demand has a possible match with
-            print(demand)
             for resource in mapping_obj.get_resources_for_demand_ordered_by_priority(demand):
-                print("\t" + resource)
                 self.apply_a_single_mapping_between(demand,
                                                     resource,
                                                     resource_schedule)
@@ -171,7 +169,6 @@ class Schedule:
         # update schedules
         int_key_schedule["available"] = updated_demand_avail_schedule
         ext_key_schedule["available"] = updated_resource_avail_schedule
-        print("\t\t update {}".format(updated_resource_avail_schedule))
         ext_key_schedule[internal_key] = overlap_result
         int_key_schedule[external_key] = overlap_result
 
@@ -331,9 +328,7 @@ class Schedule:
                                  external_schedule.get_key_schedule_date(resource_key, date))
                 key_pair = (demand_key, resource_key)
 
-                print("\t {}".format(external_schedule.get_key_schedule_date(resource_key, date)))
                 self.find_overlap_single_day(schedule_pair, key_pair)
-                print(external_schedule.get_key_schedule_date(resource_key,date))
 
 
 ##########################################
