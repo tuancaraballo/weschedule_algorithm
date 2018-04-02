@@ -617,7 +617,7 @@ class TestSolveDemandResourceSchedule(TestCase):
 
         assert sol == correct_sol
 
-    def test_two_resrouces_ends(self):
+    def test_two_resources_ends(self):
         from rooming_assignments import solve_demand_resource_schedule
         import datetime
         resource_info = [{"key": "Sally",
@@ -653,4 +653,24 @@ class TestSolveDemandResourceSchedule(TestCase):
                                      'available': []}}}}
 
         assert sol == correct_sol
-        
+
+    def test_two_resouces_middle(self):
+        from rooming_assignments import solve_demand_resource_schedule
+        import datetime
+        resource_info = [{"key": "Sally",
+                          "schedule": [{"date": "3/1/2018", "time": [("8:00", "10:00"), ("11:00", "13:00")]}
+                                       ]},
+                         {"key": "Diego",
+                          "schedule": [{"date": "3/1/2018", "time": [("8:00", "13:00")]}
+                                       ]}
+                         ]
+        demand_info = [{"key": "Montecute",
+                        "schedule": [{"date": "3/1/2018", "time": [("8:00", "13:00")]}
+                                     ]}]
+        instructions = [{"key": "mapping", "order": 1, "map": [{"key": "Montecute",
+                                                                1: "Sally", "priority": 1, "num": 2,
+                                                                2: "Diego"}]}]
+        sol = solve_demand_resource_schedule(demand_info, resource_info, instructions)
+        pprint.pprint(sol)
+
+

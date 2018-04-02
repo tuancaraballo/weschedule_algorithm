@@ -4,8 +4,9 @@ from datetime import datetime
 class Solver:
     def __init__(self):
         self.resource_schedule = None
-        self.demand_schedule = None
-        self.instructions = None
+        self.demand_schedule   = None
+        self.instructions      = None
+        self.solution = None
 
     def set_resource_schedule(self, schedule):
         self.resource_schedule = Schedule(schedule)
@@ -29,7 +30,6 @@ class Solver:
         return switcher[instruction["key"]]
 
     def solve(self):
-
         for instruction in self.instructions.get_instructions_by_order():
             self.apply_instruction(instruction)
 
@@ -50,7 +50,6 @@ class Solver:
         return switcher[key]
 
     def _call_mapping_algorithm(self):
-
         # call mapping algorithm on Demand Schedule with resource and mapping
         self.demand_schedule.run_mapping_with(self.resource_schedule,
                                               self.instructions.get_mapping())
@@ -131,7 +130,7 @@ class Schedule:
         :return: a list of overlapping segments for the two schedules
         '''
         # TODO break donw this method
-        def either_avail_schedule_empty(demand_avail_schedule,resource_avail_schedule):
+        def either_avail_schedule_empty(demand_avail_schedule, resource_avail_schedule):
             return len(int_avail_schedule) == 0 or len(ext_avail_schedule) == 0
 
         INTERNAL_INDEX = 0
