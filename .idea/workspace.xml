@@ -8,7 +8,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="098c6534-eaa7-4cd3-ba3a-3b4b50c1ce2d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.py" afterPath="$PROJECT_DIR$/app.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rooming_assignments.py" afterPath="$PROJECT_DIR$/rooming_assignments.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test_rooming_assignment.py" afterPath="$PROJECT_DIR$/test_rooming_assignment.py" />
@@ -22,7 +21,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/weschedule_algorithm$weschedule_algorithm.coverage" NAME="weschedule_algorithm Coverage Results" MODIFIED="1522442160017" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/weschedule_algorithm$Unittests_in_test_rooming_assignment_py.coverage" NAME="Unittests in test_rooming_assignment.py Coverage Results" MODIFIED="1522718189823" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/weschedule_algorithm$Unittests_in_test_rooming_assignment_py.coverage" NAME="Unittests in test_rooming_assignment.py Coverage Results" MODIFIED="1522722281815" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/weschedule_algorithm$Unittests_in_test_schedule_py.coverage" NAME="Unittests in test_schedule.py Coverage Results" MODIFIED="1522609811899" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/weschedule_algorithm$rooming_assignments.coverage" NAME="rooming_assignments Coverage Results" MODIFIED="1522442242498" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/weschedule_algorithm$roomingtest.coverage" NAME="roomingtest Coverage Results" MODIFIED="1522561497865" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -40,11 +39,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="rooming_assignments.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="rooming_assignments.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/rooming_assignments.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="42">
-              <caret line="3" column="34" lean-forward="false" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="34" />
+            <state relative-caret-position="238">
+              <caret line="17" column="31" lean-forward="false" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="31" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
               </folding>
@@ -52,11 +51,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="app.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="169" column="10" lean-forward="false" selection-start-line="169" selection-start-column="10" selection-end-line="169" selection-end-column="10" />
+            <state relative-caret-position="178">
+              <caret line="155" column="21" lean-forward="false" selection-start-line="155" selection-start-column="21" selection-end-line="155" selection-end-column="21" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
               </folding>
@@ -67,8 +66,8 @@
       <file leaf-file-name="test_rooming_assignment.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test_rooming_assignment.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="12334">
-              <caret line="881" column="50" lean-forward="true" selection-start-line="881" selection-start-column="50" selection-end-line="881" selection-end-column="50" />
+            <state relative-caret-position="710">
+              <caret line="949" column="33" lean-forward="false" selection-start-line="949" selection-start-column="33" selection-end-line="949" selection-end-column="33" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
               </folding>
@@ -132,8 +131,8 @@
         <option value="$PROJECT_DIR$/test_schedule.py" />
         <option value="$PROJECT_DIR$/roomingtest.py" />
         <option value="$PROJECT_DIR$/test_rooming_assignment.py" />
-        <option value="$PROJECT_DIR$/rooming_assignments.py" />
         <option value="$PROJECT_DIR$/app.py" />
+        <option value="$PROJECT_DIR$/rooming_assignments.py" />
       </list>
     </option>
   </component>
@@ -337,34 +336,34 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.02 at 18h 14m 58s.xml">
+    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.02 at 19h 21m 19s.xml">
       <configuration name="Unittests in test_rooming_assignment.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.02 at 18h 15m 12s.xml">
+    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.02 at 19h 21m 35s.xml">
       <configuration name="Unittests in test_rooming_assignment.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.02 at 18h 15m 20s.xml">
+    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.02 at 19h 21m 49s.xml">
       <configuration name="Unittests in test_rooming_assignment.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.02 at 18h 15m 28s.xml">
+    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.02 at 19h 23m 03s.xml">
       <configuration name="Unittests in test_rooming_assignment.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.02 at 18h 15m 44s.xml">
+    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.02 at 19h 23m 07s.xml">
       <configuration name="Unittests in test_rooming_assignment.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.02 at 18h 15m 52s.xml">
+    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.02 at 19h 23m 32s.xml">
       <configuration name="Unittests in test_rooming_assignment.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.02 at 18h 16m 07s.xml">
+    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.02 at 19h 23m 54s.xml">
       <configuration name="Unittests in test_rooming_assignment.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.02 at 18h 16m 16s.xml">
+    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.02 at 19h 24m 04s.xml">
       <configuration name="Unittests in test_rooming_assignment.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.02 at 18h 16m 26s.xml">
+    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.02 at 19h 24m 33s.xml">
       <configuration name="Unittests in test_rooming_assignment.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.02 at 18h 16m 30s.xml">
+    <history-entry file="Unittests_in_test_rooming_assignment_py - 2018.04.02 at 19h 24m 42s.xml">
       <configuration name="Unittests in test_rooming_assignment.py" configurationId="tests" />
     </history-entry>
   </component>
@@ -887,32 +886,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rooming_assignments.py">
+    <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="3" column="34" lean-forward="false" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="34" />
+        <state relative-caret-position="178">
+          <caret line="155" column="21" lean-forward="false" selection-start-line="155" selection-start-column="21" selection-end-line="155" selection-end-column="21" />
           <folding>
-            <element signature="e#0#29#0" expanded="true" />
+            <element signature="e#0#23#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test_rooming_assignment.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="12334">
-          <caret line="881" column="50" lean-forward="true" selection-start-line="881" selection-start-column="50" selection-end-line="881" selection-end-column="50" />
+        <state relative-caret-position="710">
+          <caret line="949" column="33" lean-forward="false" selection-start-line="949" selection-start-column="33" selection-end-line="949" selection-end-column="33" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.py">
+    <entry file="file://$PROJECT_DIR$/rooming_assignments.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="169" column="10" lean-forward="false" selection-start-line="169" selection-start-column="10" selection-end-line="169" selection-end-column="10" />
+        <state relative-caret-position="238">
+          <caret line="17" column="31" lean-forward="false" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="31" />
           <folding>
-            <element signature="e#0#23#0" expanded="true" />
+            <element signature="e#0#29#0" expanded="true" />
           </folding>
         </state>
       </provider>

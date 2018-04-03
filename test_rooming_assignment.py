@@ -908,7 +908,7 @@ class TestSolveDemandResourceSchedule(TestCase):
                                        ]},
                          {"key": "Diego",
                           "schedule": [{"date": "3/1/2018", "time": [("10:00", "11:00"), ("13:00", "14:00"),
-                                                                     ("15:00", "16:00"), ("13:00", "14:00")]}
+                                                                     ("15:00", "11:00"), ("13:00", "14:00")]}
                                        ]},
                          {"key": "Sandra",
                           "schedule": [{"date": "3/1/2018", "time": [("8:00", "13:00")]}
@@ -922,4 +922,31 @@ class TestSolveDemandResourceSchedule(TestCase):
                                                                 2: "Diego",
                                                                 3: "Sandra"}]}]
         sol = solve_demand_resource_schedule(demand_info, resource_info, instructions)
+        correct_sol = {'demand': {'Montecute': {'3/1/2018': {'Diego': [(datetime.datetime(1900, 1, 1, 10, 0),
+                                                  datetime.datetime(1900, 1, 1, 11, 0))],
+                                       'Sally': [(datetime.datetime(1900, 1, 1, 8, 0),
+                                                  datetime.datetime(1900, 1, 1, 10, 0)),
+                                                 (datetime.datetime(1900, 1, 1, 11, 0),
+                                                  datetime.datetime(1900, 1, 1, 13, 0))],
+                                       'available': []}}},
+                        'resource': {'Diego': {'3/1/2018': {'Montecute': [(datetime.datetime(1900, 1, 1, 10, 0),
+                                                    datetime.datetime(1900, 1, 1, 11, 0))],
+                                     'available': [(datetime.datetime(1900, 1, 1, 13, 0),
+                                                    datetime.datetime(1900, 1, 1, 14, 0)),
+                                                   (datetime.datetime(1900, 1, 1, 13, 0),
+                                                    datetime.datetime(1900, 1, 1, 14, 0)),
+                                                   (datetime.datetime(1900, 1, 1, 15, 0),
+                                                    datetime.datetime(1900, 1, 1, 11, 0))]}},
+                        'Sally': {'3/1/2018': {'Montecute': [(datetime.datetime(1900, 1, 1, 8, 0),
+                                                    datetime.datetime(1900, 1, 1, 10, 0)),
+                                                   (datetime.datetime(1900, 1, 1, 11, 0),
+                                                    datetime.datetime(1900, 1, 1, 13, 0))],
+                                     'available': [(datetime.datetime(1900, 1, 1, 14, 0),
+                                                    datetime.datetime(1900, 1, 1, 15, 0)),
+                                                   (datetime.datetime(1900, 1, 1, 16, 0),
+                                                    datetime.datetime(1900, 1, 1, 17, 0))]}},
+                        'Sandra': {'3/1/2018': {'available': [(datetime.datetime(1900, 1, 1, 8, 0),
+                                                     datetime.datetime(1900, 1, 1, 13, 0))]}}}}
+        assert sol == correct_sol
+
 

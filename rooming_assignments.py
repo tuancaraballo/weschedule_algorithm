@@ -11,6 +11,21 @@ def solve_demand_resource_schedule(demand_schedule, resource_schedule, instructi
 
     solver.solve()
     return solver.return_solution()
+##########################################
+
+def sanity(demand, resource, instructions):
+    checker = SanityChecker(demand, resource, instructions)
+    return checker.sanity_value()
+
+class SanityChecker:
+    def __init__(self, demand, resource, instructions):
+        self.sanity_value = self.determine_sanity_value(demand, resource, instructions)
+
+    def determine_sanity_value(self, demand, resource, instructions):
+        return True
+
+    def get_sanity_value(self):
+        return self.sanity_value
 
 ##########################################
 class Solver:

@@ -2,7 +2,7 @@ from flask import Flask
 from flask import request
 from flask import jsonify
 from task_assignments import find_assignments
-from rooming_assignments import solve_demand_resource_schedule
+from rooming_assignments import solve_demand_resource_schedule, sanity
 import logging
 import json
 
@@ -153,7 +153,8 @@ def rooming_inbasket_handle():
             demand = request.form.getlist('demand')
             resource = request.form.getlist('resource')
             instructions = request.form.getlist('instructions')
-
+            if sanity(demand, resource, instructions):
+                return "404"
             logging.debug('Demand info --- %s', str(demand))
             logging.debug('Resource info --- %s', str(resource))
 
