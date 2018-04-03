@@ -1,4 +1,16 @@
 from datetime import datetime
+from collections import namedtuple
+
+def solve_demand_resource_schedule(demand_schedule, resource_schedule, instructions):
+    # set up solver and
+    # Ωadd information
+    solver = Solver()
+    solver.set_demand_schedule(demand_schedule)
+    solver.set_resource_schedule(resource_schedule)
+    solver.set_instructions(instructions)
+
+    solver.solve()
+    return solver.return_solution()
 
 ##########################################
 class Solver:
@@ -129,50 +141,45 @@ class Schedule:
         :param external_schedule:
         :return: a list of overlapping segments for the two schedules
         '''
-        # TODO break donw this method
+
         def either_avail_schedule_empty(demand_avail_schedule, resource_avail_schedule):
-            return len(int_avail_schedule) == 0 or len(ext_avail_schedule) == 0
+            return len(demand_avail_schedule) == 0 or len(resource_avail_schedule) == 0
 
-        INTERNAL_INDEX = 0
-        EXTERNAL_INDEX = 1
 
-        int_key_schedule = schedule_pair[INTERNAL_INDEX]
-        ext_key_schedule = schedule_pair[EXTERNAL_INDEX]
-        internal_key = key_pair[INTERNAL_INDEX]
-        external_key = key_pair[EXTERNAL_INDEX]
+        demand_key_schedule, resource_key_schedule = schedule_pair
+        #ext_key_schedule = schedule_pair.resource_schedule
+        demand_key, resource_key = key_pair
+        #resource_key = key_pair.resource_key
 
-        #int_key_schedule["available"].sort(reverse=True)
-        #ext_key_schedule["available"].sort(reverse=True)
+        demand_avail_schedule = demand_key_schedule["available"]
+        resource_avail_schedule = resource_key_schedule["available"]
 
-        int_avail_schedule = int_key_schedule["available"]
-        ext_avail_schedule = ext_key_schedule["available"]
-
-        if either_avail_schedule_empty(int_avail_schedule, ext_avail_schedule):
+        if either_avail_schedule_empty(demand_avail_schedule, resource_avail_schedule):
             return
 
         updated_demand_avail_schedule = []
         updated_resource_avail_schedule = []
         overlap_result = []
 
-        while (len(int_avail_schedule) > 0 and len(ext_avail_schedule) > 0):
-            demand_trailing, resource_trailing, overlap_add = self._find_overlap(int_avail_schedule, ext_avail_schedule)
+        while (len(demand_avail_schedule) > 0 and len(resource_avail_schedule) > 0):
+            demand_trailing, resource_trailing, overlap_add = self._find_overlap(demand_avail_schedule, resource_avail_schedule)
 
             updated_demand_avail_schedule   += demand_trailing
             updated_resource_avail_schedule += resource_trailing
             overlap_result += overlap_add
 
-            if len(int_avail_schedule) == 0 and len(ext_avail_schedule) != 0:
-                updated_resource_avail_schedule += ext_avail_schedule
+            if len(demand_avail_schedule) == 0 and len(resource_avail_schedule) != 0:
+                updated_resource_avail_schedule += resource_avail_schedule
 
-            if len(ext_avail_schedule) == 0 and len(int_avail_schedule) != 0:
+            if len(resource_avail_schedule) == 0 and len(demand_avail_schedule) != 0:
 
-                updated_demand_avail_schedule += int_avail_schedule
+                updated_demand_avail_schedule += demand_avail_schedule
 
         # update schedules
-        int_key_schedule["available"] = updated_demand_avail_schedule
-        ext_key_schedule["available"] = updated_resource_avail_schedule
-        ext_key_schedule[internal_key] = overlap_result
-        int_key_schedule[external_key] = overlap_result
+        demand_key_schedule["available"] = updated_demand_avail_schedule
+        resource_key_schedule["available"] = updated_resource_avail_schedule
+        resource_key_schedule[demand_key] = overlap_result
+        demand_key_schedule[resource_key] = overlap_result
 
     def _find_overlap(self, demand_avail_schedule, resource_avail_schedule):
 
@@ -305,19 +312,22 @@ class Schedule:
         :param external_schedule: Schedule for other object
         :return: Does not return, just changes both Schedules in place.
         '''
+        Schedule_Pair = namedtuple("Schedule_Pair","demand_schedule resource_schedule")
+        Key_Pair = namedtuple("Key_Pair", "demand_key resource_key")
 
         demand_key_schedule = self.get_key_dates(demand_key)
         resource_key_schedule = external_schedule.get_key_dates(resource_key)
+
 
         # find overlap between two scheduels of two keys, overlap
         for date in demand_key_schedule:
             if date in resource_key_schedule:
                 # readability reasons, pair them up.
-                schedule_pair = (self.get_key_schedule_date(demand_key, date),
+                schedules = Schedule_Pair(self.get_key_schedule_date(demand_key, date),
                                  external_schedule.get_key_schedule_date(resource_key, date))
-                key_pair = (demand_key, resource_key)
+                keys = Key_Pair(demand_key, resource_key)
 
-                self.find_overlap_single_day(schedule_pair, key_pair)
+                self.find_overlap_single_day(schedules, keys)
 
 
 ##########################################
@@ -408,12 +418,4 @@ class Mapping:
         return demands_ordered_by_priority
 
 ##########################################
-def solve_demand_resource_schedule(demand_schedule, resource_schedule, instructions):
-    # set up solver and add information
-    solver = Solver()
-    solver.set_demand_schedule(demand_schedule)
-    solver.set_resource_schedule(resource_schedule)
-    solver.set_instructions(instructions)
 
-    solver.solve()
-    return solver.return_solution()

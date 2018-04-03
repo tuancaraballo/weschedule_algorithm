@@ -1,8 +1,8 @@
 from flask import Flask
 from flask import request
 from flask import jsonify
-from ast import literal_eval
 from task_assignments import find_assignments
+from rooming_assignments import solve_demand_resource_schedule
 import logging
 import json
 
@@ -133,6 +133,36 @@ def rooming_inbasket_handle():
             result = {"rooming_result": rooming_result, "inbasket_result": inbasket_result}
 
             logging.debug('Result --- %s', str(result))
+            return jsonify(result);
+            # return "success from algorithm server"
+
+        except Exception as e:
+            logging.exception('Error fetching value from request: -- %s', str(e))
+            return jsonify(str(e))
+            raise
+        return "post"
+    else:
+        return "got GET"
+
+@app.route('/assigning_demand_resource', methods=['GET', 'POST'])
+def rooming_inbasket_handle():
+    if request.method == 'POST':
+
+        try:
+
+            demand = request.form.getlist('demand')
+            resource = request.form.getlist('resource')
+            instructions = request.form.getlist('instructions')
+
+            logging.debug('Demand info --- %s', str(demand))
+            logging.debug('Resource info --- %s', str(resource))
+
+            #algorithm will need ma_info, doctor_info and preferences
+            #will return two schedules, the rooming and the inbasket schedule
+            result = solve_demand_resource_schedule(demand, resource, instructions)
+
+            logging.debug('Result --- %s', str(result))
+
             return jsonify(result);
             # return "success from algorithm server"
 
