@@ -124,7 +124,27 @@ class Schedule:
         reformatted_solution = {}
         for key, schedule in self.schedule.items():
             reformatted_solution[key] = schedule
-        return reformatted_solution
+        new_sol = {}
+        for key, schedule in self.schedule.items():
+            new_schedule = {}
+            for date, schedule_2 in schedule.items():
+                new_schedule2_ = {}
+                for assignment, list_time in schedule_2.items():
+
+                    new_list_time = []
+                    for time_int in list_time:
+
+                        #print(time_int)
+                        new_list_time.append((time_int[0].strftime("%H:%M"), time_int[1].strftime("%H:%M")))
+
+                    #print(new_list_time)
+                    new_schedule2_[assignment] = new_list_time
+                    #print(new_schedule2_)
+                new_schedule[date] = new_schedule2_
+            new_sol[key] = new_schedule
+
+
+        return new_sol
 
     def _get_schedules_for_keys(self, all_key_schedules):
         # TODO: Breakdown this method

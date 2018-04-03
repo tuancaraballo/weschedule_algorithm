@@ -168,6 +168,7 @@ def rooming_inbasket_handle():
 
             #algorithm will need ma_info, doctor_info and preferences
             #will return two schedules, the rooming and the inbasket schedule
+
             result = solve_demand_resource_schedule(demand, resource, instructions)
 
             logging.debug('Result --- %s', str(result))
