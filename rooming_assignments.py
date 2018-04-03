@@ -11,21 +11,49 @@ def solve_demand_resource_schedule(demand_schedule, resource_schedule, instructi
 
     solver.solve()
     return solver.return_solution()
+
+
+def sanity_check_demand(demand):
+    checker = SanityChecker()
+    checker.set_demand(demand)
+    return checker.sanity_value_demand()
+
+
+def sanity_check_resource(resource):
+    checker = SanityChecker()
+    checker.set_resource(resource)
+    return checker.sanity_value_resource()
+
+
+def sanity_check_instructions(instructions):
+    checker = SanityChecker()
+    checker.set_instructions(instructions)
+    return checker.sanity_value_instructions()
+
 ##########################################
-
-def sanity(demand, resource, instructions):
-    checker = SanityChecker(demand, resource, instructions)
-    return checker.sanity_value()
-
 class SanityChecker:
-    def __init__(self, demand, resource, instructions):
-        self.sanity_value = self.determine_sanity_value(demand, resource, instructions)
+    def __init__(self):
+        self.resource = None
+        self.resource = None
+        self.instructions = None
 
-    def determine_sanity_value(self, demand, resource, instructions):
-        return True
+    def set_resource(self, resource):
+        self.resource = resource
 
-    def get_sanity_value(self):
-        return self.sanity_value
+    def set_demand(self, demand):
+        self.demand = demand
+
+    def set_instructions(self, instructions):
+        self.instructions = instructions
+
+    def sanity_value_resources(self):
+        return False
+
+    def sanity_value_demand(self):
+        return False
+
+    def sanity_value_instructions(self):
+        return False
 
 ##########################################
 class Solver:
@@ -120,7 +148,10 @@ class Schedule:
         return reformatted_schedule
 
     def get_key_dates(self, key):
-        return self.schedule[key].keys()
+        try:
+            return self.schedule[key].keys()
+        except KeyError:
+            return []
 
     def get_dates_key(self, key):
         return self.schedule[key].keys()

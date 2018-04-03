@@ -2,7 +2,8 @@ from flask import Flask
 from flask import request
 from flask import jsonify
 from task_assignments import find_assignments
-from rooming_assignments import solve_demand_resource_schedule, sanity
+from rooming_assignments import solve_demand_resource_schedule, \
+    sanity_check_demand, sanity_check_resource, sanity_check_instructions
 import logging
 import json
 
@@ -125,6 +126,7 @@ def rooming_inbasket_handle():
 
             #algorithm will need ma_info, doctor_info and preferences
             #will return two schedules, the rooming and the inbasket schedule
+
             rooming_result, inbasket_result = find_assignments(ma_info, doctor_info, preferences)
 
             logging.debug('Result --- %s', str(rooming_result))
@@ -153,8 +155,14 @@ def rooming_inbasket_handle():
             demand = request.form.getlist('demand')
             resource = request.form.getlist('resource')
             instructions = request.form.getlist('instructions')
-            if sanity(demand, resource, instructions):
+
+            if sanity_check_demand(demand):
                 return "404"
+            if sanity_check_instructions(instructions):
+                return "404"
+            if sanity_check_resource(resource):
+                return "404"
+
             logging.debug('Demand info --- %s', str(demand))
             logging.debug('Resource info --- %s', str(resource))
 
